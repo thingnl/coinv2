@@ -5,7 +5,7 @@ import warnings
 import tkinter as tk
 
 from tkinter import ttk
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk                               # for PIL, install pillow
 
 class AutoScrollbar(ttk.Scrollbar):
     """ A scrollbar that hides itself if it's not needed. Works only for grid geometry manager """
