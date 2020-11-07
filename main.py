@@ -3,21 +3,13 @@
 
 __author__ = 'M. Lebbink'
 __copyright__ = 'Copyright 2020, Pecuniae Collectio'
-__credits__ = ['Billal Begueradj: https://stackoverflow.com/questions/36240787/'
-               'python-3-4-tkinter-not-able-to-give-a-size-to-frames-in-panedwindow',
-
-               'ReflexTechR: https://stackoverflow.com/questions/60740268/populate-treeview-with-info-from-sql',
-
-               'GinTonic: https://stackoverflow.com/questions/56331001/'
-               'python-tkinter-treeview-colors-are-not-updating/60949800#60949800',
-
-               'Martin Thoma: https://martin-thoma.com/configuration-files-in-python/',
+__credits__ = ['I18n:'
+               'Theo Despoudis'
+               'https://phrase.com/blog/posts/translate-python-gnu-gettext/',
 
                'Treeview sorting:'
-               'https://translate.google.com/translate?hl=en&sl=zh-CN&tl=en&u='
-               'https%3A%2F%2Fwww.pianshen.com%2Farticle%2F60037664%2F',
-
-               'Muhammad Junaid Khalid:https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/'
+               'unknown'
+               'https://www.pianshen.com/article/60037664/'
                ]
 __license__ = 'CC BY-NC-ND 4.0 Attribution-NonCommercial-NoDerivatives 4.0 International'
 __version__ = '0.0.3'
@@ -25,13 +17,13 @@ __maintainer__ = 'M. Lebbink'
 __email__ = 'mlebbink@yahoo.com'
 __status__ = 'Development'
 
-# todo   1  Investigate decent multi language solution like https://docs.python.org/3/library/gettext.html
-# todo   1  Create configuration import/management functions
-# todo   1  Create logging functionality
-# todo   1  Create database
-# todo   1  Import test data
+# Done   1  Investigate decent multi language solution like https://docs.python.org/3/library/gettext.html
+# Done      Check glob valiable for all frames, menu's and buttons
 
-# todo      Check glob valiable for all frames
+# todo   1  Create configuration import/management functions
+# todo   1  Create logging functionality https://realpython.com/python-logging/
+# todo   1  Create database function
+# todo   1  Import test data function
 
 # idea      Make sql fieldlist configurable
 # idea      Replace top button bar with icons
@@ -42,6 +34,7 @@ __status__ = 'Development'
 # System libs
 import os
 import gettext
+import logging
 
 from tkinter import *
 from tkinter import ttk
@@ -51,8 +44,15 @@ from win32api import GetSystemMetrics                       # win32api is part o
 # Own modules
 import functions.main_window as mwd
 
-# External apps
-import applications.app_zoom as zoom
+logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+logging.debug('This is a debug message')
+logging.info('This is an info message')
+logging.warning('This is a warning message')
+logging.error('This is an error message')
+logging.critical('This is a critical message')
+
 
 
 def main():
