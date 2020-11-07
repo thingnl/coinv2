@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2020-11-06 11:46+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=cp1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: main.py\n"
+"X-Poedit-SearchPath-1: functions\n"
+"X-Poedit-SearchPath-2: applications\n"
+
+#: functions/main_window.py:89
+msgid "File"
+msgstr ""
+
+#: functions/main_window.py:90
+msgid "New"
+msgstr ""
+
+#: functions/main_window.py:91
+msgid "Open"
+msgstr ""
+
+#: functions/main_window.py:92
+msgid "Close"
+msgstr ""
+
+#: functions/main_window.py:93
+msgid "Save"
+msgstr ""
+
+#: functions/main_window.py:95
+msgid "Exit"
+msgstr ""
+
+#: functions/main_window.py:98
+msgid "Tables"
+msgstr ""
+
+#: functions/main_window.py:99
+msgid "Countries"
+msgstr ""
+
+#: functions/main_window.py:100
+msgid "Suppliers"
+msgstr ""
+
+#: functions/main_window.py:101
+msgid "Orders"
+msgstr ""
+
+#: functions/main_window.py:102
+msgid "Rarity"
+msgstr ""
+
+#: functions/main_window.py:105
+msgid "Data"
+msgstr ""
+
+#: functions/main_window.py:106
+msgid "Export"
+msgstr ""
+
+#: functions/main_window.py:107
+msgid "Import"
+msgstr ""
+
+#: functions/main_window.py:110
+msgid "Help"
+msgstr ""
+
+#: functions/main_window.py:111
+msgid "About"
+msgstr ""
+
+#: functions/main_window.py:112
+msgid "Manual"
+msgstr ""
+
+#: functions/main_window.py:113
+msgid "Support"
+msgstr ""
+
+#: functions/main_window.py:128
+msgid "Filters"
+msgstr ""
+
+#: functions/main_window.py:133
+msgid "Apply filters"
+msgstr ""
+
+#: functions/main_window.py:136
+msgid "Country"
+msgstr ""
+
+#: functions/main_window.py:143
+msgid "Denomination"
+msgstr ""
+
+#: functions/main_window.py:150
+msgid "Add"
+msgstr ""
+
+#: functions/main_window.py:153
+msgid "Copy"
+msgstr ""
+
+#: functions/main_window.py:156
+msgid "Delete"
+msgstr ""
+
+#: functions/main_window.py:159
+msgid "Scans"
+msgstr ""
+
+#: functions/main_window.py:164
+msgid "Front"
+msgstr ""
+
+#: functions/main_window.py:173
+msgid "Rear"
+msgstr ""
+
+#: functions/main_window.py:182
+msgid "Value"
+msgstr ""
