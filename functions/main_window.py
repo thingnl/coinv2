@@ -12,6 +12,8 @@ from tkinter import Tk
 from PIL import Image, ImageTk
 from win32api import GetSystemMetrics                       # win32api is part of pywin32
 
+# Own modules
+import functions.config_window as cwd
 
 global _
 
@@ -25,16 +27,27 @@ nl = gettext.translation('base', localedir='locales', languages=['nl'])
 nl.install()
 
 
-
 # C:\>py -3.4 C:\Python34\Tools\i18n\pygettext.py -d guess guess.py
-# python C:\Python\Python39\Tools\i18n\pygettext.py --extract-all --default-domain=main --output-dir=locales main_window.py
+# python C:\Python\Python39\Tools\i18n\pygettext.py --extract-all --default-domain=main --output-dir=locales
+#        main_window.py
 # python C:\Python\Python39\Tools\i18n\pygettext.py -v -d base -o locales/base.pot main_window.py
 
 
-
 class glob:
+    # configuration
+    slide_horizontal = 0
+    slide_vertical = 0
+    loc_database = ""
+    loc_scans = ""
+    loc_orders = ""
+    loc_logs = ""
+    loc_backups = ""
+    radio1_language = 0
+    radio2_language = 0
+
     # system vars
     scriptpath = os.path.dirname(os.path.realpath(__file__))
+
     # screen settings
     screen_width = 0
     screen_height = 0
@@ -42,16 +55,21 @@ class glob:
     screen_height_calc = 0
     screen_top = 0
     screen_left = 0
+
     # SQL connection
     connection = 0
+
     # root
     root = 0
-    #menu
+
+    # menu
     menu = 0
     filemenu = 0
     tablemenu = 0
     datamenu = 0
+    sysmenu = 0
     helpmenu = 0
+
     # frames
     filterframe = 0
     buttonframe = 0
@@ -68,6 +86,7 @@ def get_screen_size():
     glob.screen_height_calc = int(glob.screen_height * .7)
     glob.screen_left = int((glob.screen_width - glob.screen_width_calc) / 2)
     glob.screen_top = int((glob.screen_height - glob.screen_height_calc) / 2)
+
 
 def resize(img, max_px_size):
     width_0, height_0 = img.size
@@ -122,6 +141,13 @@ def build_menu():
     glob.menu.add_cascade(label=_("Data"), menu=glob.datamenu)
     glob.datamenu.add_command(label=_("Export"), command=about)
     glob.datamenu.add_command(label=_("Import"), command=about)
+    glob.datamenu.add_command(label=_("Backup"), command=about)
+    glob.datamenu.add_command(label=_("Restore"), command=about)
+
+
+    glob.sysmenu = Menu(glob.menu, tearoff=0)
+    glob.menu.add_cascade(label=_("System"), menu=glob.sysmenu)
+    glob.sysmenu.add_command(label=_("Settings"), command=lambda: cwd.edit_settings())
 
     glob.helpmenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("Help"), menu=glob.helpmenu)
@@ -177,8 +203,8 @@ def build_frames():
     glob.right_front_frame.pack(fill=BOTH, expand=1, padx=5, pady=1)
     glob.right_front_frame.place(anchor=NW, relx=0.00)
     glob.right_front_canvas = Canvas(glob.right_front_frame, width=165, height=165, bd=0, highlightthickness=0,
-                                    relief='ridge', bg="gray85")
-    #glob.right_front_canvas.bind("<Double-1>", doubleclick_front)
+                                     relief='ridge', bg="gray85")
+    # glob.right_front_canvas.bind("<Double-1>", doubleclick_front)
     glob.right_front_canvas.pack()
 
     glob.right_rear_frame = LabelFrame(glob.photo_frame, text=_("Rear"), height=170, width=170,
@@ -187,7 +213,7 @@ def build_frames():
     glob.right_rear_frame.place(anchor=NW, relx=0.00, rely=0.29)
     glob.right_rear_canvas = Canvas(glob.right_rear_frame, width=165, height=165, bd=0, highlightthickness=0,
                                     relief='ridge', bg="gray85")
-    #glob.right_rear_canvas.bind("<Double-1>", doubleclick_rear)
+    # glob.right_rear_canvas.bind("<Double-1>", doubleclick_rear)
     glob.right_rear_canvas.pack()
 
     glob.right_value_frame = LabelFrame(glob.photo_frame, text=_("Value"), height=170, width=170,

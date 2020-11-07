@@ -24,6 +24,8 @@ __status__ = 'Development'
 # todo   1  Create logging functionality https://realpython.com/python-logging/
 # todo   1  Create database function
 # todo   1  Import test data function
+# todo   1  Add a check databse option
+# todo   1  validate config (directories) on startup and set alarm if it fails
 
 # idea      Make sql fieldlist configurable
 # idea      Replace top button bar with icons
@@ -44,15 +46,14 @@ from win32api import GetSystemMetrics                       # win32api is part o
 # Own modules
 import functions.main_window as mwd
 
-logging.basicConfig(level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
 #logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
-logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-logging.debug('This is a debug message')
-logging.info('This is an info message')
-logging.warning('This is a warning message')
-logging.error('This is an error message')
-logging.critical('This is a critical message')
-
+# logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+# logging.debug('This is a debug message')
+# logging.info('This is an info message')
+# logging.warning('This is a warning message')
+# logging.error('This is an error message')
+# logging.critical('This is a critical message')
 
 
 def main():
