@@ -20,6 +20,7 @@ __status__ = 'Development'
 # Done   1  Investigate decent multi language solution like https://docs.python.org/3/library/gettext.html
 # Done      Check glob valiable for all frames, menu's and buttons
 
+# todo   0  studie: https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
 # todo   1  Create configuration import/management functions
 # todo   1  Create logging functionality https://realpython.com/python-logging/
 # todo   1  Create database function
@@ -45,6 +46,13 @@ from win32api import GetSystemMetrics                       # win32api is part o
 
 # Own modules
 import functions.main_window as mwd
+from functions import glob
+
+global _
+
+# system vars
+glob.scriptpath = os.path.dirname(os.path.realpath(__file__))
+
 
 #logging.basicConfig(level=logging.DEBUG)
 #logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')

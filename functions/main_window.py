@@ -14,6 +14,7 @@ from win32api import GetSystemMetrics                       # win32api is part o
 
 # Own modules
 import functions.config_window as cwd
+from functions import glob
 
 global _
 
@@ -31,51 +32,6 @@ nl.install()
 # python C:\Python\Python39\Tools\i18n\pygettext.py --extract-all --default-domain=main --output-dir=locales
 #        main_window.py
 # python C:\Python\Python39\Tools\i18n\pygettext.py -v -d base -o locales/base.pot main_window.py
-
-
-class glob:
-    # configuration
-    slide_horizontal = 0
-    slide_vertical = 0
-    loc_database = ""
-    loc_scans = ""
-    loc_orders = ""
-    loc_logs = ""
-    loc_backups = ""
-    radio1_language = 0
-    radio2_language = 0
-
-    # system vars
-    scriptpath = os.path.dirname(os.path.realpath(__file__))
-
-    # screen settings
-    screen_width = 0
-    screen_height = 0
-    screen_width_calc = 0
-    screen_height_calc = 0
-    screen_top = 0
-    screen_left = 0
-
-    # SQL connection
-    connection = 0
-
-    # root
-    root = 0
-
-    # menu
-    menu = 0
-    filemenu = 0
-    tablemenu = 0
-    datamenu = 0
-    sysmenu = 0
-    helpmenu = 0
-
-    # frames
-    filterframe = 0
-    buttonframe = 0
-    sqlframe = 0
-    photoframe = 0
-    messageframe = 0
 
 
 def get_screen_size():
