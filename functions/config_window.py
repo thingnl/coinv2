@@ -2,13 +2,22 @@
 # -*- coding: utf-8 -*-
 
 # System libs
+import os
+import sys
 from os import path
+import gettext
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import *
-from functions import glob
+from . import glob
+from . import language_functions as lf
+from . import config_items as ci
 
 global _
+
+def save_language():
+    file = gettext.find('base', 'locales')
+    # print(file)
 
 
 def get_database_dir():
@@ -51,44 +60,35 @@ def get_backups_dir():
         glob.loc_backups.insert(10, answer)
 
 
-def get_config_item(itemtoget):
-    with open(glob.scriptpath + "\\coinsv2.config", "r") as fp:
-        for line in fp:
-            if not line.startswith('#'):
-                if itemtoget in line:
-                    line = line.split("=", 1)
-                    if isinstance(line[-1], str):
-                        line[-1] = line[-1].strip()
-                        return line[-1]
-                    else:
-                        return line[-1]
-
-
 def get_current_settings():
-    config_file = glob.scriptpath + "\\coinsv2.config"
+    config_file = os.path.dirname(sys.argv[0]) + "\\coinsv2.config"
     if not path.exists(config_file):
         glob.slide_horizontal.set(70)
         glob.slide_vertical.set(70)
-
         glob.loc_database.insert(10, glob.scriptpath + "\\database")
         glob.loc_scans.insert(10, glob.scriptpath + "\\images")
         glob.loc_orders.insert(10, glob.scriptpath + "\\orders")
         glob.loc_logs.insert(10, glob.scriptpath + "\\logs")
         glob.loc_backups.insert(10, glob.scriptpath + "\\backup")
     else:
-        glob.slide_horizontal.set(get_config_item("slide_horizontal"))
-        glob.slide_vertical.set(get_config_item("slide_vertical"))
+        glob.slide_horizontal.set(ci.get_config_item("slide_horizontal"))
+        glob.slide_vertical.set(ci.get_config_item("slide_vertical"))
 
-        glob.loc_database.insert(10, get_config_item("loc_database"))
-        glob.loc_scans.insert(10, get_config_item("loc_scans"))
-        glob.loc_orders.insert(10, get_config_item("loc_orders"))
-        glob.loc_logs.insert(10, get_config_item("loc_logs"))
-        glob.loc_backups.insert(10, get_config_item("loc_backups"))
+        glob.loc_database.insert(10, ci.get_config_item("loc_database"))
+        glob.loc_scans.insert(10, ci.get_config_item("loc_scans"))
+        glob.loc_orders.insert(10, ci.get_config_item("loc_orders"))
+        glob.loc_logs.insert(10, ci.get_config_item("loc_logs"))
+        glob.loc_backups.insert(10, ci.get_config_item("loc_backups"))
+        # langsel = cwd.get_config_item("language_selected")
+        if ci.get_config_item("language_selected") == "GB":
+            glob.language.set(1)
+        else:
+            glob.language.set(2)
 
 
 def sel():
-    selection = "You selected the option " + str(language.get())
-    label.config(text = selection)
+    selection = glob.language.get()
+    pass
 
 
 def build_edit_settings():
@@ -171,22 +171,17 @@ def build_edit_settings():
     label_language.grid(row=12, column=1, columnspan=2)
     label_langsel = Label(glob.edit_frame, text=_("Language:"), anchor="e", width=20)
     label_langsel.grid(row=13, column=1)
+    glob.language = IntVar()
+    glob.radio1_language = Radiobutton(glob.edit_frame, text=_("English"), variable=glob.language,
+                                       value=1, anchor="w", width=20) # , command=sel)
+    glob.radio2_language = Radiobutton(glob.edit_frame, text=_("Dutch"), variable=glob.language,
+                                       value=2, anchor="w", width=20) # , command=sel)
 
-    language = IntVar()
-    language.set(2)
-    glob.radio1_language = Radiobutton(glob.edit_frame, text=_("English"), variable=language,
-                                          value=1, anchor="w", width=20,command = sel)
-    glob.radio1_language.deselect()
-    glob.radio2_language = Radiobutton(glob.edit_frame, text=_("Dutch"), variable=language,
-                                          value=2, anchor="w", width=20,command = sel)
-    glob.radio2_language.select()
-    glob.radio2_language.invoke()
     glob.radio1_language.grid(row=13, column=2)
     glob.radio2_language.grid(row=14, column=2)
 
-    # glob.radio1_language.deselect()
-    # glob.radio2_language.select()
-    # glob.radio2_language.invoke()
+
+
 
 def edit_settings():
     build_edit_settings()

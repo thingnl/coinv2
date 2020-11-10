@@ -33,40 +33,34 @@ __status__ = 'Development'
 
 # fix       Currently nothing needs fixing
 
-
 # System libs
 import os
 import gettext
-import logging
-
-from tkinter import *
-from tkinter import ttk
-from tkinter import Tk
-from win32api import GetSystemMetrics                       # win32api is part of pywin32
-
 # Own modules
-import functions.main_window as mwd
 from functions import glob
+import functions.main_window as mwd
 
 global _
-
-# system vars
-glob.scriptpath = os.path.dirname(os.path.realpath(__file__))
-
-
-#logging.basicConfig(level=logging.DEBUG)
-#logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
-# logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-# logging.debug('This is a debug message')
-# logging.info('This is an info message')
-# logging.warning('This is a warning message')
-# logging.error('This is an error message')
-# logging.critical('This is a critical message')
-
 
 def main():
     mwd.main_window()
 
 
 if __name__ == "__main__":
+    glob.mainpath = os.path.abspath(os.path.dirname(__file__))
+
+    # gettext.textdomain('main')
+    # localedir = os.path.join(glob.mainpath, 'locales')
+    # translate = gettext.translation('main', localedir, fallback=True)
+    # nl = gettext.translation('base', localedir='./locales', languages=['nl'])
+    # nl.install()
+
+    nl = gettext.translation('base', localedir='locales', languages=['nl'])
+    nl.install()
+    
+    _ = nl.gettext
+    print(_("Front") + glob.mainpath)
+    _ = gettext.gettext
+    print(_("Front") + glob.mainpath)
+
     main()

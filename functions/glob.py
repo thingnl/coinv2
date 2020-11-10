@@ -3,6 +3,8 @@
 
 # runtime
 scriptpath = ""
+mainpath = ""
+language = 0
 
 # configuration
 slide_horizontal = 0

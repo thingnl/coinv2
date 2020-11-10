@@ -3,7 +3,6 @@
 
 # System libs
 import os
-import gettext
 import os.path
 
 from tkinter import *
@@ -13,26 +12,11 @@ from PIL import Image, ImageTk
 from win32api import GetSystemMetrics                       # win32api is part of pywin32
 
 # Own modules
-import functions.config_window as cwd
-from functions import glob
+from . import glob
+from . import config_window as cwd
+from . import language_functions as lf
 
 global _
-
-# Set up message catalog access
-gettext.textdomain('main')
-localedir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'locales')
-translate = gettext.translation('main', localedir, fallback=True)
-_ = translate.gettext
-
-nl = gettext.translation('base', localedir='locales', languages=['nl'])
-nl.install()
-
-
-# C:\>py -3.4 C:\Python34\Tools\i18n\pygettext.py -d guess guess.py
-# python C:\Python\Python39\Tools\i18n\pygettext.py --extract-all --default-domain=main --output-dir=locales
-#        main_window.py
-# python C:\Python\Python39\Tools\i18n\pygettext.py -v -d base -o locales/base.pot main_window.py
-
 
 def get_screen_size():
     glob.screen_width = GetSystemMetrics(0)
@@ -70,7 +54,6 @@ def opendb():
 
 
 def build_menu():
-    global _                                        # bring in language function
     glob.menu = Menu(glob.root)
     glob.root.config(menu=glob.menu)
     glob.root.columnconfigure(1, weight=1)
@@ -100,7 +83,6 @@ def build_menu():
     glob.datamenu.add_command(label=_("Backup"), command=about)
     glob.datamenu.add_command(label=_("Restore"), command=about)
 
-
     glob.sysmenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("System"), menu=glob.sysmenu)
     glob.sysmenu.add_command(label=_("Settings"), command=lambda: cwd.edit_settings())
@@ -113,7 +95,6 @@ def build_menu():
 
 
 def build_frames():
-    global _                                        # bring in language function
     # Frames
     glob.filterframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # left
     glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
@@ -197,27 +178,26 @@ def build_buttons():
         imagenl = Image.open("icon-nl.png")
         imagenl = resize(imagenl, 20)
         photonl = ImageTk.PhotoImage(imagenl)
-        glob.button_nl = Button(glob.buttonframe, image=photonl, command=lambda: language_nl(), padx=5)
+        glob.button_nl = Button(glob.buttonframe, image=photonl, command=lambda: lf.language_nl(), padx=5)
         glob.button_nl.image = photonl
         glob.button_nl.pack(side=RIGHT, pady=10, padx=5)
     else:
-        glob.button_nl = Button(glob.buttonframe, text="NL", command=lambda: language_nl(), padx=20)
+        glob.button_nl = Button(glob.buttonframe, text="NL", command=lambda: lf.language_nl(), padx=20)
         glob.button_nl.pack(side=RIGHT, pady=10, padx= 10)
 
     if os.path.isfile("icon-en.png"):
         imageen = Image.open("icon-en.png")
         imageen = resize(imageen, 20)
         photoen = ImageTk.PhotoImage(imageen)
-        glob.button_en = Button(glob.buttonframe, image=photoen, command=lambda: language_en(), padx=55)
+        glob.button_en = Button(glob.buttonframe, image=photoen, command=lambda: lf.language_en(), padx=55)
         glob.button_en.image = photoen
         glob.button_en.pack(side=RIGHT, pady=10, padx=5)
     else:
-        glob.button_en = Button(glob.buttonframe, text=_("GB"), command=lambda: language_en(), padx=20)
+        glob.button_en = Button(glob.buttonframe, text=_("GB"), command=lambda: lf.language_en(), padx=20)
         glob.button_en.pack(side=RIGHT, pady=10, padx=10)
 
 
 def rebuild_buttons():
-    global _                                        # bring in language function
     glob.menu.destroy()
     glob.filterframe.destroy()
     glob.photoframe.destroy()
@@ -226,19 +206,11 @@ def rebuild_buttons():
     build_buttons()
 
 
-def language_nl():
-    global _                                        # bring in language function
-    _ = nl.gettext
-    rebuild_buttons()
-
-
-def language_en():
-    global _                                        # bring in language function
-    _ = translate.gettext
-    rebuild_buttons()
-
-
 def main_window():
+    print("main_window():-" + glob.mainpath + "-")
+    # lf.init_language(glob.mainpath)
+    lf.init_language()
+
     get_screen_size()
     glob.root = Tk()
     glob.root.title('Pecuniae Collectio')

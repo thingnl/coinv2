@@ -2,228 +2,229 @@
 # Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-11-10 21:07+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2020-11-10 23:26+0100\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=cp1252\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl\n"
 "X-Poedit-SearchPath-0: main.py\n"
 "X-Poedit-SearchPath-1: functions\n"
 "X-Poedit-SearchPath-2: applications\n"
 
 #: functions/config_window.py:25
 msgid "Select databases folder:"
-msgstr ""
+msgstr "Gegevens bestanden:"
 
 #: functions/config_window.py:33
 msgid "Select scans folder:"
-msgstr ""
+msgstr "Afbeeldingen:"
 
 #: functions/config_window.py:41
 msgid "Select orders folder:"
-msgstr ""
+msgstr "Bestellingen:"
 
 #: functions/config_window.py:49
 msgid "Select logs folder:"
-msgstr ""
+msgstr "Journalen:"
 
 #: functions/config_window.py:57
 msgid "Select backups folder:"
-msgstr ""
+msgstr "Reserve kopieen:"
 
 #: functions/config_window.py:96
 msgid "Edit settings"
-msgstr ""
+msgstr "Instellingen bewerken"
 
 #: functions/config_window.py:108
 msgid "Screensize:"
-msgstr ""
+msgstr "Schermgrootte:"
 
 #: functions/config_window.py:111
 msgid "Horizontal:"
-msgstr ""
+msgstr "Horizontaal:"
 
 #: functions/config_window.py:113
 msgid "Vertical:"
-msgstr ""
+msgstr "Verticaal:"
 
 #: functions/config_window.py:127
 msgid "File locations:"
-msgstr ""
+msgstr "Bestandslocaties:"
 
 #: functions/config_window.py:130
 msgid "Databases:"
-msgstr ""
+msgstr "Gegevens bestanden:"
 
 #: functions/config_window.py:137
 msgid "Scans:"
-msgstr ""
+msgstr "Afbeeldingen:"
 
 #: functions/config_window.py:144
 msgid "Orders:"
-msgstr ""
+msgstr "Bestellingen:"
 
 #: functions/config_window.py:151
 msgid "Logs:"
-msgstr ""
+msgstr "Journalen:"
 
 #: functions/config_window.py:158
 msgid "Backup's:"
-msgstr ""
+msgstr "Reserve kopieën"
 
 #: functions/config_window.py:169 functions/config_window.py:172
 msgid "Language:"
-msgstr ""
+msgstr "Taal:"
 
 #: functions/config_window.py:175
 msgid "English"
-msgstr ""
+msgstr "Engels"
 
 #: functions/config_window.py:177
 msgid "Dutch"
-msgstr ""
+msgstr "Nederlands"
 
 #: functions/main_window.py:64
 msgid "File"
-msgstr ""
+msgstr "Bestand"
 
 #: functions/main_window.py:65
 msgid "New"
-msgstr ""
+msgstr "Nieuw"
 
 #: functions/main_window.py:66
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 #: functions/main_window.py:67
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
 
 #: functions/main_window.py:68
 msgid "Save"
-msgstr ""
+msgstr "Opslaan"
 
 #: functions/main_window.py:70
 msgid "Exit"
-msgstr ""
+msgstr "Afsluiten"
 
 #: functions/main_window.py:73
 msgid "Tables"
-msgstr ""
+msgstr "Tabellen"
 
 #: functions/main_window.py:74
 msgid "Countries"
-msgstr ""
+msgstr "Landen"
 
 #: functions/main_window.py:75
 msgid "Suppliers"
-msgstr ""
+msgstr "Leveranciers"
 
 #: functions/main_window.py:76
 msgid "Orders"
-msgstr ""
+msgstr "Bestellingen"
 
 #: functions/main_window.py:77
 msgid "Rarity"
-msgstr ""
+msgstr "Zeldzaamheid"
 
 #: functions/main_window.py:80
 msgid "Data"
-msgstr ""
+msgstr "Gegevens"
 
 #: functions/main_window.py:81
 msgid "Export"
-msgstr ""
+msgstr "Exporteren"
 
 #: functions/main_window.py:82
 msgid "Import"
-msgstr ""
+msgstr "Importeren"
 
 #: functions/main_window.py:83
 msgid "Backup"
-msgstr ""
+msgstr "Kopie maken"
 
 #: functions/main_window.py:84
 msgid "Restore"
-msgstr ""
+msgstr "Terug zetten"
 
 #: functions/main_window.py:87
 msgid "System"
-msgstr ""
+msgstr "Systeem"
 
 #: functions/main_window.py:88
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: functions/main_window.py:91
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: functions/main_window.py:92
 msgid "About"
-msgstr ""
+msgstr "Over"
 
 #: functions/main_window.py:93
 msgid "Manual"
-msgstr ""
+msgstr "Handboek"
 
 #: functions/main_window.py:94
 msgid "Support"
-msgstr ""
+msgstr "Ondersteuning"
 
 #: functions/main_window.py:111
 msgid "Filters"
-msgstr ""
+msgstr "Filters"
 
 #: functions/main_window.py:116
 msgid "Apply filters"
-msgstr ""
+msgstr "Filters toepassen"
 
 #: functions/main_window.py:119
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: functions/main_window.py:126
 msgid "Denomination"
-msgstr ""
+msgstr "Denominatie"
 
 #: functions/main_window.py:133
 msgid "Scans"
-msgstr ""
+msgstr "Afbeeldingen"
 
 #: functions/main_window.py:138
 msgid "Front"
-msgstr ""
+msgstr "Voorzijde"
 
 #: functions/main_window.py:147
 msgid "Rear"
-msgstr ""
+msgstr "Achterzijde"
 
 #: functions/main_window.py:156
 msgid "Value"
-msgstr ""
+msgstr "Waarde"
 
 #: functions/main_window.py:167
 msgid "Add"
-msgstr ""
+msgstr "Toevoegen"
 
 #: functions/main_window.py:170
 msgid "Copy"
-msgstr ""
+msgstr "Kopiëren"
 
 #: functions/main_window.py:173
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 #: functions/main_window.py:196
 msgid "GB"
-msgstr ""
+msgstr "UK"
