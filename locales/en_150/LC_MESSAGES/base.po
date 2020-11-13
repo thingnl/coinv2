@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-11-10 21:07+0100\n"
-"PO-Revision-Date: 2020-11-12 23:38+0100\n"
+"PO-Revision-Date: 2020-11-13 13:30+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,168 +63,168 @@ msgstr "File locations:"
 
 #: functions/config_window.py:130
 msgid "Databases:"
-msgstr ""
+msgstr "Databases:"
 
 #: functions/config_window.py:137
 msgid "Scans:"
-msgstr ""
+msgstr "Scans:"
 
 #: functions/config_window.py:144
 msgid "Orders:"
-msgstr ""
+msgstr "Orders:"
 
 #: functions/config_window.py:151
 msgid "Logs:"
-msgstr ""
+msgstr "Logs:"
 
 #: functions/config_window.py:158
 msgid "Backup's:"
-msgstr ""
+msgstr "Backup's:"
 
 #: functions/config_window.py:169 functions/config_window.py:172
 msgid "Language:"
-msgstr ""
+msgstr "Language:"
 
 #: functions/config_window.py:175
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: functions/config_window.py:177
 msgid "Dutch"
-msgstr ""
+msgstr "Dutch"
 
 #: functions/main_window.py:64
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #: functions/main_window.py:65
 msgid "New"
-msgstr ""
+msgstr "New"
 
 #: functions/main_window.py:66
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 #: functions/main_window.py:67
 msgid "Close"
-msgstr ""
+msgstr "Close"
 
 #: functions/main_window.py:68
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 #: functions/main_window.py:70
 msgid "Exit"
-msgstr ""
+msgstr "Exit"
 
 #: functions/main_window.py:73
 msgid "Tables"
-msgstr ""
+msgstr "Tables"
 
 #: functions/main_window.py:74
 msgid "Countries"
-msgstr ""
+msgstr "Countries"
 
 #: functions/main_window.py:75
 msgid "Suppliers"
-msgstr ""
+msgstr "Suppliers"
 
 #: functions/main_window.py:76
 msgid "Orders"
-msgstr ""
+msgstr "Orders"
 
 #: functions/main_window.py:77
 msgid "Rarity"
-msgstr ""
+msgstr "Rarity"
 
 #: functions/main_window.py:80
 msgid "Data"
-msgstr ""
+msgstr "Data"
 
 #: functions/main_window.py:81
 msgid "Export"
-msgstr ""
+msgstr "Export"
 
 #: functions/main_window.py:82
 msgid "Import"
-msgstr ""
+msgstr "Import"
 
 #: functions/main_window.py:83
 msgid "Backup"
-msgstr ""
+msgstr "Backup"
 
 #: functions/main_window.py:84
 msgid "Restore"
-msgstr ""
+msgstr "Restore"
 
 #: functions/main_window.py:87
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: functions/main_window.py:88
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
 #: functions/main_window.py:91
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: functions/main_window.py:92
 msgid "About"
-msgstr ""
+msgstr "About"
 
 #: functions/main_window.py:93
 msgid "Manual"
-msgstr ""
+msgstr "Manual"
 
 #: functions/main_window.py:94
 msgid "Support"
-msgstr ""
+msgstr "Support"
 
 #: functions/main_window.py:111
 msgid "Filters"
-msgstr ""
+msgstr "Filters"
 
 #: functions/main_window.py:116
 msgid "Apply filters"
-msgstr ""
+msgstr "Apply filters"
 
 #: functions/main_window.py:119
 msgid "Country"
-msgstr ""
+msgstr "Country"
 
 #: functions/main_window.py:126
 msgid "Denomination"
-msgstr ""
+msgstr "Denomination"
 
 #: functions/main_window.py:133
 msgid "Scans"
-msgstr ""
+msgstr "Scans"
 
 #: functions/main_window.py:138
 msgid "Front"
-msgstr ""
+msgstr "Front"
 
 #: functions/main_window.py:147
 msgid "Rear"
-msgstr ""
+msgstr "Rear"
 
 #: functions/main_window.py:156
 msgid "Value"
-msgstr ""
+msgstr "Value"
 
 #: functions/main_window.py:167
 msgid "Add"
-msgstr ""
+msgstr "Add"
 
 #: functions/main_window.py:170
 msgid "Copy"
-msgstr ""
+msgstr "Copy"
 
 #: functions/main_window.py:173
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: functions/main_window.py:196
 msgid "GB"
-msgstr ""
+msgstr "GB"

@@ -62,3 +62,16 @@ message_frame = 0
 
 # sysconfig edit screen
 edit_frame = 0
+
+button_filter_apply = 0
+filter_label_country = 0
+combo_country = 0
+filter_label_denomination = 0
+combo_denomination = 0
+
+right_front_frame = 0
+right_front_canvas = 0
+right_rear_frame = 0
+right_rear_canvas = 0
+right_value_frame = 0
+right_value_canvas = 0

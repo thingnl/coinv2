@@ -179,22 +179,22 @@ def build_buttons():
         imagenl = Image.open("icon-nl.png")
         imagenl = resize(imagenl, 20)
         photonl = ImageTk.PhotoImage(imagenl)
-        glob.button_nl = Button(glob.buttonframe, image=photonl, command=lambda: lf.language_nl(), padx=5)
+        glob.button_nl = Button(glob.buttonframe, image=photonl, command=lambda: (lf.language_nl(),rebuild_buttons()), padx=5)
         glob.button_nl.image = photonl
         glob.button_nl.pack(side=RIGHT, pady=10, padx=5)
     else:
-        glob.button_nl = Button(glob.buttonframe, text="NL", command=lambda: lf.language_nl(), padx=20)
-        glob.button_nl.pack(side=RIGHT, pady=10, padx= 10)
+        glob.button_nl = Button(glob.buttonframe, text="NL", command=lambda: (lf.language_nl(),rebuild_buttons()), padx=20)
+        glob.button_nl.pack(side=RIGHT, pady=10, padx=10)
 
     if os.path.isfile("icon-en.png"):
         imageen = Image.open("icon-en.png")
         imageen = resize(imageen, 20)
         photoen = ImageTk.PhotoImage(imageen)
-        glob.button_en = Button(glob.buttonframe, image=photoen, command=lambda: lf.language_en(), padx=55)
+        glob.button_en = Button(glob.buttonframe, image=photoen, command=lambda: (lf.language_en(),rebuild_buttons()), padx=55)
         glob.button_en.image = photoen
         glob.button_en.pack(side=RIGHT, pady=10, padx=5)
     else:
-        glob.button_en = Button(glob.buttonframe, text=_("GB"), command=lambda: lf.language_en(), padx=20)
+        glob.button_en = Button(glob.buttonframe, text=_("GB"), command=lambda: (lf.language_en(),rebuild_buttons()), padx=20)
         glob.button_en.pack(side=RIGHT, pady=10, padx=10)
 
 
@@ -211,13 +211,9 @@ def main_window():
     # setup language based on config file
     langsel = ci.get_config_item("language_selected")
     if langsel == "GB":
-        en150 = gettext.translation('base', localedir='locales', languages=['en_150'])
-        en150.install()
-        _ = en150.gettext
+        lf.language_en()
     else:
-        nl = gettext.translation('base', localedir='locales', languages=['nl'])
-        nl.install()
-        _ = nl.gettext
+        lf.language_nl()
 
     get_screen_size()
     glob.root = Tk()
