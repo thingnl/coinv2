@@ -4,7 +4,7 @@
 # System libs
 import os
 import os.path
-
+import gettext
 from tkinter import *
 from tkinter import ttk
 from tkinter import Tk
@@ -13,10 +13,12 @@ from win32api import GetSystemMetrics                       # win32api is part o
 
 # Own modules
 from . import glob
+from . import config_items as ci
 from . import config_window as cwd
 from . import language_functions as lf
 
 global _
+
 
 def get_screen_size():
     glob.screen_width = GetSystemMetrics(0)
@@ -163,7 +165,6 @@ def build_frames():
 
 
 def build_buttons():
-    global _                                        # bring in language function
     glob.button_add = Button(glob.buttonframe, text=_("Add"), command=about, padx=20)
     glob.button_add.pack(side=LEFT, pady=10, padx=10)
 
@@ -207,9 +208,16 @@ def rebuild_buttons():
 
 
 def main_window():
-    print("main_window():-" + glob.mainpath + "-")
-    # lf.init_language(glob.mainpath)
-    lf.init_language()
+    # setup language based on config file
+    langsel = ci.get_config_item("language_selected")
+    if langsel == "GB":
+        en150 = gettext.translation('base', localedir='locales', languages=['en_150'])
+        en150.install()
+        _ = en150.gettext
+    else:
+        nl = gettext.translation('base', localedir='locales', languages=['nl'])
+        nl.install()
+        _ = nl.gettext
 
     get_screen_size()
     glob.root = Tk()

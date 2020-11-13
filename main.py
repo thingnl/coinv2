@@ -38,29 +38,17 @@ import os
 import gettext
 # Own modules
 from functions import glob
-import functions.main_window as mwd
+from functions import main_window as mwd
 
 global _
+
+glob.mainpath = os.path.abspath(os.path.dirname(__file__))
+glob.localespath = glob.mainpath + '\\locales'
+
 
 def main():
     mwd.main_window()
 
 
 if __name__ == "__main__":
-    glob.mainpath = os.path.abspath(os.path.dirname(__file__))
-
-    # gettext.textdomain('main')
-    # localedir = os.path.join(glob.mainpath, 'locales')
-    # translate = gettext.translation('main', localedir, fallback=True)
-    # nl = gettext.translation('base', localedir='./locales', languages=['nl'])
-    # nl.install()
-
-    nl = gettext.translation('base', localedir='locales', languages=['nl'])
-    nl.install()
-    
-    _ = nl.gettext
-    print(_("Front") + glob.mainpath)
-    _ = gettext.gettext
-    print(_("Front") + glob.mainpath)
-
     main()

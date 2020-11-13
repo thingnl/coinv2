@@ -19,6 +19,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: main.py\n"
 "X-Poedit-SearchPath-1: functions\n"
 "X-Poedit-SearchPath-2: applications\n"
+"Language: en\n"
 
 #: functions/config_window.py:25
 msgid "Select databases folder:"

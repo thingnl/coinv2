@@ -4,6 +4,7 @@
 # runtime
 scriptpath = ""
 mainpath = ""
+localespath = ""
 language = 0
 
 # configuration
