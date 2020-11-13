@@ -110,6 +110,9 @@ def build_frames():
     glob.photoframe.grid(row=0, column=2, rowspan=2, columnspan=1, sticky=E + W + N + S)  # right
     glob.messageframe.grid(row=2, column=0, rowspan=1, columnspan=3, sticky=E + W + N + S)  # message
 
+    glob.message_frame = Text(glob.messageframe, height=1)
+    glob.message_frame.pack(fill=X, expand=1, padx=5, pady=5)
+
     glob.filter_frame = LabelFrame(glob.filterframe, text=_("Filters"), height=650, width=175,
                                    relief=RIDGE, bd=2, bg="gray85")  # bg="gray85"
     glob.filter_frame.pack(fill=BOTH, expand=1, padx=5, pady=5)
@@ -179,33 +182,46 @@ def build_buttons():
         imagenl = Image.open("icon-nl.png")
         imagenl = resize(imagenl, 20)
         photonl = ImageTk.PhotoImage(imagenl)
-        glob.button_nl = Button(glob.buttonframe, image=photonl, command=lambda: (lf.language_nl(),rebuild_buttons()), padx=5)
+        glob.button_nl = Button(glob.buttonframe, image=photonl, command=lambda: (lf.language_nl(),
+                                                                                  rebuild_buttons()), padx=5)
         glob.button_nl.image = photonl
         glob.button_nl.pack(side=RIGHT, pady=10, padx=5)
     else:
-        glob.button_nl = Button(glob.buttonframe, text="NL", command=lambda: (lf.language_nl(),rebuild_buttons()), padx=20)
+        glob.button_nl = Button(glob.buttonframe, text="NL", command=lambda: (lf.language_nl(),
+                                                                              rebuild_buttons()), padx=20)
         glob.button_nl.pack(side=RIGHT, pady=10, padx=10)
 
     if os.path.isfile("icon-en.png"):
         imageen = Image.open("icon-en.png")
         imageen = resize(imageen, 20)
         photoen = ImageTk.PhotoImage(imageen)
-        glob.button_en = Button(glob.buttonframe, image=photoen, command=lambda: (lf.language_en(),rebuild_buttons()), padx=55)
+        glob.button_en = Button(glob.buttonframe, image=photoen, command=lambda: (lf.language_en(),
+                                                                                  rebuild_buttons()), padx=55)
         glob.button_en.image = photoen
         glob.button_en.pack(side=RIGHT, pady=10, padx=5)
     else:
-        glob.button_en = Button(glob.buttonframe, text=_("GB"), command=lambda: (lf.language_en(),rebuild_buttons()), padx=20)
+        glob.button_en = Button(glob.buttonframe, text=_("GB"), command=lambda: (lf.language_en(),
+                                                                                 rebuild_buttons()), padx=20)
         glob.button_en.pack(side=RIGHT, pady=10, padx=10)
 
 
+def build_message():
+    glob.message_frame = Text(glob.messageframe, height=1)
+    glob.message_frame.pack(fill=X, expand=1, padx=5, pady=5)
+    glob.message_frame.insert(END, "msg_welcome")
+
+
 def rebuild_buttons():
+    # delete old
     glob.menu.destroy()
     glob.filterframe.destroy()
     glob.photoframe.destroy()
+    glob.messageframe.destroy()
+    # Build new
     build_menu()
     build_frames()
     build_buttons()
-
+    #build_message()
 
 def main_window():
     # setup language based on config file
@@ -225,5 +241,6 @@ def main_window():
     build_menu()
     build_frames()
     build_buttons()
+    #build_message()
 
     glob.root.mainloop()

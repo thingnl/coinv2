@@ -75,3 +75,4 @@ right_rear_frame = 0
 right_rear_canvas = 0
 right_value_frame = 0
 right_value_canvas = 0
+message_frame = 0
