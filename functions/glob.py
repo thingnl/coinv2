@@ -40,6 +40,13 @@ datamenu = 0
 sysmenu = 0
 helpmenu = 0
 
+# buttons
+button_add = 0
+button_copy = 0
+button_del = 0
+button_nl = 0
+button_en = 0
+
 # frames
 filterframe = 0
 buttonframe = 0
@@ -47,6 +54,11 @@ sqlframe = 0
 photoframe = 0
 messageframe = 0
 
+filter_frame = 0
+button_frame = 0
+sql_frame = 0
+photo_frame = 0
+message_frame = 0
+
 # sysconfig edit screen
 edit_frame = 0
-button_frame = 0
