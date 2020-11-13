@@ -24,8 +24,10 @@ def get_screen_size():
     glob.screen_width = GetSystemMetrics(0)
     glob.screen_height = GetSystemMetrics(1)
     # resize to 70%
-    glob.screen_width_calc = int(glob.screen_width * .7)
-    glob.screen_height_calc = int(glob.screen_height * .7)
+    glob.screen_width_setup = int(ci.get_config_item("slide_horizontal"))/100
+    glob.screen_height_setup = int(ci.get_config_item("slide_vertical"))/100
+    glob.screen_width_calc = int(glob.screen_width * glob.screen_width_setup)
+    glob.screen_height_calc = int(glob.screen_height * glob.screen_height_setup)
     glob.screen_left = int((glob.screen_width - glob.screen_width_calc) / 2)
     glob.screen_top = int((glob.screen_height - glob.screen_height_calc) / 2)
 
@@ -98,11 +100,17 @@ def build_menu():
 
 def build_frames():
     # Frames
+    # glob.filterframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # left
+    # glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
+    # glob.sqlframe = Frame(glob.root, bg="green", width=900)  # center
+    # glob.photoframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # right
+    # glob.messageframe = Frame(glob.root, bg="blue", width=1100)  # message
+
     glob.filterframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # left
     glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
     glob.sqlframe = Frame(glob.root, bg="green", width=900)  # center
     glob.photoframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # right
-    glob.messageframe = Frame(glob.root, bg="blue", width=1100)  # message
+    glob.messageframe = Frame(glob.root, bg="blue", height=50, width=1100)  # message
 
     glob.filterframe.grid(row=0, column=0, rowspan=2, columnspan=1, sticky=E + W + N + S)  # left
     glob.buttonframe.grid(row=0, column=1, sticky=E + W + N + S)  # buttons
@@ -212,16 +220,17 @@ def build_message():
 
 
 def rebuild_buttons():
-    # delete old
-    glob.menu.destroy()
+    # delete old frames
     glob.filterframe.destroy()
+    glob.buttonframe.destroy()
+    glob.sqlframe.destroy()
     glob.photoframe.destroy()
     glob.messageframe.destroy()
-    # Build new
+    # Build new menu, frames and buttons
     build_menu()
     build_frames()
     build_buttons()
-    #build_message()
+
 
 def main_window():
     # setup language based on config file

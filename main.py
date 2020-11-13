@@ -31,7 +31,8 @@ __status__ = 'Development'
 # idea      Make sql fieldlist configurable
 # idea      Replace top button bar with icons
 
-# fix       Currently nothing needs fixing
+# fixed     frame size in reloading with language button, delete frames was not deleting all frames.
+# fix       Nothing at the moment :)
 
 # System libs
 import os

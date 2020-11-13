@@ -23,6 +23,8 @@ screen_width = 0
 screen_height = 0
 screen_width_calc = 0
 screen_height_calc = 0
+screen_width_setup = 0
+screen_height_setup = 0
 screen_top = 0
 screen_left = 0
 
