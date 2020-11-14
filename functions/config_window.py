@@ -228,8 +228,8 @@ def save_settings():
     file1.close()
     file2.close()
 
-    # Not renaming this way
-    # os.rename(config_file, backup_file)
+    # delete config_file
+    # rename new_config_file to config_file
 
     # Close edit window
     glob.top.destroy()
