@@ -15,9 +15,13 @@
 import gettext
 # from . import config_window as cwd
 # from . import config_items as ci
-# from . import glob
+from . import glob
 
 global _
+
+def send_message(message_text):
+    glob.message_frame.delete("1.0", "end")
+    glob.message_frame.insert("1.0", message_text)
 
 
 def language_nl():

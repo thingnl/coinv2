@@ -114,6 +114,7 @@ def build_frames():
 
     glob.message_frame = Text(glob.messageframe, height=1)
     glob.message_frame.pack(fill=X, expand=1, padx=5, pady=5)
+    lf.send_message(_("Welcome to Pecuniae Collectio"))
 
     glob.filter_frame = LabelFrame(glob.filterframe, text=_("Filters"), height=650, width=175,
                                    relief=RIDGE, bd=2, bg="gray85")  # bg="gray85"

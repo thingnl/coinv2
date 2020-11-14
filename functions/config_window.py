@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 
 # System libs
-# import os
+import os
+import time
 from os import path
 # import gettext
 # import tkinter as tk
 from tkinter import filedialog
 from tkinter import *
 from . import glob
-# from . import language_functions as lf
+from . import language_functions as lf
 from . import config_items as ci
 
 global _
@@ -194,6 +195,7 @@ def save_settings():
     # Rename config file to backup config file
     config_file = glob.mainpath + "\\coinsv2.config"
     new_config_file = glob.mainpath + "\\coinsv2.config.new"
+    timestr = time.strftime("%Y%m%d-%H%M%S")
 
     # Open existing config file for input
     file1 = open(config_file, 'r')
@@ -228,9 +230,13 @@ def save_settings():
     file1.close()
     file2.close()
 
-    # delete config_file
-    # rename new_config_file to config_file
-    #going to try this push again.
+    # Rename current file
+    os.rename(config_file, config_file + "." + timestr)
+
+    # Rename new config file
+    os.rename(new_config_file, config_file)
+
+    lf.send_message(_("New settings saved to configuration file."))
 
     # Close edit window
     glob.top.destroy()
