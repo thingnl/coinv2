@@ -20,9 +20,7 @@ global _
 
 
 def get_config_item(itemtoget):
-    # print(glob.scriptpath + "\\coinsv2.config")
-    # pathname = os.path.dirname(sys.argv[0])
-    # with open(glob.mainpath + "\\coinsv2.config", "r") as fp:
+
     with open(os.path.join(glob.mainpath, 'coinsv2.config'), "r") as fp:
         for line in fp:
             if not line.startswith('#'):

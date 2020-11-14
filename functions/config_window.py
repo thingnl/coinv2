@@ -17,6 +17,14 @@ global _
 
 
 def get_database_dir():
+    """ Ask user for directory to store databases.
+
+    Args:
+        None.
+
+    Returns:
+        Path to database storage location.
+    """
     answer = filedialog.askdirectory(parent=glob.edit_edit_frame, initialdir=glob.scriptpath,
                                      title=_("Select databases folder:"))
     if answer != "":
@@ -25,6 +33,14 @@ def get_database_dir():
 
 
 def get_scans_dir():
+    """ Ask user for directory to store pictures/scans.
+
+    Args:
+        None.
+
+    Returns:
+        Path to pictures/scans storage location.
+    """
     answer = filedialog.askdirectory(parent=glob.edit_edit_frame, initialdir=glob.scriptpath,
                                      title=_("Select scans folder:"))
     if answer != "":
@@ -33,6 +49,14 @@ def get_scans_dir():
 
 
 def get_orders_dir():
+    """ Ask user for directory to store pdf orders.
+
+    Args:
+        None.
+
+    Returns:
+        Path to pdf storage location.
+    """
     answer = filedialog.askdirectory(parent=glob.edit_edit_frame, initialdir=glob.scriptpath,
                                      title=_("Select orders folder:"))
     if answer != "":
@@ -41,6 +65,14 @@ def get_orders_dir():
 
 
 def get_logs_dir():
+    """ Ask user for directory to store log files.
+
+    Args:
+        None.
+
+    Returns:
+        Path to logs storage location.
+    """
     answer = filedialog.askdirectory(parent=glob.edit_edit_frame, initialdir=glob.scriptpath,
                                      title=_("Select logs folder:"))
     if answer != "":
@@ -49,6 +81,14 @@ def get_logs_dir():
 
 
 def get_backups_dir():
+    """ Ask user for directory to store backup files.
+
+    Args:
+        None.
+
+    Returns:
+        Path to backup storage location.
+    """
     answer = filedialog.askdirectory(parent=glob.edit_edit_frame, initialdir=glob.scriptpath,
                                      title=_("Select backups folder:"))
     if answer != "":
@@ -57,6 +97,14 @@ def get_backups_dir():
 
 
 def get_current_settings():
+    """ Get all the settings for the system configuration screen.
+
+    Args:
+        None.
+
+    Returns:
+        Returns nothing but put all the settings directly on screen.
+    """
     config_file = glob.mainpath + "\\coinsv2.config"
     if not path.exists(config_file):
         glob.slide_horizontal.set(70)
