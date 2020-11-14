@@ -8,29 +8,47 @@
 # python C:\Python\Python39\Tools\i18n\pygettext.py -v -d base -o locales/base.pot main_window.py
 
 # System libs
-# import os
-# import sys
-# import gettext
-# import os.path
 import gettext
-# from . import config_window as cwd
-# from . import config_items as ci
 from . import glob
 
 global _
 
 def send_message(message_text):
+    """ Show message to user at bottom main window.
+
+    Args:
+        message_text: string.
+
+    Returns:
+        Returns nothing, put's message directly on screen.
+    """
     glob.message_frame.delete("1.0", "end")
     glob.message_frame.insert("1.0", message_text)
 
 
 def language_nl():
+    """ Switch GUI language to Dutch.  For a permanent switch, update setting in the system configuration.
+
+    Args:
+        None.
+
+    Returns:
+        Nothing.
+    """
     nl = gettext.translation('base', localedir='locales', languages=['nl'])
     nl.install()
     _ = nl.gettext
 
 
 def language_en():
+    """ Switch GUI language to English. For a permanent switch, update setting in the system configuration.
+
+    Args:
+        None.
+
+    Returns:
+        Nothing.
+    """
     en150 = gettext.translation('base', localedir='locales', languages=['en_150'])
     en150.install()
     _ = en150.gettext

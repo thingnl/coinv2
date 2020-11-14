@@ -82,3 +82,7 @@ right_rear_canvas = 0
 right_value_frame = 0
 right_value_canvas = 0
 # message_frame = 0
+
+# journal files
+main_journal = ""
+sql_journal = ""

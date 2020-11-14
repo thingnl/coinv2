@@ -4,11 +4,12 @@
 # System libs
 import os
 import time
+
 from os import path
-# import gettext
-# import tkinter as tk
+
 from tkinter import filedialog
 from tkinter import *
+
 from . import glob
 from . import language_functions as lf
 from . import config_items as ci
@@ -129,11 +130,6 @@ def get_current_settings():
         else:
             glob.language.set(2)
 
-# def sel():
-#     selection = glob.language.get()
-#     pass
-#
-
 
 def build_edit_settings():
     glob.top = Toplevel()
@@ -234,16 +230,10 @@ def build_edit_settings():
     glob.radio2_language.grid(row=14, column=2)
 
 
-def save_language():
-
-    pass
-
-
 def save_settings():
     # Rename config file to backup config file
     config_file = glob.mainpath + "\\coinsv2.config"
     new_config_file = glob.mainpath + "\\coinsv2.config.new"
-    timestr = time.strftime("%Y%m%d-%H%M%S")
 
     # Open existing config file for input
     file1 = open(config_file, 'r')
@@ -279,7 +269,7 @@ def save_settings():
     file2.close()
 
     # Rename current file
-    os.rename(config_file, config_file + "." + timestr)
+    os.rename(config_file, config_file + "." + time.strftime("%Y%m%d-%H%M%S"))
 
     # Rename new config file
     os.rename(new_config_file, config_file)
@@ -294,9 +284,11 @@ def edit_settings():
     build_edit_settings()
     get_current_settings()
 
-    # open last database on startup
-    # Include jpg in backup
-    # Include orders in backup
+    # open last database on startup?
+    # Include jpg in backup?
+    # Include orders in backup?
+    # log SQL data?
+    # max days to keep logs, 0 = keep all?
 
     # get a directory
     # answer = filedialog.askdirectory(parent=edit_frame,

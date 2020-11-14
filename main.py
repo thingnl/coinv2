@@ -19,10 +19,11 @@ __status__ = 'Development'
 
 # Done   1  Investigate decent multi language solution like https://docs.python.org/3/library/gettext.html
 # Done      Check glob valiable for all frames, menu's and buttons
+# Done   0  studie: https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
+# Done   0  Create configuration import/management functions
 
-# todo   0  studie: https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
-# todo   1  Create configuration import/management functions
 # todo   1  Create logging functionality https://realpython.com/python-logging/
+
 # todo   1  Create database function
 # todo   1  Import test data function
 # todo   1  Add a check databse option
@@ -36,15 +37,25 @@ __status__ = 'Development'
 
 # System libs
 import os
-# import gettext
+import time
+
 # Own modules
 from functions import glob
 from functions import main_window as mwd
+from functions import config_items as ci
+from functions import journal_functions as jf
 
 global _
 
 glob.mainpath = os.path.abspath(os.path.dirname(__file__))
 glob.localespath = glob.mainpath + '\\locales'
+glob.main_journal = ci.get_config_item("loc_logs") + "/system_journal" + "." + time.strftime("%Y%m%d")
+glob.sql_journal = ci.get_config_item("loc_logs") + "/sql_journal" + "." + time.strftime("%Y%m%d")
+
+jf.write_main_journal_entry("New PC session started.")
+
+print(glob.main_journal)
+print(glob.sql_journal)
 
 
 def main():

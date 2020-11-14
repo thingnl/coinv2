@@ -9,10 +9,7 @@
 
 # System libs
 import os
-# import sys
-# import gettext
 import os.path
-# import gettext
 
 from . import glob
 
@@ -20,7 +17,14 @@ global _
 
 
 def get_config_item(itemtoget):
+    """ Retrieves requested configuration setting from coinv2.config file.
 
+    Args:
+        itemtoget: sting.
+
+    Returns:
+        Returns value found for requested configuration item.
+    """
     with open(os.path.join(glob.mainpath, 'coinsv2.config'), "r") as fp:
         for line in fp:
             if not line.startswith('#'):
