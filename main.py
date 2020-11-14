@@ -36,7 +36,7 @@ __status__ = 'Development'
 
 # System libs
 import os
-import gettext
+# import gettext
 # Own modules
 from functions import glob
 from functions import main_window as mwd

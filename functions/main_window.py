@@ -4,7 +4,7 @@
 # System libs
 import os
 import os.path
-import gettext
+# import gettext
 from tkinter import *
 from tkinter import ttk
 from tkinter import Tk
@@ -23,7 +23,6 @@ global _
 def get_screen_size():
     glob.screen_width = GetSystemMetrics(0)
     glob.screen_height = GetSystemMetrics(1)
-    # resize to 70%
     glob.screen_width_setup = int(ci.get_config_item("slide_horizontal"))/100
     glob.screen_height_setup = int(ci.get_config_item("slide_vertical"))/100
     glob.screen_width_calc = int(glob.screen_width * glob.screen_width_setup)
@@ -58,12 +57,13 @@ def opendb():
 
 
 def build_menu():
+    # Menu
     glob.menu = Menu(glob.root)
     glob.root.config(menu=glob.menu)
     glob.root.columnconfigure(1, weight=1)
     glob.root.rowconfigure(1, weight=1)
 
-    # Menu's
+    # Menu options
     glob.filemenu = Menu(glob.root, tearoff=0)
     glob.menu.add_cascade(label=_("File"), menu=glob.filemenu)
     glob.filemenu.add_command(label=_("New"), command=newfile)
@@ -100,12 +100,6 @@ def build_menu():
 
 def build_frames():
     # Frames
-    # glob.filterframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # left
-    # glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
-    # glob.sqlframe = Frame(glob.root, bg="green", width=900)  # center
-    # glob.photoframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # right
-    # glob.messageframe = Frame(glob.root, bg="blue", width=1100)  # message
-
     glob.filterframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # left
     glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
     glob.sqlframe = Frame(glob.root, bg="green", width=900)  # center
@@ -250,6 +244,5 @@ def main_window():
     build_menu()
     build_frames()
     build_buttons()
-    #build_message()
 
     glob.root.mainloop()

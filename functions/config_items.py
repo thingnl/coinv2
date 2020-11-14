@@ -9,14 +9,15 @@
 
 # System libs
 import os
-import sys
-import gettext
+# import sys
+# import gettext
 import os.path
-import gettext
+# import gettext
 
 from . import glob
 
 global _
+
 
 def get_config_item(itemtoget):
     # print(glob.scriptpath + "\\coinsv2.config")

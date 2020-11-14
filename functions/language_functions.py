@@ -8,16 +8,17 @@
 # python C:\Python\Python39\Tools\i18n\pygettext.py -v -d base -o locales/base.pot main_window.py
 
 # System libs
-import os
-import sys
+# import os
+# import sys
+# import gettext
+# import os.path
 import gettext
-import os.path
-import gettext
-from . import config_window as cwd
-from . import config_items as ci
-from . import glob
+# from . import config_window as cwd
+# from . import config_items as ci
+# from . import glob
 
 global _
+
 
 def language_nl():
     nl = gettext.translation('base', localedir='locales', languages=['nl'])

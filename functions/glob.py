@@ -63,7 +63,11 @@ photo_frame = 0
 message_frame = 0
 
 # sysconfig edit screen
-edit_frame = 0
+top = 0
+edit_edit_frame = 0
+edit_button_frame = 0
+button_edit_cancel = 0
+button_edit_save = 0
 
 button_filter_apply = 0
 filter_label_country = 0
@@ -77,4 +81,4 @@ right_rear_frame = 0
 right_rear_canvas = 0
 right_value_frame = 0
 right_value_canvas = 0
-message_frame = 0
+# message_frame = 0
