@@ -1,0 +1,230 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2020-11-10 21:07+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=cp1252\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: main.py\n"
+"X-Poedit-SearchPath-1: functions\n"
+"X-Poedit-SearchPath-2: applications\n"
+"Language: en\n"
+
+#: functions/config_window.py:25
+msgid "Select databases folder:"
+msgstr ""
+
+#: functions/config_window.py:33
+msgid "Select scans folder:"
+msgstr ""
+
+#: functions/config_window.py:41
+msgid "Select orders folder:"
+msgstr ""
+
+#: functions/config_window.py:49
+msgid "Select logs folder:"
+msgstr ""
+
+#: functions/config_window.py:57
+msgid "Select backups folder:"
+msgstr ""
+
+#: functions/config_window.py:96
+msgid "Edit settings"
+msgstr ""
+
+#: functions/config_window.py:108
+msgid "Screensize:"
+msgstr ""
+
+#: functions/config_window.py:111
+msgid "Horizontal:"
+msgstr ""
+
+#: functions/config_window.py:113
+msgid "Vertical:"
+msgstr ""
+
+#: functions/config_window.py:127
+msgid "File locations:"
+msgstr ""
+
+#: functions/config_window.py:130
+msgid "Databases:"
+msgstr ""
+
+#: functions/config_window.py:137
+msgid "Scans:"
+msgstr ""
+
+#: functions/config_window.py:144
+msgid "Orders:"
+msgstr ""
+
+#: functions/config_window.py:151
+msgid "Logs:"
+msgstr ""
+
+#: functions/config_window.py:158
+msgid "Backup's:"
+msgstr ""
+
+#: functions/config_window.py:169 functions/config_window.py:172
+msgid "Language:"
+msgstr ""
+
+#: functions/config_window.py:175
+msgid "English"
+msgstr ""
+
+#: functions/config_window.py:177
+msgid "Dutch"
+msgstr ""
+
+#: functions/main_window.py:64
+msgid "File"
+msgstr ""
+
+#: functions/main_window.py:65
+msgid "New"
+msgstr ""
+
+#: functions/main_window.py:66
+msgid "Open"
+msgstr ""
+
+#: functions/main_window.py:67
+msgid "Close"
+msgstr ""
+
+#: functions/main_window.py:68
+msgid "Save"
+msgstr ""
+
+#: functions/main_window.py:70
+msgid "Exit"
+msgstr ""
+
+#: functions/main_window.py:73
+msgid "Tables"
+msgstr ""
+
+#: functions/main_window.py:74
+msgid "Countries"
+msgstr ""
+
+#: functions/main_window.py:75
+msgid "Suppliers"
+msgstr ""
+
+#: functions/main_window.py:76
+msgid "Orders"
+msgstr ""
+
+#: functions/main_window.py:77
+msgid "Rarity"
+msgstr ""
+
+#: functions/main_window.py:80
+msgid "Data"
+msgstr ""
+
+#: functions/main_window.py:81
+msgid "Export"
+msgstr ""
+
+#: functions/main_window.py:82
+msgid "Import"
+msgstr ""
+
+#: functions/main_window.py:83
+msgid "Backup"
+msgstr ""
+
+#: functions/main_window.py:84
+msgid "Restore"
+msgstr ""
+
+#: functions/main_window.py:87
+msgid "System"
+msgstr ""
+
+#: functions/main_window.py:88
+msgid "Settings"
+msgstr ""
+
+#: functions/main_window.py:91
+msgid "Help"
+msgstr ""
+
+#: functions/main_window.py:92
+msgid "About"
+msgstr ""
+
+#: functions/main_window.py:93
+msgid "Manual"
+msgstr ""
+
+#: functions/main_window.py:94
+msgid "Support"
+msgstr ""
+
+#: functions/main_window.py:111
+msgid "Filters"
+msgstr ""
+
+#: functions/main_window.py:116
+msgid "Apply filters"
+msgstr ""
+
+#: functions/main_window.py:119
+msgid "Country"
+msgstr ""
+
+#: functions/main_window.py:126
+msgid "Denomination"
+msgstr ""
+
+#: functions/main_window.py:133
+msgid "Scans"
+msgstr ""
+
+#: functions/main_window.py:138
+msgid "Front"
+msgstr ""
+
+#: functions/main_window.py:147
+msgid "Rear"
+msgstr ""
+
+#: functions/main_window.py:156
+msgid "Value"
+msgstr ""
+
+#: functions/main_window.py:167
+msgid "Add"
+msgstr ""
+
+#: functions/main_window.py:170
+msgid "Copy"
+msgstr ""
+
+#: functions/main_window.py:173
+msgid "Delete"
+msgstr ""
+
+#: functions/main_window.py:196
+msgid "GB"
+msgstr ""
