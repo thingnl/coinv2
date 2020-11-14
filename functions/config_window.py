@@ -230,6 +230,7 @@ def save_settings():
 
     # delete config_file
     # rename new_config_file to config_file
+    #going to try this push again.
 
     # Close edit window
     glob.top.destroy()
