@@ -12,6 +12,7 @@ import os
 import os.path
 
 from . import glob
+from . import journal_functions as jf
 
 global _
 
@@ -32,6 +33,10 @@ def get_config_item(itemtoget):
                     line = line.split("=", 1)
                     if isinstance(line[-1], str):
                         line[-1] = line[-1].strip()
+                        #jf.write_main_journal_entry("[config_items.py] - Retrieved %s." % (itemtoget))
+                        jf.write_main_journal_entry("[config_items.py] - Retrieved %s = %s" %
+                                                    (itemtoget, str(line[-1])))
                         return line[-1]
                     else:
+                        jf.write_main_journal_entry("[config_items.py] - Retrieved %s" % (itemtoget))
                         return line[-1]

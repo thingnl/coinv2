@@ -1,6 +1,11 @@
 # class glob:
 # Globals module
 
+# system
+system_version = "v2.0.2"
+system_build = "23"
+system_sql = "1.0"
+
 # runtime
 scriptpath = ""
 mainpath = ""

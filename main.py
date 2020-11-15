@@ -47,20 +47,24 @@ from functions import journal_functions as jf
 
 global _
 
+# Setup some system variables
 glob.mainpath = os.path.abspath(os.path.dirname(__file__))
 glob.localespath = glob.mainpath + '\\locales'
 glob.main_journal = ci.get_config_item("loc_logs") + "/system_journal" + "." + time.strftime("%Y%m%d")
 glob.sql_journal = ci.get_config_item("loc_logs") + "/sql_journal" + "." + time.strftime("%Y%m%d")
 
-jf.write_main_journal_entry("New PC session started.")
-
-print(glob.main_journal)
-print(glob.sql_journal)
+# Write some log entries
+jf.write_main_journal_entry("[main.py] - -----------------------")
+jf.write_main_journal_entry("[main.py] - New PC session started.")
+jf.write_main_journal_entry("[main.py] - system_version = " + glob.system_version)
+jf.write_main_journal_entry("[main.py] - system_build = " + glob.system_build)
+jf.write_main_journal_entry("[main.py] - system_sql = " + glob.system_sql)
 
 
 def main():
     mwd.main_window()
 
+    jf.write_main_journal_entry("[main.py] - Main closed by Exit.")
 
 if __name__ == "__main__":
     main()
