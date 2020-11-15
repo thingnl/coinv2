@@ -31,9 +31,10 @@ __status__ = 'Development'
 
 # idea      Make sql fieldlist configurable
 # idea      Replace top button bar with icons
+# idea      Add Schema Version table to SQL database
 
 # fixed     frame size in reloading with language button, delete frames was not deleting all frames.
-# fix       Nothing at the moment :)
+# fix       Menu exit does not, takes 3 times to actually exit. May actually be file write delay
 
 # System libs
 import os
@@ -52,6 +53,11 @@ glob.mainpath = os.path.abspath(os.path.dirname(__file__))
 glob.localespath = glob.mainpath + '\\locales'
 glob.main_journal = ci.get_config_item("loc_logs") + "/system_journal" + "." + time.strftime("%Y%m%d")
 glob.sql_journal = ci.get_config_item("loc_logs") + "/sql_journal" + "." + time.strftime("%Y%m%d")
+
+# Open logfile in line unbuffered mode (0), not allowed, only binairy writes
+# Open logfile in line buffered mode (1), does not flush
+# Open logfile with buffersize
+glob.fh_main_log = open(glob.main_journal, mode='a',buffering=50)
 
 # Write some log entries
 jf.write_main_journal_entry("[main.py] - -----------------------")

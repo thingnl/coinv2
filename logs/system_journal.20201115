@@ -1,2 +1,66 @@
-20201115-004504 New PC session started.
-20201115-004534 New PC session started.
+20201115-224204 - [main.py] - -----------------------
+20201115-224204 - [main.py] - New PC session started.
+20201115-224204 - [main.py] - system_version = v2.0.2
+20201115-224204 - [main.py] - system_build = 23
+20201115-224204 - [main.py] - system_sql = 1.0
+20201115-224204 - [config_items.py] - Retrieved language_selected = GB
+20201115-224204 - [language_functions.py] - Language switched to GB.
+20201115-224204 - [config_items.py] - Retrieved slide_horizontal = 85
+20201115-224204 - [config_items.py] - Retrieved slide_vertical = 70
+20201115-224204 - [main_window.py] - Metrics  1920x1080
+20201115-224204 - [main_window.py] - Geometry 1632x756+144+162.
+20201115-224215 - [language_functions.py] - Language switched to NL.
+20201115-224215 - [language_functions.py] - Language switched to GB.
+20201115-224216 - [language_functions.py] - Language switched to NL.
+20201115-224217 - [language_functions.py] - Language switched to GB.
+20201115-224219 - [config_window.py] - Configuration window opened.
+20201115-224219 - [config_items.py] - Retrieved slide_horizontal = 85
+20201115-224219 - [config_items.py] - Retrieved slide_vertical = 70
+20201115-224219 - [config_items.py] - Retrieved loc_database = F:/py-dev/coinv2/database
+20201115-224219 - [config_items.py] - Retrieved loc_scans = F:/py-dev/coinv2/images
+20201115-224219 - [config_items.py] - Retrieved loc_orders = F:/py-dev/coinv2/orders
+20201115-224219 - [config_items.py] - Retrieved loc_logs = F:/py-dev/coinv2/logs
+20201115-224219 - [config_items.py] - Retrieved loc_backups = F:/py-dev/coinv2/backup
+20201115-224219 - [config_items.py] - Retrieved language_selected = GB
+20201115-224223 - [config_window.py] - Wrote slide_horizontal = 85
+20201115-224223 - [config_window.py] - Wrote slide_vertical = 70
+20201115-224223 - [config_window.py] - Wrote loc_database = F:/py-dev/coinv2/database
+20201115-224223 - [config_window.py] - Wrote loc_scans = F:/py-dev/coinv2/images
+20201115-224223 - [config_window.py] - Wrote loc_orders = F:/py-dev/coinv2/orders
+20201115-224223 - [config_window.py] - Wrote loc_logs = F:/py-dev/coinv2/logs
+20201115-224223 - [config_window.py] - Wrote loc_backups = F:/py-dev/coinv2/backup
+20201115-224223 - [config_window.py] - Wrote language_selected = NL
+20201115-224223 - [config_window.py] - Old config moved to F:\py-dev\coinv2\coinsv2.config.20201115-224223
+20201115-224223 - [config_window.py] - New settings saved to F:\py-dev\coinv2\coinsv2.config.
+20201115-224227 - [config_window.py] - Configuration window opened.
+20201115-224227 - [config_items.py] - Retrieved slide_horizontal = 85
+20201115-224227 - [config_items.py] - Retrieved slide_vertical = 70
+20201115-224227 - [config_items.py] - Retrieved loc_database = F:/py-dev/coinv2/database
+20201115-224227 - [config_items.py] - Retrieved loc_scans = F:/py-dev/coinv2/images
+20201115-224227 - [config_items.py] - Retrieved loc_orders = F:/py-dev/coinv2/orders
+20201115-224227 - [config_items.py] - Retrieved loc_logs = F:/py-dev/coinv2/logs
+20201115-224227 - [config_items.py] - Retrieved loc_backups = F:/py-dev/coinv2/backup
+20201115-224227 - [config_items.py] - Retrieved language_selected = NL
+20201115-224231 - [config_window.py] - Wrote slide_horizontal = 85
+20201115-224231 - [config_window.py] - Wrote slide_vertical = 70
+20201115-224231 - [config_window.py] - Wrote loc_database = F:/py-dev/coinv2/database
+20201115-224231 - [config_window.py] - Wrote loc_scans = F:/py-dev/coinv2/images
+20201115-224231 - [config_window.py] - Wrote loc_orders = F:/py-dev/coinv2/orders
+20201115-224231 - [config_window.py] - Wrote loc_logs = F:/py-dev/coinv2/logs
+20201115-224231 - [config_window.py] - Wrote loc_backups = F:/py-dev/coinv2/backup
+20201115-224231 - [config_window.py] - Wrote language_selected = GB
+20201115-224231 - [config_window.py] - Old config moved to F:\py-dev\coinv2\coinsv2.config.20201115-224231
+20201115-224231 - [config_window.py] - New settings saved to F:\py-dev\coinv2\coinsv2.config.
+20201115-224240 - [main.py] - Main closed by Exit.
+20201115-225913 - [main.py] - -----------------------
+20201115-225914 - [main.py] - New PC session started.
+20201115-225914 - [main.py] - system_version = v2.0.2
+20201115-225914 - [main.py] - system_build = 23
+20201115-225914 - [main.py] - system_sql = 1.0
+20201115-225914 - [config_items.py] - Retrieved language_selected = GB
+20201115-225914 - [language_functions.py] - Language switched to GB.
+20201115-225914 - [config_items.py] - Retrieved slide_horizontal = 85
+20201115-225914 - [config_items.py] - Retrieved slide_vertical = 70
+20201115-225914 - [main_window.py] - Metrics  1920x1080
+20201115-225914 - [main_window.py] - Geometry 1632x756+144+162.
+20201115-225916 - [main.py] - Main closed by Exit.
