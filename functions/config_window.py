@@ -13,7 +13,7 @@ from tkinter import *
 from . import glob
 from . import language_functions as lf
 from . import config_items as ci
-from . import journal_functions as jf
+# from . import journal_functions as jf
 
 global _
 
@@ -116,6 +116,9 @@ def get_current_settings():
         glob.loc_orders.insert(10, glob.scriptpath + "\\orders")
         glob.loc_logs.insert(10, glob.scriptpath + "\\logs")
         glob.loc_backups.insert(10, glob.scriptpath + "\\backup")
+        glob.language.set(1)
+        glob.sqllog.set("INFO")
+        glob.sqllog.set("INFO")
     else:
         glob.slide_horizontal.set(ci.get_config_item("slide_horizontal"))
         glob.slide_vertical.set(ci.get_config_item("slide_vertical"))
@@ -125,12 +128,12 @@ def get_current_settings():
         glob.loc_orders.insert(10, ci.get_config_item("loc_orders"))
         glob.loc_logs.insert(10, ci.get_config_item("loc_logs"))
         glob.loc_backups.insert(10, ci.get_config_item("loc_backups"))
-        # langsel = cwd.get_config_item("language_selected")
         if ci.get_config_item("language_selected") == "GB":
             glob.language.set(1)
         else:
             glob.language.set(2)
-
+        glob.mainlog.set(ci.get_config_item("main_log_level"))
+        glob.sqllog.set(ci.get_config_item("sql_log_level"))
 
 def build_edit_settings():
     glob.top = Toplevel()
@@ -161,74 +164,110 @@ def build_edit_settings():
     label_horizontal = Label(glob.edit_edit_frame, text=_("Horizontal:"), anchor="e", width=20)
     label_horizontal.grid(row=2, column=1)
     label_vertical = Label(glob.edit_edit_frame, text=_("Vertical:"), anchor="e", width=20)
-    label_vertical.grid(row=3, column=1)
+    label_vertical.grid(row=2, column=4)
 
     glob.slide_horizontal = Scale(glob.edit_edit_frame, from_=0, to=100, length=150, tickinterval=25, orient=HORIZONTAL)
     glob.slide_horizontal.grid(row=2, column=2, columnspan=2)
     glob.slide_vertical = Scale(glob.edit_edit_frame, from_=0, to=100, length=150, tickinterval=25, orient=HORIZONTAL)
-    glob.slide_vertical.grid(row=3, column=2, columnspan=2)
+    glob.slide_vertical.grid(row=2, column=5, columnspan=2)
 
     label_emptyline = Label(glob.edit_edit_frame, text="")
     label_emptyline.grid(row=4, column=1)
     label_emptyline = Label(glob.edit_edit_frame, text="", width=20)
     label_emptyline.grid(row=1, column=4)
 
+    # Main log setting
+    label_mainlog = Label(glob.edit_edit_frame, text=_("Log levels:"), font=("Segoe", 10, 'bold underline'),
+                           anchor="w", width=20)
+    label_mainlog.grid(row=5, column=4, columnspan=2)
+    label_mainsel = Label(glob.edit_edit_frame, text=_("Level main log:"), anchor="e", width=20)
+    label_mainsel.grid(row=6, column=4)
+    glob.mainlog = StringVar()
+    glob.radio1_mainlog = Radiobutton(glob.edit_edit_frame, text=_("No logging"), variable=glob.mainlog,
+                                      value="NOTSET", anchor="w", width=20)
+    glob.radio2_mainlog = Radiobutton(glob.edit_edit_frame, text=_("Info"), variable=glob.mainlog,
+                                      value="INFO", anchor="w", width=20)
+    glob.radio3_mainlog = Radiobutton(glob.edit_edit_frame, text=_("Extended"), variable=glob.mainlog,
+                                      value="DEBUG", anchor="w", width=20)
+
+    glob.radio1_mainlog.grid(row=6, column=5)
+    glob.radio2_mainlog.grid(row=7, column=5)
+    glob.radio3_mainlog.grid(row=8, column=5)
+
+    # SQL log setting
+    label_sqllog = Label(glob.edit_edit_frame, text=_("Level sql log:"), anchor="e", width=20)
+    label_sqllog.grid(row=6, column=6)
+    glob.sqllog = StringVar()
+    glob.radio1_sqllog = Radiobutton(glob.edit_edit_frame, text=_("No logging"), variable=glob.sqllog,
+                                      value="NOTSET", anchor="w", width=20)
+    glob.radio2_sqllog = Radiobutton(glob.edit_edit_frame, text=_("Info"), variable=glob.sqllog,
+                                      value="INFO", anchor="w", width=20)
+    glob.radio3_sqllog = Radiobutton(glob.edit_edit_frame, text=_("Extended"), variable=glob.sqllog,
+                                      value="DEBUG", anchor="w", width=20)
+
+    glob.radio1_sqllog.grid(row=6, column=7)
+    glob.radio2_sqllog.grid(row=7, column=7)
+    glob.radio3_sqllog.grid(row=8, column=7)
+
     # directories
+    label_emptyline = Label(glob.edit_edit_frame, text="")
+    label_emptyline.grid(row=13, column=1)
+
     label_directories = Label(glob.edit_edit_frame, text=_("File locations:"),
                               font=("Segoe", 10, 'bold underline'), anchor="w", width=20)
-    label_directories.grid(row=5, column=1, columnspan=2)
+    label_directories.grid(row=14, column=1, columnspan=2)
     label_database = Label(glob.edit_edit_frame, text=_("Databases:"), anchor="e", width=20)
-    label_database.grid(row=6, column=1)
+    label_database.grid(row=15, column=1)
     glob.loc_database = Entry(glob.edit_edit_frame)
-    glob.loc_database.grid(row=6, column=2, columnspan=3, sticky=NSEW)
+    glob.loc_database.grid(row=15, column=2, columnspan=3, sticky=NSEW)
     button_database = Button(glob.edit_edit_frame, text="▽", command=lambda: get_database_dir())
-    button_database.grid(row=6, column=5, sticky='w')
+    button_database.grid(row=15, column=5, sticky='w')
 
     label_scans = Label(glob.edit_edit_frame, text=_("Scans:"), anchor="e", width=20)
-    label_scans.grid(row=7, column=1)
+    label_scans.grid(row=16, column=1)
     glob.loc_scans = Entry(glob.edit_edit_frame)
-    glob.loc_scans.grid(row=7, column=2, columnspan=3, sticky=NSEW)
+    glob.loc_scans.grid(row=16, column=2, columnspan=3, sticky=NSEW)
     button_scans = Button(glob.edit_edit_frame, text="▽", command=lambda: get_scans_dir())
-    button_scans.grid(row=7, column=5, sticky='w')
+    button_scans.grid(row=16, column=5, sticky='w')
 
     label_orders = Label(glob.edit_edit_frame, text=_("Orders:"), anchor="e", width=20)
-    label_orders.grid(row=8, column=1)
+    label_orders.grid(row=17, column=1)
     glob.loc_orders = Entry(glob.edit_edit_frame)
-    glob.loc_orders.grid(row=8, column=2, columnspan=3, sticky=NSEW)
+    glob.loc_orders.grid(row=17, column=2, columnspan=3, sticky=NSEW)
     button_orders = Button(glob.edit_edit_frame, text="▽", command=lambda: get_orders_dir())
-    button_orders.grid(row=8, column=5, sticky='w')
+    button_orders.grid(row=17, column=5, sticky='w')
 
     label_logs = Label(glob.edit_edit_frame, text=_("Logs:"), anchor="e", width=20)
-    label_logs.grid(row=9, column=1)
+    label_logs.grid(row=18, column=1)
     glob.loc_logs = Entry(glob.edit_edit_frame)
-    glob.loc_logs.grid(row=9, column=2, columnspan=3, sticky=NSEW)
+    glob.loc_logs.grid(row=18, column=2, columnspan=3, sticky=NSEW)
     button_logs = Button(glob.edit_edit_frame, text="▽", command=lambda: get_logs_dir())
-    button_logs.grid(row=9, column=5, sticky='w')
+    button_logs.grid(row=18, column=5, sticky='w')
 
     label_backups = Label(glob.edit_edit_frame, text=_("Backup's:"), anchor="e", width=20)
-    label_backups.grid(row=10, column=1)
+    label_backups.grid(row=19, column=1)
     glob.loc_backups = Entry(glob.edit_edit_frame)
-    glob.loc_backups.grid(row=10, column=2, columnspan=3, sticky=NSEW)
+    glob.loc_backups.grid(row=19, column=2, columnspan=3, sticky=NSEW)
     button_backups = Button(glob.edit_edit_frame, text="▽", command=lambda: get_backups_dir())
-    button_backups.grid(row=10, column=5, sticky='w')
+    button_backups.grid(row=19, column=5, sticky='w')
 
     label_emptyline = Label(glob.edit_edit_frame, text="")
-    label_emptyline.grid(row=11, column=1)
+    label_emptyline.grid(row=20, column=1)
 
     # language
     label_language = Label(glob.edit_edit_frame, text=_("Language:"), font=("Segoe", 10, 'bold underline'),
                            anchor="w", width=20)
-    label_language.grid(row=12, column=1, columnspan=2)
+    label_language.grid(row=5, column=1, columnspan=2)
     label_langsel = Label(glob.edit_edit_frame, text=_("Language:"), anchor="e", width=20)
-    label_langsel.grid(row=13, column=1)
+    label_langsel.grid(row=6, column=1)
     glob.language = IntVar()
     glob.radio1_language = Radiobutton(glob.edit_edit_frame, text=_("English"), variable=glob.language,
                                        value=1, anchor="w", width=20)
     glob.radio2_language = Radiobutton(glob.edit_edit_frame, text=_("Dutch"), variable=glob.language,
                                        value=2, anchor="w", width=20)
 
-    glob.radio1_language.grid(row=13, column=2)
-    glob.radio2_language.grid(row=14, column=2)
+    glob.radio1_language.grid(row=6, column=2)
+    glob.radio2_language.grid(row=7, column=2)
 
 
 def save_settings():
@@ -272,6 +311,15 @@ def save_settings():
             else:
                 file2.write("language_selected = NL\n")
                 glob.logger_main.debug("Wrote language_selected = NL")
+
+        elif line.startswith('main_log_level'):
+            file2.write("main_log_level = " + glob.mainlog.get() + '\n')
+            glob.logger_main.debug("Wrote main_log_level = " + glob.mainlog.get())
+
+        elif line.startswith('sql_log_level'):
+            file2.write("sql_log_level = " + glob.sqllog.get() + '\n')
+            glob.logger_main.debug("Wrote sql_log_level = " + glob.sqllog.get())
+
         else:
             file2.write(line)
 
@@ -297,8 +345,6 @@ def edit_settings():
     glob.logger_main.info("Configuration window starting.")
     build_edit_settings()
     get_current_settings()
-
-    #glob.top.mainloop()
 
     glob.logger_main.info("Configuration window closed.")
 

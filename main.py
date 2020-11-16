@@ -25,16 +25,16 @@ __status__ = 'Development'
 # Done      Check glob valiable for all frames, menu's and buttons
 # Done   0  studie: https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
 # Done   0  Create configuration import/management functions
-
-# todo   1  Create logging functionality
+# Done   1  Create logging functionality
+# Done   1  Add main loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
+# Done   1  Add sql loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
 
 # todo   1  Create housekeeping function to clear out old logs and config files
 # todo   1  Create database function
 # todo   1  Import test data function
-# todo   1  Add a check databse option
+# todo   1  Add a check database option to system menu
 # todo   1  validate config (directories) on startup and set alarm if it fails
-# todo   1  Add main loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
-# todo   1  Add sql loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
+# todo   2  Update language select on config screen to use stringvar() iso intvar(), like logging
 
 # idea      Make sql fieldlist configurable
 # idea      Replace top button bar with icons
@@ -64,8 +64,8 @@ glob.main_journal = ci.get_config_item("loc_logs") + "/system_journal" + "." + t
 glob.sql_journal = ci.get_config_item("loc_logs") + "/sql_journal" + "." + time.strftime("%Y%m%d")
 
 # Setup logging
-jf.setup_logger('Main_log', glob.main_journal )
-jf.setup_logger('SQL_log', glob.sql_journal )
+jf.setup_logger('Main_log', glob.main_journal, ci.get_config_item("main_log_level") )
+jf.setup_logger('SQL_log', glob.sql_journal, ci.get_config_item("sql_log_level") )
 glob.logger_main = logging.getLogger('Main_log')
 glob.logger_sql = logging.getLogger('SQL_log')
 

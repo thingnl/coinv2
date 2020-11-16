@@ -10,7 +10,7 @@
 # System libs
 import gettext
 from . import glob
-from . import journal_functions as jf
+# from . import journal_functions as jf
 
 global _
 

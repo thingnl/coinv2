@@ -16,7 +16,7 @@ from . import glob
 from . import config_items as ci
 from . import config_window as cwd
 from . import language_functions as lf
-from . import journal_functions as jf
+# from . import journal_functions as jf
 
 global _
 

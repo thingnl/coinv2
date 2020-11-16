@@ -12,7 +12,7 @@ import os
 import os.path
 
 from . import glob
-from . import journal_functions as jf
+# from . import journal_functions as jf
 
 global _
 
