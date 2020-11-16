@@ -64,8 +64,8 @@ glob.main_journal = ci.get_config_item("loc_logs") + "/system_journal" + "." + t
 glob.sql_journal = ci.get_config_item("loc_logs") + "/sql_journal" + "." + time.strftime("%Y%m%d")
 
 # Setup logging
-jf.setup_logger('Main_log', glob.main_journal, ci.get_config_item("main_log_level") )
-jf.setup_logger('SQL_log', glob.sql_journal, ci.get_config_item("sql_log_level") )
+jf.setup_logger('Main_log', glob.main_journal, ci.get_config_item("main_log_level"))
+jf.setup_logger('SQL_log', glob.sql_journal, ci.get_config_item("sql_log_level"))
 glob.logger_main = logging.getLogger('Main_log')
 glob.logger_sql = logging.getLogger('SQL_log')
 
@@ -76,6 +76,7 @@ def main():
     mwd.main_window()
 
     glob.logger_main.info("Main closed by Exit.")
+
 
 if __name__ == "__main__":
     main()

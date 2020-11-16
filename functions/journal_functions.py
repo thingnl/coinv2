@@ -9,16 +9,16 @@ from . import glob
 
 
 def setup_logger(logger_name, log_file, logging_level):
-    l = logging.getLogger(logger_name)
+    logger = logging.getLogger(logger_name)
     formatter = logging.Formatter('%(asctime)s.%(msecs)03d - %(levelname)s - %(message)s',
                                   datefmt='%Y/%m/%d %I:%M:%S')
-    fileHandler = logging.FileHandler(log_file, mode='a')
-    fileHandler.setFormatter(formatter)
+    filehandler = logging.FileHandler(log_file, mode='a')
+    filehandler.setFormatter(formatter)
     # Enable streamHandlers for logging to console
     # streamHandler = logging.StreamHandler()
     # streamHandler.setFormatter(formatter)
-    l.setLevel(logging_level)
-    l.addHandler(fileHandler)
+    logger.setLevel(logging_level)
+    logger.addHandler(filehandler)
     # l.addHandler(streamHandler)
 
 

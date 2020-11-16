@@ -14,6 +14,7 @@ from . import glob
 
 global _
 
+
 def send_message(message_text):
     """ Show message to user at bottom main window.
 

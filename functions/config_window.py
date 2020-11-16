@@ -135,6 +135,7 @@ def get_current_settings():
         glob.mainlog.set(ci.get_config_item("main_log_level"))
         glob.sqllog.set(ci.get_config_item("sql_log_level"))
 
+
 def build_edit_settings():
     glob.top = Toplevel()
     glob.top.title(_("Edit settings"))
@@ -143,8 +144,8 @@ def build_edit_settings():
     glob.top.grab_set()                      # Disable input on main window.
 
     # Create frames
-    glob.edit_edit_frame = Frame(master=glob.top, padx=5, pady=5)                            # main edit part
-    glob.edit_button_frame = Frame(master=glob.top, height=70, bg="gray85", padx=5, pady=5)  # bottom buttons
+    glob.edit_edit_frame = Frame(master=glob.top, padx=5, pady=5)
+    glob.edit_button_frame = Frame(master=glob.top, height=70, bg="gray85", padx=5, pady=5)
 
     glob.edit_edit_frame.pack(fill=BOTH, expand=1)
     glob.edit_button_frame.pack(fill=BOTH, expand=0)
@@ -177,8 +178,8 @@ def build_edit_settings():
     label_emptyline.grid(row=1, column=4)
 
     # Main log setting
-    label_mainlog = Label(glob.edit_edit_frame, text=_("Log levels:"), font=("Segoe", 10, 'bold underline'),
-                           anchor="w", width=20)
+    label_mainlog = Label(glob.edit_edit_frame, text=_("Log levels:"),
+                          font=("Segoe", 10, 'bold underline'), anchor="w", width=20)
     label_mainlog.grid(row=5, column=4, columnspan=2)
     label_mainsel = Label(glob.edit_edit_frame, text=_("Level main log:"), anchor="e", width=20)
     label_mainsel.grid(row=6, column=4)
@@ -198,12 +199,12 @@ def build_edit_settings():
     label_sqllog = Label(glob.edit_edit_frame, text=_("Level sql log:"), anchor="e", width=20)
     label_sqllog.grid(row=6, column=6)
     glob.sqllog = StringVar()
-    glob.radio1_sqllog = Radiobutton(glob.edit_edit_frame, text=_("No logging"), variable=glob.sqllog,
-                                      value="NOTSET", anchor="w", width=20)
-    glob.radio2_sqllog = Radiobutton(glob.edit_edit_frame, text=_("Info"), variable=glob.sqllog,
-                                      value="INFO", anchor="w", width=20)
-    glob.radio3_sqllog = Radiobutton(glob.edit_edit_frame, text=_("Extended"), variable=glob.sqllog,
-                                      value="DEBUG", anchor="w", width=20)
+    glob.radio1_sqllog = Radiobutton(glob.edit_edit_frame, text=_("No logging"),
+                                     variable=glob.sqllog, value="NOTSET", anchor="w", width=20)
+    glob.radio2_sqllog = Radiobutton(glob.edit_edit_frame, text=_("Info"),
+                                     variable=glob.sqllog, value="INFO", anchor="w", width=20)
+    glob.radio3_sqllog = Radiobutton(glob.edit_edit_frame, text=_("Extended"),
+                                     variable=glob.sqllog, value="DEBUG", anchor="w", width=20)
 
     glob.radio1_sqllog.grid(row=6, column=7)
     glob.radio2_sqllog.grid(row=7, column=7)
@@ -347,7 +348,6 @@ def edit_settings():
     get_current_settings()
 
     glob.logger_main.info("Configuration window closed.")
-
 
     # open last database on startup?
     # Include jpg in backup?
