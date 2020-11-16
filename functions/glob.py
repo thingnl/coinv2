@@ -2,8 +2,8 @@
 # Globals module
 
 # file handles
-fh_main_log = 0
-fh_sql_log = 0
+logger_main = 0
+logger_sql = 0
 
 # system
 system_version = "v2.0.2"

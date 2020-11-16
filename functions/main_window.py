@@ -241,11 +241,9 @@ def main_window():
     glob.root.title('Pecuniae Collectio')
     glob.root.geometry('%sx%s+%s+%s' % (glob.screen_width_calc, glob.screen_height_calc,
                                         glob.screen_left, glob.screen_top))
-    jf.write_main_journal_entry("[main_window.py] - Metrics  %sx%s" % (GetSystemMetrics(0), GetSystemMetrics(1)))
-    jf.write_main_journal_entry("[main_window.py] - Geometry %sx%s+%s+%s." % (glob.screen_width_calc,
-                                                                              glob.screen_height_calc,
-                                                                              glob.screen_left,
-                                                                              glob.screen_top))
+    glob.logger_main.debug("Screem metrics  %sx%s" % (GetSystemMetrics(0), GetSystemMetrics(1)))
+    glob.logger_main.debug("Window geometry %sx%s+%s+%s." % (glob.screen_width_calc, glob.screen_height_calc,
+                                                             glob.screen_left, glob.screen_top))
     glob.root.option_add("*Font", "Segoe 8")
 
     build_menu()

@@ -39,7 +39,7 @@ def language_nl():
     nl = gettext.translation('base', localedir='locales', languages=['nl'])
     nl.install()
     _ = nl.gettext
-    jf.write_main_journal_entry("[language_functions.py] - Language switched to NL.")
+    glob.logger_main.info("Language switched to NL.")
 
 
 def language_en():
@@ -54,4 +54,4 @@ def language_en():
     en150 = gettext.translation('base', localedir='locales', languages=['en_150'])
     en150.install()
     _ = en150.gettext
-    jf.write_main_journal_entry("[language_functions.py] - Language switched to GB.")
+    glob.logger_main.info("Language switched to GB.")

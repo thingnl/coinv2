@@ -7,6 +7,10 @@ __credits__ = ['I18n:'
                'Theo Despoudis'
                'https://phrase.com/blog/posts/translate-python-gnu-gettext/',
 
+               'Logging:'
+               'Gank'
+               'https://stackoverflow.com/questions/11232230/logging-to-two-files-with-different-settings',
+
                'Treeview sorting:'
                'unknown'
                'https://www.pianshen.com/article/60037664/'
@@ -22,23 +26,28 @@ __status__ = 'Development'
 # Done   0  studie: https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
 # Done   0  Create configuration import/management functions
 
-# todo   1  Create logging functionality https://realpython.com/python-logging/
+# todo   1  Create logging functionality
 
+# todo   1  Create housekeeping function to clear out old logs and config files
 # todo   1  Create database function
 # todo   1  Import test data function
 # todo   1  Add a check databse option
 # todo   1  validate config (directories) on startup and set alarm if it fails
+# todo   1  Add main loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
+# todo   1  Add sql loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
 
 # idea      Make sql fieldlist configurable
 # idea      Replace top button bar with icons
 # idea      Add Schema Version table to SQL database
 
 # fixed     frame size in reloading with language button, delete frames was not deleting all frames.
-# fix       Menu exit does not, takes 3 times to actually exit. May actually be file write delay
+# fixed     Menu exit does not, takes 3 times to actually exit. Switched to logger, solved write delay (4 now)
+# fix       Again, noting to fix
 
 # System libs
 import os
 import time
+import logging
 
 # Own modules
 from functions import glob
@@ -54,23 +63,19 @@ glob.localespath = glob.mainpath + '\\locales'
 glob.main_journal = ci.get_config_item("loc_logs") + "/system_journal" + "." + time.strftime("%Y%m%d")
 glob.sql_journal = ci.get_config_item("loc_logs") + "/sql_journal" + "." + time.strftime("%Y%m%d")
 
-# Open logfile in line unbuffered mode (0), not allowed, only binairy writes
-# Open logfile in line buffered mode (1), does not flush
-# Open logfile with buffersize
-glob.fh_main_log = open(glob.main_journal, mode='a',buffering=50)
+# Setup logging
+jf.setup_logger('Main_log', glob.main_journal )
+jf.setup_logger('SQL_log', glob.sql_journal )
+glob.logger_main = logging.getLogger('Main_log')
+glob.logger_sql = logging.getLogger('SQL_log')
 
-# Write some log entries
-jf.write_main_journal_entry("[main.py] - -----------------------")
-jf.write_main_journal_entry("[main.py] - New PC session started.")
-jf.write_main_journal_entry("[main.py] - system_version = " + glob.system_version)
-jf.write_main_journal_entry("[main.py] - system_build = " + glob.system_build)
-jf.write_main_journal_entry("[main.py] - system_sql = " + glob.system_sql)
+jf.log_new_start()
 
 
 def main():
     mwd.main_window()
 
-    jf.write_main_journal_entry("[main.py] - Main closed by Exit.")
+    glob.logger_main.info("Main closed by Exit.")
 
 if __name__ == "__main__":
     main()

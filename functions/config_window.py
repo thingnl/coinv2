@@ -242,39 +242,36 @@ def save_settings():
     # Open new config file for output
     file2 = open(new_config_file, 'w')
 
+    glob.logger_main.info("Saving configuration:")
     for line in file1:
         if line.startswith('slide_horizontal'):
             file2.write("slide_horizontal = " + str(glob.slide_horizontal.get()) + '\n')
-            jf.write_main_journal_entry("[config_window.py] - Wrote slide_horizontal = " +
-                                        str(glob.slide_horizontal.get()))
+
         elif line.startswith('slide_vertical'):
             file2.write("slide_vertical = " + str(glob.slide_vertical.get()) + '\n')
-            jf.write_main_journal_entry("[config_window.py] - Wrote slide_vertical = " +
-                                        str(glob.slide_vertical.get()))
+            glob.logger_main.debug("Wrote slide_vertical = " + str(glob.slide_vertical.get()))
         elif line.startswith('loc_database'):
             file2.write("loc_database = " + str(glob.loc_database.get()) + '\n')
-            jf.write_main_journal_entry("[config_window.py] - Wrote loc_database = " + str(glob.loc_database.get()))
+            glob.logger_main.debug("Wrote loc_database = " + str(glob.loc_database.get()))
         elif line.startswith('loc_scans'):
             file2.write("loc_scans = " + str(glob.loc_scans.get()) + '\n')
-            jf.write_main_journal_entry("[config_window.py] - Wrote loc_scans = " + str(glob.loc_scans.get()))
+            glob.logger_main.debug("Wrote loc_scans = " + str(glob.loc_scans.get()))
         elif line.startswith('loc_orders'):
             file2.write("loc_orders = " + str(glob.loc_orders.get()) + '\n')
-            jf.write_main_journal_entry("[config_window.py] - Wrote loc_orders = " + str(glob.loc_orders.get()))
+            glob.logger_main.debug("Wrote loc_orders = " + str(glob.loc_orders.get()))
         elif line.startswith('loc_logs'):
             file2.write("loc_logs = " + str(glob.loc_logs.get()) + '\n')
-            jf.write_main_journal_entry("[config_window.py] - Wrote loc_logs = " + str(glob.loc_logs.get()))
+            glob.logger_main.debug("Wrote loc_logs = " + str(glob.loc_logs.get()))
         elif line.startswith('loc_backups'):
             file2.write("loc_backups = " + str(glob.loc_backups.get()) + '\n')
-            jf.write_main_journal_entry("[config_window.py] - Wrote loc_backups = " + str(glob.loc_backups.get()))
+            glob.logger_main.debug("Wrote loc_backups = " + str(glob.loc_backups.get()))
         elif line.startswith('language_selected'):
             if glob.language.get() == 1:
                 file2.write("language_selected = GB\n")
-                jf.write_main_journal_entry(
-                    "[config_window.py] - Wrote language_selected = GB")
+                glob.logger_main.debug("Wrote language_selected = GB")
             else:
                 file2.write("language_selected = NL\n")
-                jf.write_main_journal_entry(
-                    "[config_window.py] - Wrote language_selected = NL")
+                glob.logger_main.debug("Wrote language_selected = NL")
         else:
             file2.write(line)
 
@@ -284,27 +281,26 @@ def save_settings():
 
     # Rename current file
     os.rename(config_file, config_file + "." + time.strftime("%Y%m%d-%H%M%S"))
-    jf.write_main_journal_entry("[config_window.py] - Old config moved to " + config_file
-                                + "." + time.strftime("%Y%m%d-%H%M%S"))
+    glob.logger_main.debug("Old config moved to " + config_file + "." + time.strftime("%Y%m%d-%H%M%S"))
 
     # Rename new config file
     os.rename(new_config_file, config_file)
 
     lf.send_message(_("New settings saved to configuration file."))
-    jf.write_main_journal_entry("[config_window.py] - New settings saved to " + config_file + ".")
+    glob.logger_main.info("New settings saved to " + config_file + ".")
 
     # Close edit window
     glob.top.destroy()
 
 
 def edit_settings():
-    jf.write_main_journal_entry("[config_window.py] - Configuration window opened.")
+    glob.logger_main.info("Configuration window starting.")
     build_edit_settings()
     get_current_settings()
 
-    glob.top.mainloop()
+    #glob.top.mainloop()
 
-    # jf.write_main_journal_entry("[config_window.py] - Configuration window closed.")
+    glob.logger_main.info("Configuration window closed.")
 
 
     # open last database on startup?
