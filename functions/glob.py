@@ -101,7 +101,6 @@ radio1_sqllog = 0
 radio2_sqllog = 0
 radio3_sqllog = 0
 
-
 # journal files
 main_journal = ""
 sql_journal = ""

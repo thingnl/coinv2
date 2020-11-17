@@ -16,6 +16,7 @@ from . import glob
 from . import config_items as ci
 from . import config_window as cwd
 from . import language_functions as lf
+from . import database_new as dbn
 # from . import journal_functions as jf
 
 global _
@@ -67,7 +68,7 @@ def build_menu():
     # Menu options
     glob.filemenu = Menu(glob.root, tearoff=0)
     glob.menu.add_cascade(label=_("File"), menu=glob.filemenu)
-    glob.filemenu.add_command(label=_("New"), command=newfile)
+    glob.filemenu.add_command(label=_("New"), command=lambda: dbn.saveBox())
     glob.filemenu.add_command(label=_("Open"), command=opendb())
     glob.filemenu.add_command(label=_("Close"), command=newfile)
     glob.filemenu.add_command(label=_("Save"), command=newfile)
