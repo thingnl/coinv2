@@ -17,7 +17,7 @@ from . import config_items as ci
 from . import config_window as cwd
 from . import language_functions as lf
 from . import database_new as dbn
-# from . import journal_functions as jf
+from . import journal_functions as jf
 
 global _
 
@@ -68,7 +68,7 @@ def build_menu():
     # Menu options
     glob.filemenu = Menu(glob.root, tearoff=0)
     glob.menu.add_cascade(label=_("File"), menu=glob.filemenu)
-    glob.filemenu.add_command(label=_("New"), command=lambda: dbn.saveBox())
+    glob.filemenu.add_command(label=_("New"), command=lambda: dbn.create_newdb())
     glob.filemenu.add_command(label=_("Open"), command=opendb())
     glob.filemenu.add_command(label=_("Close"), command=newfile)
     glob.filemenu.add_command(label=_("Save"), command=newfile)
@@ -92,6 +92,7 @@ def build_menu():
     glob.sysmenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("System"), menu=glob.sysmenu)
     glob.sysmenu.add_command(label=_("Settings"), command=lambda: cwd.edit_settings())
+    glob.sysmenu.add_command(label=_("Logfiles"), command=lambda: jf.browse_logfiles())
 
     glob.helpmenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("Help"), menu=glob.helpmenu)
@@ -212,6 +213,7 @@ def build_buttons():
 
 def build_message():
     glob.message_frame = Text(glob.messageframe, height=1)
+    glob.message_frame.config(font =("Courier", 54))
     glob.message_frame.pack(fill=X, expand=1, padx=5, pady=5)
     glob.message_frame.insert(END, "msg_welcome")
 

@@ -2,10 +2,12 @@
 # -*- coding: utf-8 -*-
 
 # System libs
-# import os
+import os
 import logging
-# import time
+from tkinter import filedialog
 from . import glob
+from . import config_items as ci
+
 
 
 def setup_logger(logger_name, log_file, logging_level):
@@ -50,3 +52,16 @@ def log_new_start():
     glob.logger_sql.debug('System_version = ' + glob.system_version)
     glob.logger_sql.debug('System_build = ' + glob.system_build)
     glob.logger_sql.debug('System_sql = ' + glob.system_sql)
+
+
+def browse_logfiles():
+    """ Send messages to the logs to inducate a new run. Includes version information.
+
+    Args:
+
+    Returns:
+    """
+    filename = filedialog.askopenfilename(initialdir=ci.get_config_item("loc_logs"), title="Select a File",
+                                          filetypes=(("Logfiles", "*.log*"), ("all files", "*.*")))
+    if filename != "":
+        os.startfile(filename)

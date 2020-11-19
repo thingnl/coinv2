@@ -18,11 +18,9 @@ global _
 def send_message(message_text):
     """ Show message to user at bottom main window.
 
-    Args:
-        message_text: string.
+    Args: message_text
 
-    Returns:
-        Returns nothing, put's message directly on screen.
+    Returns: Returns nothing, put's message directly on screen.
     """
     glob.message_frame.delete("1.0", "end")
     glob.message_frame.insert("1.0", message_text)
@@ -31,11 +29,9 @@ def send_message(message_text):
 def language_nl():
     """ Switch GUI language to Dutch.  For a permanent switch, update setting in the system configuration.
 
-    Args:
-        None.
+    Args: None
 
-    Returns:
-        Nothing.
+    Returns: Nothing
     """
     nl = gettext.translation('base', localedir='locales', languages=['nl'])
     nl.install()
@@ -46,11 +42,9 @@ def language_nl():
 def language_en():
     """ Switch GUI language to English. For a permanent switch, update setting in the system configuration.
 
-    Args:
-        None.
+    Args: None
 
-    Returns:
-        Nothing.
+    Returns: Nothing
     """
     en150 = gettext.translation('base', localedir='locales', languages=['en_150'])
     en150.install()

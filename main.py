@@ -28,10 +28,12 @@ __status__ = 'Development'
 # Done   1  Create logging functionality
 # Done   1  Add main loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
 # Done   1  Add sql loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
+# Done   1  Add show main log option to system menu
+# Done   1  Add show sql log option to main menu
 
 # todo   1  Create housekeeping function to clear out old logs and config files
-# todo   1  Create database function
-# todo   1  Import test data function
+# todo   1  Create create database function
+# todo   1  Import/create test data function
 # todo   1  Add a check database option to system menu
 # todo   1  validate config (directories) on startup and set alarm if it fails
 # todo   2  Update language select on config screen to use stringvar() iso intvar(), like logging
@@ -42,7 +44,7 @@ __status__ = 'Development'
 
 # fixed     frame size in reloading with language button, delete frames was not deleting all frames.
 # fixed     Menu exit does not, takes 3 times to actually exit. Switched to logger, solved write delay (4 now)
-# fix       Again, noting to fix
+# fix       Cleanup opening logfiles and add log entries on opening
 
 # System libs
 import os
@@ -60,8 +62,8 @@ global _
 # Setup some system variables
 glob.mainpath = os.path.abspath(os.path.dirname(__file__))
 glob.localespath = glob.mainpath + '\\locales'
-glob.main_journal = ci.get_config_item("loc_logs") + "/system_journal" + "." + time.strftime("%Y%m%d")
-glob.sql_journal = ci.get_config_item("loc_logs") + "/sql_journal" + "." + time.strftime("%Y%m%d")
+glob.main_journal = ci.get_config_item("loc_logs") + "/system_journal" + "." + time.strftime("%Y%m%d") + ".log"
+glob.sql_journal = ci.get_config_item("loc_logs") + "/sql_journal" + "." + time.strftime("%Y%m%d") + ".log"
 
 # Setup logging
 jf.setup_logger('Main_log', glob.main_journal, ci.get_config_item("main_log_level"))
