@@ -3,7 +3,7 @@
 
 # System libs
 from . import glob
-
+from . import testdata_v001 as td
 
 def create_table_schema(conn):
     """
@@ -22,9 +22,10 @@ def create_table_schema(conn):
         glob.logger_sql.debug(e)
 
     sql_command = """INSERT INTO schema (id, version) VALUES(?,?);"""
-    sql_data = [1, "v001"]
+    sql_data = [1, 'v001']
     c = conn.cursor()
     try:
+        glob.logger_sql.debug("Inserting [1, 'v001'] into table schema")
         c.execute(sql_command, sql_data,)
         conn.commit()
     except Exception as e:
@@ -45,8 +46,11 @@ def create_table_country(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table country")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
+
+    td.insert_table_country(conn)
 
 
 def create_table_headofstate(conn):
@@ -67,6 +71,7 @@ def create_table_headofstate(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table headofstate")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -86,6 +91,7 @@ def create_table_quality(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table quality")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -106,8 +112,17 @@ def create_table_valuations(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table valuations")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
+
+    # sql_command = """CREATE INDEX i_valuations ON valuations(coin_id, year);"""
+    # c = conn.cursor()
+    # try:
+    #     c.execute(sql_command)
+    #     glob.logger_sql.debug("Created index i_valuations")
+    # except Exception as e:
+    #     glob.logger_sql.debug(e)
 
 
 def create_table_suppliers(conn):
@@ -136,12 +151,9 @@ def create_table_suppliers(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table suppliers")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
-
-
-def create_table_config(conn):
-    pass
 
 
 def create_table_orders(conn):
@@ -162,6 +174,7 @@ def create_table_orders(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table orders")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -185,6 +198,7 @@ def create_table_mintmaster(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table mintmaster")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -210,6 +224,7 @@ def create_table_mint(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table mint")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -224,13 +239,22 @@ def create_table_valuta(conn):
     """
     sql_command = """CREATE TABLE IF NOT EXISTS valuta (id              INTEGER PRIMARY KEY AUTOINCREMENT,
                                                         valuta          TEXT NOT NULL,
-                                                        country_id      REFERENCES country(id));"""
+                                                        country         TEXT NOT NULL;"""
     c = conn.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table valuta")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
+
+    # sql_command = """CREATE INDEX i_valuta ON valuta(country, valuta);"""
+    # c = conn.cursor()
+    # try:
+    #     c.execute(sql_command)
+    #     glob.logger_sql.debug("Created index i_valuta")
+    # except Exception as e:
+    #     glob.logger_sql.debug(e)
 
 
 def create_table_strike(conn):
@@ -247,6 +271,7 @@ def create_table_strike(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table strike")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -298,6 +323,7 @@ def create_table_coin(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table coin")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -317,6 +343,7 @@ def create_table_replace(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table replace")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
     pass
@@ -337,6 +364,7 @@ def create_table_rarity(conn):
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table rarity")
+        conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
     pass

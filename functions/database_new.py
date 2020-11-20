@@ -14,16 +14,6 @@ from . import language_functions as lf
 from . import glob
 
 
-def func1():
-    """ Placeholder
-
-    Args:
-
-    Returns:
-    """
-    pass
-
-
 def create_newdb():
     """ Ask user for name and location for a new database.
 

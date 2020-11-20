@@ -30,13 +30,20 @@ __status__ = 'Development'
 # Done   1  Add sql loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
 # Done   1  Add show main log option to system menu
 # Done   1  Add show sql log option to main menu
+# Done   1  Create create database function
 
 # todo   1  Create housekeeping function to clear out old logs and config files
-# todo   1  Create create database function
 # todo   1  Import/create test data function
 # todo   1  Add a check database option to system menu
 # todo   1  validate config (directories) on startup and set alarm if it fails
 # todo   2  Update language select on config screen to use stringvar() iso intvar(), like logging
+# todo   2  SQL housekeeping function Vacuum (https://sqlite.org/lang_vacuum.html)
+# todo   2  SQL housekeeping function integrity check
+# todo   2  SQL housekeeping function foreign key check
+# todo   2  SQL housekeeping function optimize
+# todo   2  SQL housekeeping function compact
+# todo   3  Create reports (or some query engine app)
+# todo   1  Before loading testdata, verify db is open and empty: SELECT exists(SELECT 1 FROM MyTable LIMIT 1);
 
 # idea      Make sql fieldlist configurable
 # idea      Replace top button bar with icons
