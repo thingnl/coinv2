@@ -3,7 +3,7 @@
 
 # System libs
 from . import glob
-from . import testdata_v001 as td
+
 
 def create_table_schema(conn):
     """
@@ -49,8 +49,6 @@ def create_table_country(conn):
         conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
-
-    td.insert_table_country(conn)
 
 
 def create_table_headofstate(conn):
@@ -146,7 +144,7 @@ def create_table_suppliers(conn):
                                                            email           TEXT,
                                                            web             TEXT,
                                                            customerid      TEXT,
-                                                           country_id      REFERENCES country(id));"""
+                                                           country         TEXT);"""
     c = conn.cursor()
     try:
         c.execute(sql_command)
@@ -190,10 +188,11 @@ def create_table_mintmaster(conn):
     sql_command = """CREATE TABLE IF NOT EXISTS mintmaster (id              INTEGER PRIMARY KEY AUTOINCREMENT,
                                                             naam            TEXT NOT NULL,
                                                             signtxt         TEXT,
+                                                            signjpg         TEXT,
                                                             started         TEXT,
                                                             finished        TEXT,
                                                             remark          TEXT,
-                                                            country_id      REFERENCES country(id));"""
+                                                            country         TEXT);"""
     c = conn.cursor()
     try:
         c.execute(sql_command)
@@ -239,7 +238,7 @@ def create_table_valuta(conn):
     """
     sql_command = """CREATE TABLE IF NOT EXISTS valuta (id              INTEGER PRIMARY KEY AUTOINCREMENT,
                                                         valuta          TEXT NOT NULL,
-                                                        country         TEXT NOT NULL;"""
+                                                        country         TEXT NOT NULL);"""
     c = conn.cursor()
     try:
         c.execute(sql_command)
@@ -314,7 +313,7 @@ def create_table_coin(conn):
                                                       ynforsale       INTEGER,
                                                       ynother         INTEGER,
                                                       supplier        TEXT,
-                                                      order           TEXT,
+                                                      orderno         TEXT,
                                                       purchaseprice   REAL,
                                                       mint            TEXT,
                                                       mintmaster      TEXT,

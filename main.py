@@ -44,6 +44,7 @@ __status__ = 'Development'
 # todo   2  SQL housekeeping function compact
 # todo   3  Create reports (or some query engine app)
 # todo   1  Before loading testdata, verify db is open and empty: SELECT exists(SELECT 1 FROM MyTable LIMIT 1);
+# todo   1  Write order pdf's amd coin front and rear jpg's from source code on inserting testdata
 
 # idea      Make sql fieldlist configurable
 # idea      Replace top button bar with icons
