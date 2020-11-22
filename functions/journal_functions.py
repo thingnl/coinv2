@@ -9,7 +9,6 @@ from . import glob
 from . import config_items as ci
 
 
-
 def setup_logger(logger_name, log_file, logging_level):
     """ Starts a logger in mode 'append'
 

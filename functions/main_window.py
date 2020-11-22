@@ -213,7 +213,7 @@ def build_buttons():
 
 def build_message():
     glob.message_frame = Text(glob.messageframe, height=1)
-    glob.message_frame.config(font =("Courier", 54))
+    glob.message_frame.config(font=("Courier", 54))
     glob.message_frame.pack(fill=X, expand=1, padx=5, pady=5)
     glob.message_frame.insert(END, "msg_welcome")
 

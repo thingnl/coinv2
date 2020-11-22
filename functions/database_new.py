@@ -16,6 +16,11 @@ from . import glob
 global _
 
 
+def check_database_empty(conn):
+
+    pass
+
+
 def create_newdb():
     """ Ask user for name and location for a new database.
 
@@ -30,6 +35,7 @@ def create_newdb():
                                                       defaultextension=".db",
                                                       initialdir=ci.get_config_item("loc_database"))
     if new_dbfile != "":
+        lf.send_message(_("Creating database " + new_dbfile + "."))
         glob.logger_sql.info("Creating new database: " + new_dbfile)
 
         conn = None
@@ -63,15 +69,19 @@ def create_newdb():
         td.insert_table_mintmaster(conn)
 
         tables.create_table_mint(conn)
+        td.insert_table_mint(conn)
 
         tables.create_table_valuta(conn)
+        td.insert_table_valuta(conn)
 
         tables.create_table_strike(conn)
         td.insert_table_strike(conn)
 
         tables.create_table_coin(conn)
+        td.insert_table_coin(conn)
 
         tables.create_table_replace(conn)
+        td.insert_table_replace(conn)
 
         tables.create_table_rarity(conn)
         td.insert_table_rarity(conn)

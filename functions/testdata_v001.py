@@ -210,3 +210,150 @@ def insert_table_mintmaster(conn):
         conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
+
+
+def insert_table_mint(conn):
+    """
+        Insert test data into mint table
+
+        Args: conn - sql connection object
+
+        Returns: Nothing
+        """
+    sql_command = """INSERT INTO mint (id, name, adres, zipcode, city, weblink, started, finished, country)
+                     VALUES(?,?,?,?,?,?,?,?,?);"""
+    sql_tuples = [('1', 'Koninklijke Nederlandse Munt', 'Linker Hoon 2', '3991 CX', 'Houten',
+                   'https://www.knm.nl/', '1567', '', 'Nederland'),
+                  ('2', 'Koninklijke Munt van België', '', '', '',
+                   'https://finance.belgium.be/en/royal-mint-of-belgium', '', '', 'Belgie')]
+    c = conn.cursor()
+    try:
+        glob.logger_sql.debug("Inserting 2 records into table mint")
+        c.executemany(sql_command, sql_tuples)
+        conn.commit()
+    except Exception as e:
+        glob.logger_sql.debug(e)
+
+
+def insert_table_valuta(conn):
+    """
+        Insert test data into valuta table
+
+        Args: conn - sql connection object
+
+        Returns: Nothing
+        """
+    sql_command = """INSERT INTO valuta (id, valuta, country) VALUES(?,?,?);"""
+    sql_tuples = [('1', 'cent', 'Nederland'),
+                  ('2', 'gulden', 'Nederland'),
+                  ('3', 'eurocent', 'Nederland'),
+                  ('4', 'euro', 'Nederland'),
+                  ('5', 'dukaat', 'Nederland'),
+                  ('6', 'dubbele dukaat', 'Nederland'),
+                  ('7', 'rijder', 'Nederland'),
+                  ('8', 'daalder', 'Nederland'),
+                  ('9', 'mark', 'Duitsland'),
+                  ('10', 'groschen', 'Duitsland'),
+                  ('11', 'pfennig', 'Duitsland'),
+                  ('12', 'franc', 'Frankrijk'),
+                  ('13', 'centimes', 'Frankrijk'),
+                  ('14', 'sous', 'Frankrijk')]
+    c = conn.cursor()
+    try:
+        glob.logger_sql.debug("Inserting 14 records into table valuta")
+        c.executemany(sql_command, sql_tuples)
+        conn.commit()
+    except Exception as e:
+        glob.logger_sql.debug(e)
+
+
+def insert_table_replace(conn):
+    """
+        Insert test data into replace table
+
+        Args: conn - sql connection object
+
+        Returns: Nothing
+        """
+    sql_command = """INSERT INTO replace (id, searchfor, replacewith)
+                     VALUES(?,?,?);"""
+    sql_tuples = [('1', '1/2', '½'),
+                  ('2', '.5', '½'),
+                  ('3', '1/4', '¼'),
+                  ('4', '"a', 'ä'),
+                  ('5', '"e', 'ë'),
+                  ('6', '/o', 'ø')]
+    c = conn.cursor()
+    try:
+        glob.logger_sql.debug("Inserting 6 records into table replace")
+        c.executemany(sql_command, sql_tuples)
+        conn.commit()
+    except Exception as e:
+        glob.logger_sql.debug(e)
+
+
+# Table for edge?
+# muntmeesterteken (mmt)
+
+def insert_table_coin(conn):
+    """
+        Insert test data into coin table
+
+        Args: conn - sql connection object
+
+        Returns: Nothing
+    """
+    sql_command = """INSERT INTO coin (id, privateindex, indexid, krauseid, denomination, valuta, country, year, mmt,
+                                       quality, remark, coinage, diameter, edge, edgetext, weight, designer, frontside,
+                                       rearside, material, rarity, frontjpglink, rearjpglink, serie, storage, ynhave, 
+                                       ynwant, ynordered, ynforsale, ynother, supplier, orderno, purchaseprice, mint, 
+                                       mintmaster, headofstate) 
+                      VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"""
+    sql_tuples = [('1', '3500', '', 'KM# 213', '1', 'dukaat', 'Nederland', '1989', 'Pijl en boog', 'PROOF', '', '35747',
+                   '40 mm', 'Kabelrand', '', '28.25 g', '', 'Ridder met zwaard staande op ondergrond met in de '
+                                                            'linkerhand een lint waaraan het provincie wapen van '
+                                                            'Utrecht',
+                   'Gekroond Nederlands wapen tussen jaartal', 'zilver 873/1000', 'N', '', '', '', 'map 3', 'Y', 'N',
+                   'N', 'N', 'N', 'Theo Peters', '', '', 'KNM', '', 'Koningin Beatrix'),
+                  ('2', '3505', '', 'KM# 213', '1', 'dukaat', 'Nederland', '1992', 'Pijl en boog', 'PROOF', '', '10900',
+                   '40 mm', 'Kabelrand', '', '28.25 g', '', 'Ridder met zwaard staande op ondergrond met in de '
+                                                            'linkerhand een lint waaraan het provincie wapen van '
+                                                            'Utrecht',
+                   'Gekroond Nederlands wapen tussen jaartal', 'zilver 873/1000', 'N', '', '', '', 'map 3', 'Y', 'N',
+                   'N', 'N', 'N', 'Theo Peters', '', '', 'KNM', '', 'Koningin Beatrix'),
+                  ('3', '3510', '', 'KM# 213', '1', 'dukaat', 'Nederland', '1993', 'Pijl en boog', 'PROOF', '', '12500',
+                   '40 mm', 'Kabelrand', '', '28.25 g', '', 'Ridder met zwaard staande op ondergrond met in de '
+                                                            'linkerhand een lint waaraan het provincie wapen van '
+                                                            'Utrecht',
+                   'Gekroond Nederlands wapen tussen jaartal', 'zilver 873/1000', 'N', '', '', '', 'map 3', 'Y', 'Y',
+                   'N', 'N', 'N', 'Theo Peters', '', '', 'KNM', '', 'Koningin Beatrix'),
+                  ('4', '3515', '', 'KM# 218', '1', 'dukaat', 'Nederland', '1994', 'Pijl en boog', 'PROOF', 'Groningen',
+                   '11000', '40 mm', 'Kabelrand', '', '28.25 g', '', 'Ridder met zwaard staande op ondergrond met in '
+                                                                     'de linkerhand een lint waaraan een '
+                                                                     'provinciewapen; aan einde van het omschrift de '
+                                                                     'afgekorte naam van een provincie',
+                   'Gekroond Nederlands wapen tussen jaartal', 'zilver 873/1000', 'N', '', '', 'Zeven provinciën',
+                   'map 3', 'N', 'Y', 'N', 'N', 'N', 'Theo Peters', '', '', 'KNM', '', 'Koningin Beatrix'),
+                  ('5', '3965', '', 'KM# 190.2', '1', 'dukaat', 'Nederland', '1986', 'Aambeeld', 'PROOF', '', '950091',
+                   '21 mm', 'Kabelrand', '', '3.494 g', '', 'Staande ridder naar rechts met zwaard en pijlenbundel',
+                   'Versierd vierkant met daarin: MO.AUR.REG.BELGII AD LEGEM IMPERII.', 'goud 983/1000', 'N', '', '',
+                   '', 'map 4', 'Y', 'N', 'N', 'N', 'N', 'KNM', '', '', 'KNM', '', 'Koningin Beatrix')]
+    c = conn.cursor()
+    try:
+        glob.logger_sql.debug("Inserting 5 records into table coin")
+        c.executemany(sql_command, sql_tuples)
+        conn.commit()
+    except Exception as e:
+        glob.logger_sql.debug(e)
+
+
+# Strike type missing from coin
+
+# Some language stuf
+# Obverse
+# Reverse
+# Ruler
+# Subject for Serie
+# Date for year
+# Mintage as struck
+# Edge lettering voor randschrift

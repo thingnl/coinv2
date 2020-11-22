@@ -48,6 +48,8 @@ __status__ = 'Development'
 # idea      Make sql fieldlist configurable
 # idea      Replace top button bar with icons
 # idea      Add Schema Version table to SQL database
+# idea      Some library function to PDF catalogs
+# idea      Krause books: https://world-coins.weebly.com/krause-catalogs--other-books.html
 
 # fixed     frame size in reloading with language button, delete frames was not deleting all frames.
 # fixed     Menu exit does not, takes 3 times to actually exit. Switched to logger, solved write delay (4 now)

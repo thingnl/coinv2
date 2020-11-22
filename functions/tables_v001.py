@@ -218,7 +218,7 @@ def create_table_mint(conn):
                                                       weblink         TEXT,
                                                       started         TEXT,
                                                       finished        TEXT,
-                                                      country_id      REFERENCES country(id));"""
+                                                      country         TEXT);"""
     c = conn.cursor()
     try:
         c.execute(sql_command)
@@ -291,6 +291,7 @@ def create_table_coin(conn):
                                                       valuta          TEXT NOT NULL,
                                                       country         TEXT NOT NULL,
                                                       year            TEXT,
+                                                      mmt             TEXT,
                                                       quality         TEXT,
                                                       remark          TEXT,
                                                       coinage         TEXT,
