@@ -6,14 +6,12 @@
 import tkinter
 import tkinter.filedialog
 import sqlite3
+from sqlite3 import Error
 from . import config_items as ci
 from . import tables_v001 as tables
 from . import language_functions as lf
-from . import testdata_v001 as td
 
 from . import glob
-
-global _
 
 
 def create_newdb():
@@ -36,48 +34,46 @@ def create_newdb():
         try:
             conn = sqlite3.connect(new_dbfile)
             glob.logger_sql.debug("sqlite version: " + sqlite3.version)
-        except Exception as e:
+        except Error as e:
             glob.logger_sql.exception("Error creating " + new_dbfile + " database")
-            glob.logger_sql.exception(e)
 
         tables.create_table_schema(conn)
-
         tables.create_table_country(conn)
-        td.insert_table_country(conn)
-
         tables.create_table_headofstate(conn)
-        td.insert_table_headofstate(conn)
-
         tables.create_table_quality(conn)
-        td.insert_table_quality(conn)
-
         tables.create_table_valuations(conn)
-
         tables.create_table_suppliers(conn)
-        td.insert_table_suppliers(conn)
-
         tables.create_table_orders(conn)
-        td.insert_table_orders(conn)
-
         tables.create_table_mintmaster(conn)
-        td.insert_table_mintmaster(conn)
-
         tables.create_table_mint(conn)
-
         tables.create_table_valuta(conn)
-
         tables.create_table_strike(conn)
-        td.insert_table_strike(conn)
-
         tables.create_table_coin(conn)
-
         tables.create_table_replace(conn)
-
         tables.create_table_rarity(conn)
-        td.insert_table_rarity(conn)
 
-        conn.close()
-        lf.send_message(_("Database " + new_dbfile + " created."))
+
+
+
+
+
+
+
+
+
+
+
+
     else:
         glob.logger_main.info("New database function closed.")
         glob.logger_sql.info("New database function closed.")
+
+
+
+
+
+
+
+    conn.close()
+
+    lf.send_message(_("Database " + new_dbfile + " created."))
