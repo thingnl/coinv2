@@ -6,6 +6,7 @@ import os
 import os.path
 # import gettext
 from tkinter import *
+from tkinter import Message
 from tkinter import ttk
 from tkinter import Tk
 from PIL import Image, ImageTk
@@ -88,6 +89,8 @@ def build_menu():
     glob.datamenu.add_command(label=_("Import"), command=about)
     glob.datamenu.add_command(label=_("Backup"), command=about)
     glob.datamenu.add_command(label=_("Restore"), command=about)
+    glob.datamenu.add_separator()
+    glob.datamenu.add_command(label=_("Testdata"), command=dbn.insert_testdate())
 
     glob.sysmenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("System"), menu=glob.sysmenu)
@@ -114,6 +117,9 @@ def build_frames():
     glob.sqlframe.grid(row=1, column=1, sticky=E + W + N + S)  # center
     glob.photoframe.grid(row=0, column=2, rowspan=2, columnspan=1, sticky=E + W + N + S)  # right
     glob.messageframe.grid(row=2, column=0, rowspan=1, columnspan=3, sticky=E + W + N + S)  # message
+
+
+    # Try using a message widget here. Text is not updating correctly!
 
     glob.message_frame = Text(glob.messageframe, height=1)
     glob.message_frame.pack(fill=X, expand=1, padx=5, pady=5)

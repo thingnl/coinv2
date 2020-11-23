@@ -298,6 +298,7 @@ def create_table_coin(conn):
                                                       diameter        TEXT,
                                                       edge            TEXT,
                                                       edgetext        TEXT,
+                                                      striketype      TEXT,
                                                       weight          TEXT,
                                                       designer        TEXT,
                                                       frontside       TEXT,

@@ -304,38 +304,38 @@ def insert_table_coin(conn):
         Returns: Nothing
     """
     sql_command = """INSERT INTO coin (id, privateindex, indexid, krauseid, denomination, valuta, country, year, mmt,
-                                       quality, remark, coinage, diameter, edge, edgetext, weight, designer, frontside,
-                                       rearside, material, rarity, frontjpglink, rearjpglink, serie, storage, ynhave, 
-                                       ynwant, ynordered, ynforsale, ynother, supplier, orderno, purchaseprice, mint, 
-                                       mintmaster, headofstate) 
-                      VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"""
+                                       quality, remark, coinage, diameter, edge, edgetext, striketype, weight, designer,
+                                       frontside, rearside, material, rarity, frontjpglink, rearjpglink, serie, storage, 
+                                       ynhave, ynwant, ynordered, ynforsale, ynother, supplier, orderno, purchaseprice, 
+                                       mint, mintmaster, headofstate) 
+                      VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"""
     sql_tuples = [('1', '3500', '', 'KM# 213', '1', 'dukaat', 'Nederland', '1989', 'Pijl en boog', 'PROOF', '', '35747',
-                   '40 mm', 'Kabelrand', '', '28.25 g', '', 'Ridder met zwaard staande op ondergrond met in de '
-                                                            'linkerhand een lint waaraan het provincie wapen van '
-                                                            'Utrecht',
+                   '40 mm', 'Kabelrand', '', 'Medailleslag', '28.25 g', '',
+                   'Ridder met zwaard staande op ondergrond met in de linkerhand een lint waaraan het provincie '
+                   'wapen van Utrecht',
                    'Gekroond Nederlands wapen tussen jaartal', 'zilver 873/1000', 'N', '', '', '', 'map 3', 'Y', 'N',
                    'N', 'N', 'N', 'Theo Peters', '', '', 'KNM', '', 'Koningin Beatrix'),
                   ('2', '3505', '', 'KM# 213', '1', 'dukaat', 'Nederland', '1992', 'Pijl en boog', 'PROOF', '', '10900',
-                   '40 mm', 'Kabelrand', '', '28.25 g', '', 'Ridder met zwaard staande op ondergrond met in de '
-                                                            'linkerhand een lint waaraan het provincie wapen van '
-                                                            'Utrecht',
+                   '40 mm', 'Kabelrand', '', 'Medailleslag', '28.25 g', '',
+                   'Ridder met zwaard staande op ondergrond met in de linkerhand een lint waaraan het provincie '
+                   'wapen van Utrecht',
                    'Gekroond Nederlands wapen tussen jaartal', 'zilver 873/1000', 'N', '', '', '', 'map 3', 'Y', 'N',
                    'N', 'N', 'N', 'Theo Peters', '', '', 'KNM', '', 'Koningin Beatrix'),
                   ('3', '3510', '', 'KM# 213', '1', 'dukaat', 'Nederland', '1993', 'Pijl en boog', 'PROOF', '', '12500',
-                   '40 mm', 'Kabelrand', '', '28.25 g', '', 'Ridder met zwaard staande op ondergrond met in de '
-                                                            'linkerhand een lint waaraan het provincie wapen van '
-                                                            'Utrecht',
+                   '40 mm', 'Kabelrand', '', 'Medailleslag', '28.25 g', '',
+                   'Ridder met zwaard staande op ondergrond met in de linkerhand een lint waaraan het provincie wapen'
+                   ' van Utrecht',
                    'Gekroond Nederlands wapen tussen jaartal', 'zilver 873/1000', 'N', '', '', '', 'map 3', 'Y', 'Y',
                    'N', 'N', 'N', 'Theo Peters', '', '', 'KNM', '', 'Koningin Beatrix'),
                   ('4', '3515', '', 'KM# 218', '1', 'dukaat', 'Nederland', '1994', 'Pijl en boog', 'PROOF', 'Groningen',
-                   '11000', '40 mm', 'Kabelrand', '', '28.25 g', '', 'Ridder met zwaard staande op ondergrond met in '
-                                                                     'de linkerhand een lint waaraan een '
-                                                                     'provinciewapen; aan einde van het omschrift de '
-                                                                     'afgekorte naam van een provincie',
+                   '11000', '40 mm', 'Kabelrand', '', 'Medailleslag', '28.25 g', '',
+                   'Ridder met zwaard staande op ondergrond met in de linkerhand een lint waaraan een '
+                   'provinciewapen; aan einde van het omschrift de afgekorte naam van een provincie',
                    'Gekroond Nederlands wapen tussen jaartal', 'zilver 873/1000', 'N', '', '', 'Zeven provinciën',
                    'map 3', 'N', 'Y', 'N', 'N', 'N', 'Theo Peters', '', '', 'KNM', '', 'Koningin Beatrix'),
                   ('5', '3965', '', 'KM# 190.2', '1', 'dukaat', 'Nederland', '1986', 'Aambeeld', 'PROOF', '', '950091',
-                   '21 mm', 'Kabelrand', '', '3.494 g', '', 'Staande ridder naar rechts met zwaard en pijlenbundel',
+                   '21 mm', 'Kabelrand', '', 'Medailleslag', '3.494 g', '',
+                   'Staande ridder naar rechts met zwaard en pijlenbundel',
                    'Versierd vierkant met daarin: MO.AUR.REG.BELGII AD LEGEM IMPERII.', 'goud 983/1000', 'N', '', '',
                    '', 'map 4', 'Y', 'N', 'N', 'N', 'N', 'KNM', '', '', 'KNM', '', 'Koningin Beatrix')]
     c = conn.cursor()

@@ -11,14 +11,37 @@ from . import tables_v001 as tables
 from . import language_functions as lf
 from . import testdata_v001 as td
 
+import time
+
 from . import glob
 
 global _
 
 
 def check_database_empty(conn):
+    """ Ask user for name and location for a new database.
+
+        Args:
+
+        Returns:
+        """
 
     pass
+
+
+def insert_testdate():
+    """ Ask user for name and location for a new database.
+
+    Args:
+
+    Returns:
+    """
+
+    pass
+
+
+
+
 
 
 def create_newdb():
@@ -35,7 +58,7 @@ def create_newdb():
                                                       defaultextension=".db",
                                                       initialdir=ci.get_config_item("loc_database"))
     if new_dbfile != "":
-        lf.send_message(_("Creating database " + new_dbfile + "."))
+        lf.send_message(_(" " + new_dbfile + "."))
         glob.logger_sql.info("Creating new database: " + new_dbfile)
 
         conn = None

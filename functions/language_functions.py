@@ -10,6 +10,7 @@
 # System libs
 import gettext
 from . import glob
+from tkinter import Message
 # from . import journal_functions as jf
 
 global _
