@@ -10,9 +10,7 @@ from . import config_items as ci
 from . import tables_v001 as tables
 from . import language_functions as lf
 from . import testdata_v001 as td
-
 import time
-
 from . import glob
 
 global _
@@ -36,12 +34,19 @@ def insert_testdate():
 
     Returns:
     """
-
+    # td.insert_table_country(conn)
+    # td.insert_table_headofstate(conn)
+    # td.insert_table_quality(conn)
+    # td.insert_table_suppliers(conn)
+    # td.insert_table_orders(conn)
+    # td.insert_table_mintmaster(conn)
+    # td.insert_table_mint(conn)
+    # td.insert_table_valuta(conn)
+    # td.insert_table_strike(conn)
+    # td.insert_table_coin(conn)
+    # td.insert_table_replace(conn)
+    # td.insert_table_rarity(conn)
     pass
-
-
-
-
 
 
 def create_newdb():
@@ -58,7 +63,7 @@ def create_newdb():
                                                       defaultextension=".db",
                                                       initialdir=ci.get_config_item("loc_database"))
     if new_dbfile != "":
-        lf.send_message(_(" " + new_dbfile + "."))
+        lf.send_message(_("Creating new database: " + new_dbfile + "."))
         glob.logger_sql.info("Creating new database: " + new_dbfile)
 
         conn = None
@@ -68,48 +73,67 @@ def create_newdb():
         except Exception as e:
             glob.logger_sql.exception("Error creating " + new_dbfile + " database")
             glob.logger_sql.exception(e)
+            lf.send_message(_("Error creating " + new_dbfile + " database"))
+            return
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (5%)"))
         tables.create_table_schema(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (11%)"))
         tables.create_table_country(conn)
-        td.insert_table_country(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (18%)"))
         tables.create_table_headofstate(conn)
-        td.insert_table_headofstate(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (26%)"))
         tables.create_table_quality(conn)
-        td.insert_table_quality(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (37%)"))
         tables.create_table_valuations(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (51%)"))
         tables.create_table_suppliers(conn)
-        td.insert_table_suppliers(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (63%)"))
         tables.create_table_orders(conn)
-        td.insert_table_orders(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (69%)"))
         tables.create_table_mintmaster(conn)
-        td.insert_table_mintmaster(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (76%)"))
         tables.create_table_mint(conn)
-        td.insert_table_mint(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (82%)"))
         tables.create_table_valuta(conn)
-        td.insert_table_valuta(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (87%)"))
         tables.create_table_strike(conn)
-        td.insert_table_strike(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (92%)"))
         tables.create_table_coin(conn)
-        td.insert_table_coin(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (95%)"))
         tables.create_table_replace(conn)
-        td.insert_table_replace(conn)
+        time.sleep(1)
 
+        lf.send_message(_("Creating new database: " + new_dbfile + " (98%)"))
         tables.create_table_rarity(conn)
-        td.insert_table_rarity(conn)
+        time.sleep(1)
 
         conn.close()
+        time.sleep(1)
         lf.send_message(_("Database " + new_dbfile + " created."))
     else:
         glob.logger_main.info("New database function closed.")

@@ -70,6 +70,7 @@ button_frame = 0
 sql_frame = 0
 photo_frame = 0
 message_frame = 0
+message_text = ""
 
 # sysconfig edit screen
 top = 0

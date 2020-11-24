@@ -6,7 +6,6 @@ import os
 import os.path
 # import gettext
 from tkinter import *
-from tkinter import Message
 from tkinter import ttk
 from tkinter import Tk
 from PIL import Image, ImageTk
@@ -118,10 +117,8 @@ def build_frames():
     glob.photoframe.grid(row=0, column=2, rowspan=2, columnspan=1, sticky=E + W + N + S)  # right
     glob.messageframe.grid(row=2, column=0, rowspan=1, columnspan=3, sticky=E + W + N + S)  # message
 
-
-    # Try using a message widget here. Text is not updating correctly!
-
-    glob.message_frame = Text(glob.messageframe, height=1)
+    # glob.message_frame = Label(glob.messageframe, height=1)
+    glob.message_frame = Text(glob.messageframe, height=1, font=("Segoe", 10))
     glob.message_frame.pack(fill=X, expand=1, padx=5, pady=5)
     lf.send_message(_("Welcome to Pecuniae Collectio"))
 

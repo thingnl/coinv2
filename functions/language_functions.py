@@ -9,9 +9,8 @@
 
 # System libs
 import gettext
+from tkinter import *
 from . import glob
-from tkinter import Message
-# from . import journal_functions as jf
 
 global _
 
@@ -25,6 +24,7 @@ def send_message(message_text):
     """
     glob.message_frame.delete("1.0", "end")
     glob.message_frame.insert("1.0", message_text)
+    glob.message_frame.update()                         # force update on frame
 
 
 def language_nl():
