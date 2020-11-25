@@ -9,6 +9,7 @@ logger_sql = 0
 system_version = "v2.0.2"
 system_build = "23"
 system_sql = "1.0"
+current_open_db = ""
 
 # runtime
 scriptpath = ""
@@ -38,9 +39,9 @@ screen_top = 0
 screen_left = 0
 
 # SQL connection
-connection = 0
+conn = 0
 
-# root
+# root TK
 root = 0
 
 # menu

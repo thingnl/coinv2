@@ -69,7 +69,7 @@ def build_menu():
     glob.filemenu = Menu(glob.root, tearoff=0)
     glob.menu.add_cascade(label=_("File"), menu=glob.filemenu)
     glob.filemenu.add_command(label=_("New"), command=lambda: dbn.create_newdb())
-    glob.filemenu.add_command(label=_("Open"), command=opendb())
+    glob.filemenu.add_command(label=_("Open"), command=lambda: dbn.open_db())
     glob.filemenu.add_command(label=_("Close"), command=newfile)
     glob.filemenu.add_command(label=_("Save"), command=newfile)
     glob.filemenu.add_separator()
@@ -89,7 +89,7 @@ def build_menu():
     glob.datamenu.add_command(label=_("Backup"), command=about)
     glob.datamenu.add_command(label=_("Restore"), command=about)
     glob.datamenu.add_separator()
-    glob.datamenu.add_command(label=_("Testdata"), command=dbn.insert_testdate())
+    glob.datamenu.add_command(label=_("Testdata"), command=lambda: dbn.insert_testdata())
 
     glob.sysmenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("System"), menu=glob.sysmenu)

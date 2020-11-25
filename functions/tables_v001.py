@@ -114,14 +114,6 @@ def create_table_valuations(conn):
     except Exception as e:
         glob.logger_sql.debug(e)
 
-    # sql_command = """CREATE INDEX i_valuations ON valuations(coin_id, year);"""
-    # c = conn.cursor()
-    # try:
-    #     c.execute(sql_command)
-    #     glob.logger_sql.debug("Created index i_valuations")
-    # except Exception as e:
-    #     glob.logger_sql.debug(e)
-
 
 def create_table_suppliers(conn):
     """

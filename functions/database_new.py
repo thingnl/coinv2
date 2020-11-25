@@ -6,6 +6,7 @@
 import tkinter
 import tkinter.filedialog
 import sqlite3
+from tkinter import messagebox
 from . import config_items as ci
 from . import tables_v001 as tables
 from . import language_functions as lf
@@ -27,13 +28,18 @@ def check_database_empty(conn):
     pass
 
 
-def insert_testdate():
+def insert_testdata():
     """ Ask user for name and location for a new database.
 
     Args:
 
     Returns:
     """
+    # Is a database currently loaded?
+    if glob.current_open_db == "":
+        messagebox.showerror(title=_("No database"), message=_("No database is loaded. Please open a database first."))
+        return
+
     # td.insert_table_country(conn)
     # td.insert_table_headofstate(conn)
     # td.insert_table_quality(conn)
@@ -47,6 +53,64 @@ def insert_testdate():
     # td.insert_table_replace(conn)
     # td.insert_table_rarity(conn)
     pass
+
+
+def open_db():
+    """ Ask user to selct a database and load it's contents.
+
+    Args:
+
+    Returns:
+    """
+    if glob.current_open_db != "":
+        messagebox.showerror(title=_("Database loaded"), message=_("A database is currently loaded. Please close the "
+                                                                   "current database first before opening a new "
+                                                                   "database."))
+        glob.logger_main.info("A database is already open, exiting.")
+        return
+
+    glob.logger_main.info("Starting Open database function.")
+    file_list = [("Databases", ".db"), ("All files", ".*")]
+    glob.current_open_db = tkinter.filedialog.askopenfilename(title="Select database to open...", filetypes=file_list,
+                                                      defaultextension=".db",
+                                                      initialdir=ci.get_config_item("loc_database"))
+    if glob.current_open_db == "":
+        return
+
+    # Create connection
+    conn = None
+    try:
+        conn = sqlite3.connect(glob.current_open_db)
+    except Error as e:
+        print(e)
+
+    # try getting the db version
+    sql_command = """SELECT * FROM schema"""
+    cur = conn.cursor()
+    cur.execute(sql_command)
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)
+
+    print(glob.current_open_db)
+    print(conn)
+
+    pass
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def create_newdb():
