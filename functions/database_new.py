@@ -24,7 +24,7 @@ def check_database_empty(conn):
 
         Returns:
         """
-
+    print(conn)
     pass
 
 
@@ -73,9 +73,10 @@ def open_db():
     glob.logger_main.info("Starting Open database function.")
     file_list = [("Databases", ".db"), ("All files", ".*")]
     # No open database... What file would you like me to open?
-    glob.current_open_db = tkinter.filedialog.askopenfilename(title=_("Select database to open..."), filetypes=file_list,
-                                                      defaultextension=".db",
-                                                      initialdir=ci.get_config_item("loc_database"))
+    glob.current_open_db = tkinter.filedialog.askopenfilename(title=_("Select database to open..."),
+                                                              filetypes=file_list,
+                                                              defaultextension=".db",
+                                                              initialdir=ci.get_config_item("loc_database"))
     if glob.current_open_db == "":
         glob.logger_main.info("Nothing selected, exiting.")
         return
@@ -102,7 +103,8 @@ def open_db():
                                                                   "database. Please make sure the selected file "
                                                                   "is a database and is undamaged."))
         glob.logger_main.info("Database could not be read, exiting.")
-        glob.logger_main.debug(e)
+        glob.logger_sql.info("Database could not be read, exiting.")
+        glob.logger_sql.debug(e)
         print(e)
         return
 
@@ -115,8 +117,37 @@ def open_db():
         glob.logger_main.info("Wrong schema version found, exiting")
 
     # And we have a correct version of the database schema. What's next.... ah, load the data....
+    sql_command = """SELECT * FROM coin"""
+    try:
+        cur.execute(sql_command)
+        glob.coin_data = cur.fetchall()
+    except Exception as e:
+        glob.logger_sql.debug(e)
+        print(e)
+
+    for row in glob.coin_data:
+        print(row)
+
+    sql_command = """SELECT description FROM country ORDER by description"""
+    try:
+        cur.execute(sql_command)
+        glob.country_data = ['*']
+        for row in cur.fetchall():
+            glob.country_data.append(row[0])
+    except Exception as e:
+        glob.logger_sql.debug(e)
+        print(e)
+
+    # Try sening the countries to the correct filter
+    # while adding a * for all
+    for line in glob.country_data:
+        print(line)
+
+    lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) + " coins loaded."))
 
     pass
+
+
 
 
 

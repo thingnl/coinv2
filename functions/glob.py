@@ -106,3 +106,7 @@ radio3_sqllog = 0
 # journal files
 main_journal = ""
 sql_journal = ""
+
+# Actual data lists
+coin_data = []
+country_data = []
