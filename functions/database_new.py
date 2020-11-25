@@ -62,6 +62,7 @@ def open_db():
 
     Returns:
     """
+    # Is there already a open database?
     if glob.current_open_db != "":
         messagebox.showerror(title=_("Database loaded"), message=_("A database is currently loaded. Please close the "
                                                                    "current database first before opening a new "
@@ -71,31 +72,49 @@ def open_db():
 
     glob.logger_main.info("Starting Open database function.")
     file_list = [("Databases", ".db"), ("All files", ".*")]
-    glob.current_open_db = tkinter.filedialog.askopenfilename(title="Select database to open...", filetypes=file_list,
+    # No open database... What file would you like me to open?
+    glob.current_open_db = tkinter.filedialog.askopenfilename(title=_("Select database to open..."), filetypes=file_list,
                                                       defaultextension=".db",
                                                       initialdir=ci.get_config_item("loc_database"))
     if glob.current_open_db == "":
+        glob.logger_main.info("Nothing selected, exiting.")
         return
 
-    # Create connection
+    # try to create a connection
     conn = None
     try:
         conn = sqlite3.connect(glob.current_open_db)
-    except Error as e:
+    except Exception as e:
+        messagebox.showerror(title=_("Database error"), message=_("A connection to the selected database could not be"
+                                                                  " made. Please make sure the selected file is a "
+                                                                  "valid database."))
+        glob.logger_main.info("Database could not be connected, exiting.")
         print(e)
 
     # try getting the db version
     sql_command = """SELECT * FROM schema"""
     cur = conn.cursor()
-    cur.execute(sql_command)
+    try:
+        cur.execute(sql_command)
+        row = cur.fetchone()
+    except Exception as e:
+        messagebox.showerror(title=_("Database error"), message=_("An error happened while trying to read the "
+                                                                  "database. Please make sure the selected file "
+                                                                  "is a database and is undamaged."))
+        glob.logger_main.info("Database could not be read, exiting.")
+        glob.logger_main.debug(e)
+        print(e)
+        return
 
-    rows = cur.fetchall()
+    # So by now we have a working database and got the version of the schema. Let's check it...
+    glob.logger_sql.debug("Schema version found: " + row[1] + ", system is on " + glob.system_sql)
+    if row[1] != glob.system_sql:
+        messagebox.showerror(title=_("Database error"), message=_("This database version (" + row[1] + ") is for a "
+                                                                  "different version of Pecuniae Collectio and can "
+                                                                  "not be used."))
+        glob.logger_main.info("Wrong schema version found, exiting")
 
-    for row in rows:
-        print(row)
-
-    print(glob.current_open_db)
-    print(conn)
+    # And we have a correct version of the database schema. What's next.... ah, load the data....
 
     pass
 

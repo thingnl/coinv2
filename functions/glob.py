@@ -8,7 +8,7 @@ logger_sql = 0
 # system
 system_version = "v2.0.2"
 system_build = "23"
-system_sql = "1.0"
+system_sql = "v001"
 current_open_db = ""
 
 # runtime
