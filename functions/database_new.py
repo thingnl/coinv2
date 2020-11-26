@@ -11,6 +11,7 @@ from . import config_items as ci
 from . import tables_v001 as tables
 from . import language_functions as lf
 from . import testdata_v001 as td
+from . import data_functions as df
 import time
 from . import glob
 
@@ -117,50 +118,17 @@ def open_db():
         glob.logger_main.info("Wrong schema version found, exiting")
 
     # And we have a correct version of the database schema. What's next.... ah, load the data....
-    sql_command = """SELECT * FROM coin"""
-    try:
-        cur.execute(sql_command)
-        glob.coin_data = cur.fetchall()
-    except Exception as e:
-        glob.logger_sql.debug(e)
-        print(e)
 
-    for row in glob.coin_data:
-        print(row)
+    # Set country filter
+    df.load_filter_country(cur)
 
-    sql_command = """SELECT description FROM country ORDER by description"""
-    try:
-        cur.execute(sql_command)
-        glob.country_data = ['*']
-        for row in cur.fetchall():
-            glob.country_data.append(row[0])
-    except Exception as e:
-        glob.logger_sql.debug(e)
-        print(e)
-
-    # Try sening the countries to the correct filter
-    # while adding a * for all
-    for line in glob.country_data:
-        print(line)
-
-    lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) + " coins loaded."))
-
-    pass
+    # Load coins to central treeview
+    df.load_coin_tree(cur)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # Done loading database
+    lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) +
+                      " coins loaded."))
 
 
 def create_newdb():

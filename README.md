@@ -2,6 +2,17 @@
 ### Second incarnation of Pecuniae Collectio
 
 
+##### Python install
+* Upgrade pip
+  - c:\python\python39\python.exe -m pip install --upgrade pip
+* List packages
+  - pip list (Is depending on the environment!)
+* Install PIL
+  - pip install pillow
+
+
+
+
 ---
 ##### Some usefull sqlite stuff
 * List all fields for table strike
