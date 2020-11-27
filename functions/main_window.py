@@ -105,11 +105,17 @@ def build_menu():
 
 def build_frames():
     # Frames
-    glob.filterframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # left
+    # glob.filterframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # left
+    # glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
+    # glob.sqlframe = Frame(glob.root, bg="green", width=900)  # center
+    # glob.photoframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # right
+    # glob.messageframe = Frame(glob.root, bg="blue", height=50, width=1100)  # message
+
+    glob.filterframe = Frame(glob.root, bg="gray85", height=700, width=185, padx=5, pady=5)  # left
     glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
-    glob.sqlframe = Frame(glob.root, bg="green", width=900)  # center
-    glob.photoframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # right
-    glob.messageframe = Frame(glob.root, bg="blue", height=50, width=1100)  # message
+    glob.sqlframe = Frame(glob.root, bg="white", width=900)  # center
+    glob.photoframe = Frame(glob.root, bg="gray85", height=700, width=185, padx=5, pady=5)  # right
+    glob.messageframe = Frame(glob.root, bg="gray85", height=50, width=1100)  # message
 
     glob.filterframe.grid(row=0, column=0, rowspan=2, columnspan=1, sticky=E + W + N + S)  # left
     glob.buttonframe.grid(row=0, column=1, sticky=E + W + N + S)  # buttons

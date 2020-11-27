@@ -2,12 +2,35 @@
 # -*- coding: utf-8 -*-
 
 # System libs
-import os
-import logging
+# import os
+# import logging
 from tkinter import ttk
 from tkinter import *
 from . import glob
-from . import config_items as ci
+# from . import config_items as ci
+
+
+# Needed for the line coloring stuff
+def fixed_map(option):
+    return [elm for elm in glob.style.map('Treeview', query_opt=option) if
+            elm[:2] != ('!disabled', '!selected')]
+
+
+def treeview_sort_column( tv, col, reverse):  # Treeview, column name, arrangement
+    l = [(tv.set(k, col), k) for k in tv.get_children('')]
+    l.sort(reverse=reverse)  # Sort by
+    for index, (val, k) in enumerate(l):  # based on sorted index movement
+        tv.move(k, '', index)
+        tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))
+    # Reset the child coloring
+    acounter = 0
+    for child in glob.sql_frame.get_children():
+        if acounter % 2 == 0:
+            glob.sql_frame.item(child, tags="even")
+            acounter += 1
+        else:
+            glob.sql_frame.item(child, tags="odd")
+            acounter += 1
 
 
 def load_filter_country(cur):
@@ -41,8 +64,13 @@ def load_coin_tree(cur):
         glob.logger_sql.debug(e)
         print(e)
 
+    glob.style = ttk.Style()
+    glob.style.map('Treeview', foreground=fixed_map('foreground'), background=fixed_map('background'))
+    glob.style.configure("mystyle.Treeview", highlightthickness=0, bd=0,
+                        font=('Courier New', 8))  # Modify the font of the body
+
     # glob.sqlframe
-    glob.sql_frame = ttk.Treeview(glob.sqlframe)
+    glob.sql_frame = ttk.Treeview(glob.sqlframe, style="mystyle.Treeview")
     glob.sql_frame['columns'] = ("SQL RecNo", "Private index", "Index", "Krause", "denomination", "valuta",
                                  "country", "year", "mmt", "quality", "remark", "coinage", "diameter",
                                  "edge", "edgetext", "striketype", "weight", "designer", "frontside",
@@ -51,116 +79,125 @@ def load_coin_tree(cur):
                                  "supplier", "orderno", "purchaseprice", "mint", "mintmaster",
                                  "headofstate")
 
-    # glob.sql_frame.column("#0", width=0, stretch=NO)  # Hide tree index
-    # glob.sql_frame.column("#1", anchor=W)
-    # glob.sql_frame.column("#2", anchor=W)
-    # glob.sql_frame.column("#3", anchor=W)
-    # glob.sql_frame.column("#4", anchor=W)
-    # glob.sql_frame.column("#5", anchor=W)
-    # glob.sql_frame.column("#6", anchor=W)
-    # glob.sql_frame.column("#7", anchor=W)
-    # glob.sql_frame.column("#8", anchor=W)
-    # glob.sql_frame.column("#9", anchor=W)
+    # Set colors for odd and even rows
+    glob.sql_frame.tag_configure('odd', background='#FFFFFF')  # light blue #FFFFFF
+    glob.sql_frame.tag_configure('even', background='#E2FFFF')  # white #E2FFFF
 
-    # glob.sql_frame.column("#2", width=len(max(glob.coin_data, key=lambda t: len(t[0]))[3]), stretch=NO)
+    # Inserting horizontal scrollbar
+    scrollh = ttk.Scrollbar(glob.sqlframe, orient="horizontal", command=glob.sql_frame.xview)
+    scrollh.pack(side=BOTTOM, fill='x')
+    glob.sql_frame.configure(xscrollcommand=scrollh.set)
 
-    elements = list(zip(*glob.coin_data))  # Combine all tuple columns into lines
-                                           # next, get longest value and compare to 20
-                                           # Take longest value as width
+    # Inserting vertical scrollbar
+    scrollv = ttk.Scrollbar(glob.sqlframe, orient="vertical", command=glob.sql_frame.yview)
+    scrollv.pack(side=RIGHT, fill='y')
+    glob.sql_frame.configure(yscrollcommand=scrollv.set)
+
+    # Combine all tuple columns into lines
+    elements = list(zip(*glob.coin_data))
+    # next, get longest value and compare to 20
+    # Take longest value as width
+
+    # Set width for all columns so data fits and/or header shows, while hiding the first 2 index fields.
     glob.sql_frame.column("#0", width=0, minwidth=0, stretch=NO)
     glob.sql_frame.column("#1", width=0, minwidth=0, stretch=NO)
-    glob.sql_frame.column("#2", width=max(len(max(elements[1], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#3", width=max(len(max(elements[2], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#4", width=max(len(max(elements[3], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#5", width=max(len(max(elements[4], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#6", width=max(len(max(elements[5], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#7", width=max(len(max(elements[6], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#8", width=max(len(max(elements[7], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#9", width=max(len(max(elements[8], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#10", width=max(len(max(elements[9], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#11", width=max(len(max(elements[10], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#12", width=max(len(max(elements[11], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#13", width=max(len(max(elements[12], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#14", width=max(len(max(elements[13], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#15", width=max(len(max(elements[14], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#16", width=max(len(max(elements[15], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#17", width=max(len(max(elements[16], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#18", width=max(len(max(elements[17], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#19", width=max(len(max(elements[18], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#20", width=max(len(max(elements[19], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#21", width=max(len(max(elements[20], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#22", width=max(len(max(elements[21], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#23", width=max(len(max(elements[22], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#24", width=max(len(max(elements[23], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#25", width=max(len(max(elements[24], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#26", width=max(len(max(elements[25], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#27", width=max(len(max(elements[26], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#28", width=max(len(max(elements[27], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#29", width=max(len(max(elements[28], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#30", width=max(len(max(elements[29], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#31", width=max(len(max(elements[30], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#32", width=max(len(max(elements[31], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#33", width=max(len(max(elements[32], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#34", width=max(len(max(elements[33], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#35", width=max(len(max(elements[34], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#36", width=max(len(max(elements[35], key=len)) * 9, 20), stretch=NO)
-    glob.sql_frame.column("#37", width=max(len(max(elements[36], key=len)) * 9, 20), stretch=NO)
+    glob.sql_frame.column("#2", width=max(len(max(elements[1], key=len)) * 9, len("Private index") * 6), stretch=NO)
+    glob.sql_frame.column("#3", width=max(len(max(elements[2], key=len)) * 9, len("Index") * 8), stretch=NO)
+    glob.sql_frame.column("#4", width=max(len(max(elements[3], key=len)) * 9, len("Krause") * 6), stretch=NO)
+    glob.sql_frame.column("#5", width=max(len(max(elements[4], key=len)) * 9, len("Denomination") * 7), stretch=NO, anchor=E)
+    glob.sql_frame.column("#6", width=max(len(max(elements[5], key=len)) * 9, len("Valuta") * 6), stretch=NO)
+    glob.sql_frame.column("#7", width=max(len(max(elements[6], key=len)) * 9, len("Country") * 6), stretch=NO)
+    glob.sql_frame.column("#8", width=max(len(max(elements[7], key=len)) * 9, len("Year") * 6), stretch=NO)
+    glob.sql_frame.column("#9", width=max(len(max(elements[8], key=len)) * 9, len("Mmt") * 6), stretch=NO)
+    glob.sql_frame.column("#10", width=max(len(max(elements[9], key=len)) * 9, len("Quality") * 7), stretch=NO)
+    glob.sql_frame.column("#11", width=max(len(max(elements[10], key=len)) * 9, len("Remark") * 6), stretch=NO)
+    glob.sql_frame.column("#12", width=max(len(max(elements[11], key=len)) * 9, len("Coinage") * 6), stretch=NO, anchor=E)
+    glob.sql_frame.column("#13", width=max(len(max(elements[12], key=len)) * 9, len("Diameter") * 7), stretch=NO)
+    glob.sql_frame.column("#14", width=max(len(max(elements[13], key=len)) * 8, len("Edge") * 6), stretch=NO)
+    glob.sql_frame.column("#15", width=max(len(max(elements[14], key=len)) * 8, len("Edge text") * 7), stretch=NO)
+    glob.sql_frame.column("#16", width=max(len(max(elements[15], key=len)) * 9, len("Strike type") * 6), stretch=NO)
+    glob.sql_frame.column("#17", width=max(len(max(elements[16], key=len)) * 9, len("Weight") * 6), stretch=NO)
+    glob.sql_frame.column("#18", width=max(len(max(elements[17], key=len)) * 9, len("Designer") * 7), stretch=NO)
+    glob.sql_frame.column("#19", width=max(len(max(elements[18], key=len)) * 7, len("Front side") * 6), stretch=NO)
+    glob.sql_frame.column("#20", width=max(len(max(elements[19], key=len)) * 7, len("Rear side") * 6), stretch=NO)
+    glob.sql_frame.column("#21", width=max(len(max(elements[20], key=len)) * 7, len("Material") * 6), stretch=NO)
+    glob.sql_frame.column("#22", width=max(len(max(elements[21], key=len)) * 9, len("Rarity") * 7), stretch=NO)
+    glob.sql_frame.column("#23", width=max(len(max(elements[22], key=len)) * 7, len("Front jpg") * 7), stretch=NO)
+    glob.sql_frame.column("#24", width=max(len(max(elements[23], key=len)) * 7, len("Rear jpg") * 7), stretch=NO)
+    glob.sql_frame.column("#25", width=max(len(max(elements[24], key=len)) * 9, len("Serie") * 6), stretch=NO)
+    glob.sql_frame.column("#26", width=max(len(max(elements[25], key=len)) * 9, len("Storage") * 7), stretch=NO)
+    glob.sql_frame.column("#27", width=max(len(max(elements[26], key=len)) * 9, len("Have") * 7), stretch=NO)
+    glob.sql_frame.column("#28", width=max(len(max(elements[27], key=len)) * 9, len("Want") * 7), stretch=NO)
+    glob.sql_frame.column("#29", width=max(len(max(elements[28], key=len)) * 9, len("Ordered") * 7), stretch=NO)
+    glob.sql_frame.column("#30", width=max(len(max(elements[29], key=len)) * 9, len("For sale") * 7), stretch=NO)
+    glob.sql_frame.column("#31", width=max(len(max(elements[30], key=len)) * 9, len("Other") * 7), stretch=NO)
+    glob.sql_frame.column("#32", width=max(len(max(elements[31], key=len)) * 9, len("Supplier") * 7), stretch=NO)
+    glob.sql_frame.column("#33", width=max(len(max(elements[32], key=len)) * 9, len("Order no") * 7), stretch=NO)
+    glob.sql_frame.column("#34", width=max(len(max(elements[33], key=len)) * 9, len("Price") * 9), stretch=NO, anchor=E)
+    glob.sql_frame.column("#35", width=max(len(max(elements[34], key=len)) * 9, len("Mint") * 9), stretch=NO)
+    glob.sql_frame.column("#36", width=max(len(max(elements[35], key=len)) * 9, len("Mintmaster") * 7), stretch=NO)
+    glob.sql_frame.column("#37", width=max(len(max(elements[36], key=len)) * 9, len("Ruler") * 7), stretch=NO)
 
-    glob.sql_frame.heading("#0", text="Id", anchor=W)
-    glob.sql_frame.heading("#1", text="SQL RecNo", anchor=W)
-    glob.sql_frame.heading("#2", text="Private index", anchor=W)
-    glob.sql_frame.heading("#3", text="Index", anchor=W)
-    glob.sql_frame.heading("#4", text="Krause", anchor=W)
-    glob.sql_frame.heading("#5", text="denomination", anchor=W)
-    glob.sql_frame.heading("#6", text="valuta", anchor=W)
-    glob.sql_frame.heading("#7", text="country", anchor=W)
-    glob.sql_frame.heading("#8", text="year", anchor=W)
-    glob.sql_frame.heading("#9", text="mmt", anchor=W)
-    glob.sql_frame.heading("#10", text="quality", anchor=W)
-    glob.sql_frame.heading("#11", text="remark", anchor=W)
-    glob.sql_frame.heading("#12", text="coinage", anchor=W)
-    glob.sql_frame.heading("#13", text="diameter", anchor=W)
-    glob.sql_frame.heading("#14", text="edge", anchor=W)
-    glob.sql_frame.heading("#15", text="edgetext", anchor=W)
-    glob.sql_frame.heading("#16", text="striketype", anchor=W)
-    glob.sql_frame.heading("#17", text="weight", anchor=W)
-    glob.sql_frame.heading("#18", text="designer", anchor=W)
-    glob.sql_frame.heading("#19", text="frontside", anchor=W)
-    glob.sql_frame.heading("#20", text="rearside", anchor=W)
-    glob.sql_frame.heading("#21", text="material", anchor=W)
-    glob.sql_frame.heading("#22", text="rarity", anchor=W)
-    glob.sql_frame.heading("#23", text="frontjpglink", anchor=W)
-    glob.sql_frame.heading("#24", text="rearjpglink", anchor=W)
-    glob.sql_frame.heading("#25", text="serie", anchor=W)
-    glob.sql_frame.heading("#26", text="storage", anchor=W)
-    glob.sql_frame.heading("#27", text="ynhave", anchor=W)
-    glob.sql_frame.heading("#28", text="ynwant", anchor=W)
-    glob.sql_frame.heading("#29", text="ynordered", anchor=W)
-    glob.sql_frame.heading("#30", text="ynforsale", anchor=W)
-    glob.sql_frame.heading("#31", text="ynother", anchor=W)
-    glob.sql_frame.heading("#32", text="supplier", anchor=W)
-    glob.sql_frame.heading("#33", text="orderno", anchor=W)
-    glob.sql_frame.heading("#34", text="purchaseprice", anchor=W)
-    glob.sql_frame.heading("#35", text="mint", anchor=W)
-    glob.sql_frame.heading("#36", text="mintmaster", anchor=W)
-    glob.sql_frame.heading("#37", text="headofstate", anchor=W)
-
-
-
-
-
-
-
-
-
-
-
-
-    # for teller in range(0,len(glob.treeheaders)):
-    #    glob.sql_frame.heading(glob.treeheaders[teller][0], text=glob.treeheaders[teller][1], anchor=W)
+    glob.sql_frame.heading("#0", text="Id", anchor=W, command = lambda
+        _col="#0": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#1", text="SQL RecNo", anchor=W, command = lambda
+        _col="#1": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#2", text="Private index", anchor=W, command = lambda
+        _col="#2": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#3", text="Index", anchor=W, command = lambda
+        _col="#3": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#4", text="Krause", anchor=W, command = lambda
+        _col="#4": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#5", text="Denomination", anchor=E, command = lambda
+        _col="#5": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#6", text="Valuta", anchor=W, command = lambda
+        _col="#6": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#7", text="Country", anchor=W, command = lambda
+        _col="#7": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#8", text="Year", anchor=W, command = lambda
+        _col="#8": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#9", text="Mmt", anchor=W)
+    glob.sql_frame.heading("#10", text="Quality", anchor=W)
+    glob.sql_frame.heading("#11", text="Remark", anchor=W)
+    glob.sql_frame.heading("#12", text="Coinage", anchor=E)
+    glob.sql_frame.heading("#13", text="Diameter", anchor=W)
+    glob.sql_frame.heading("#14", text="Edge", anchor=W)
+    glob.sql_frame.heading("#15", text="Edge text", anchor=W)
+    glob.sql_frame.heading("#16", text="Strike type", anchor=W)
+    glob.sql_frame.heading("#17", text="Weight", anchor=W)
+    glob.sql_frame.heading("#18", text="Designer", anchor=W)
+    glob.sql_frame.heading("#19", text="Front side", anchor=W)
+    glob.sql_frame.heading("#20", text="Rrear side", anchor=W)
+    glob.sql_frame.heading("#21", text="Material", anchor=W)
+    glob.sql_frame.heading("#22", text="Rarity", anchor=W)
+    glob.sql_frame.heading("#23", text="Front jpg link", anchor=W)
+    glob.sql_frame.heading("#24", text="Rear jpg link", anchor=W)
+    glob.sql_frame.heading("#25", text="Serie", anchor=W)
+    glob.sql_frame.heading("#26", text="Storage", anchor=W)
+    glob.sql_frame.heading("#27", text="Have", anchor=W)
+    glob.sql_frame.heading("#28", text="Want", anchor=W)
+    glob.sql_frame.heading("#29", text="Ordered", anchor=W)
+    glob.sql_frame.heading("#30", text="For sale", anchor=W)
+    glob.sql_frame.heading("#31", text="Other", anchor=W)
+    glob.sql_frame.heading("#32", text="Supplier", anchor=W)
+    glob.sql_frame.heading("#33", text="Order no", anchor=W)
+    glob.sql_frame.heading("#34", text="Price", anchor=E)
+    glob.sql_frame.heading("#35", text="Mint", anchor=W)
+    glob.sql_frame.heading("#36", text="Mintmaster", anchor=W)
+    glob.sql_frame.heading("#37", text="Ruler", anchor=W)
 
     for teller in range(0, len(glob.coin_data)):
         glob.sql_frame.insert(parent='', index='end', iid=teller, text="text", values=glob.coin_data[teller])
+
+    # Reset the child coloring
+    acounter = 0
+    for child in glob.sql_frame.get_children():
+        if acounter % 2 == 0:
+            glob.sql_frame.item(child, tags="even")
+            acounter += 1
+        else:
+            glob.sql_frame.item(child, tags="odd")
+            acounter += 1
 
     glob.sql_frame.pack(fill=BOTH, expand=1)
 

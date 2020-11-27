@@ -115,3 +115,4 @@ country_data = []
 treecolumns = ("#0", "#01", "#02", "#03", "#04", "#05", "#06", "#07", "#08")
 treeheaders = [(0, "id"), (1, "SQL RecNo"), (2, "Private index"), (3, "Index"), (4, "Krause"), (5, "denomination"),
                (6, "valuta"), (7, "country"), (8, "year")]
+style = ""
