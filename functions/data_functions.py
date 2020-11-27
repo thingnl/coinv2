@@ -150,12 +150,12 @@ def load_coin_tree(cur):
         _col="#4": treeview_sort_column(glob.sql_frame, _col, False))
     glob.sql_frame.heading("#5", text="Denomination", anchor=E, command = lambda
         _col="#5": treeview_sort_column(glob.sql_frame, _col, False))
-    glob.sql_frame.heading("#6", text="Valuta", anchor=W, command = lambda
-        _col="#6": treeview_sort_column(glob.sql_frame, _col, False))
-    glob.sql_frame.heading("#7", text="Country", anchor=W, command = lambda
-        _col="#7": treeview_sort_column(glob.sql_frame, _col, False))
-    glob.sql_frame.heading("#8", text="Year", anchor=W, command = lambda
-        _col="#8": treeview_sort_column(glob.sql_frame, _col, False))
+    glob.sql_frame.heading("#6", text="Valuta", anchor=W, command = lambda: treeview_sort_column(glob.sql_frame,
+                                                                                                 "#6", False))
+    glob.sql_frame.heading("#7", text="Country", anchor=W, command = lambda: treeview_sort_column(glob.sql_frame,
+                                                                                                  "#7", False))
+    glob.sql_frame.heading("#8", text="Year", anchor=W, command = lambda: treeview_sort_column(glob.sql_frame,
+                                                                                               "#8", False))
     glob.sql_frame.heading("#9", text="Mmt", anchor=W)
     glob.sql_frame.heading("#10", text="Quality", anchor=W)
     glob.sql_frame.heading("#11", text="Remark", anchor=W)
