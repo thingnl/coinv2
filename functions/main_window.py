@@ -94,6 +94,7 @@ def build_menu():
     glob.sysmenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("System"), menu=glob.sysmenu)
     glob.sysmenu.add_command(label=_("Settings"), command=lambda: cwd.edit_settings())
+    glob.sysmenu.add_command(label=_("Hide/Show Columns"), command=lambda: cwd.hide_show_columns())
     glob.sysmenu.add_command(label=_("Logfiles"), command=lambda: jf.browse_logfiles())
 
     glob.helpmenu = Menu(glob.menu, tearoff=0)

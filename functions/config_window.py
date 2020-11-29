@@ -286,7 +286,6 @@ def save_settings():
     for line in file1:
         if line.startswith('slide_horizontal'):
             file2.write("slide_horizontal = " + str(glob.slide_horizontal.get()) + '\n')
-
         elif line.startswith('slide_vertical'):
             file2.write("slide_vertical = " + str(glob.slide_vertical.get()) + '\n')
             glob.logger_main.debug("Wrote slide_vertical = " + str(glob.slide_vertical.get()))
@@ -342,6 +341,248 @@ def save_settings():
     glob.top.destroy()
 
 
+def build_hide_show():
+    glob.top = Toplevel()
+    glob.top.title(_("Hide/Show Columns"))
+    glob.top.geometry('%sx%s' % (800, 550))
+    glob.top.option_add("*Font", "Segoe 8")
+    glob.top.grab_set()                      # Disable input on main window.
+
+    # Create frames
+    glob.edit_edit_frame = Frame(master=glob.top, padx=5, pady=5)
+    glob.edit_button_frame = Frame(master=glob.top, height=70, bg="gray85", padx=5, pady=5)
+
+    glob.edit_edit_frame.pack(fill=BOTH, expand=1)
+    glob.edit_button_frame.pack(fill=BOTH, expand=0)
+
+    # Create buttons
+    glob.button_edit_cancel = Button(glob.edit_button_frame, text=_("Cancel"),
+                                     command=lambda: glob.top.destroy(), padx=20)
+    glob.button_edit_cancel.pack(side=LEFT, pady=10, padx=10)
+
+    glob.button_edit_save = Button(glob.edit_button_frame, text=_("Save"), command=lambda: save_settings(), padx=20)
+    glob.button_edit_save.pack(side=RIGHT, pady=10, padx=10)
+
+    label_mainwindow = Label(glob.edit_edit_frame, text=_("Hide or Show columns:"),
+                             font=("Segoe", 10, 'bold underline'), anchor="w", width=20)
+    label_mainwindow.grid(row=1, column=1, columnspan=2)
+
+    label_empty_line = Label(glob.edit_edit_frame, text=" ", anchor="w", width=20)
+    label_empty_line.grid(row=2, column=1)
+
+    label_fill1_line = Label(glob.edit_edit_frame, text="_", anchor="w", width=20)
+    label_fill1_line.grid(row=2, column=7)
+    label_fill2_line = Label(glob.edit_edit_frame, text="Hide")
+    label_fill2_line.grid(row=3, column=3)
+    label_fill3_line = Label(glob.edit_edit_frame, text="Show")
+    label_fill3_line.grid(row=3, column=4)
+    label_fill4_line = Label(glob.edit_edit_frame, text="Hide")
+    label_fill4_line.grid(row=3, column=9)
+    label_fill5_line = Label(glob.edit_edit_frame, text="Show")
+    label_fill5_line.grid(row=3, column=10)
+
+    # --------
+    label_private_index = Label(glob.edit_edit_frame, text=_("Private Index:"), anchor="w", width=20)
+    label_private_index.grid(row=4, column=2)
+    glob.radio_private_index = StringVar()
+    glob.radio1_private_index = Radiobutton(glob.edit_edit_frame, text="",
+                                            variable=glob.radio_private_index, value="Hide")
+    glob.radio2_private_index = Radiobutton(glob.edit_edit_frame, text="",
+                                            variable=glob.radio_private_index, value="Show")
+    glob.radio1_private_index.grid(row=4, column=3)
+    glob.radio2_private_index.grid(row=4, column=4)
+    # --------
+    label_index = Label(glob.edit_edit_frame, text=_("Index:"), anchor="w", width=20)
+    label_index.grid(row=5, column=2)
+    glob.radio_index = StringVar()
+    glob.radio1_index = Radiobutton(glob.edit_edit_frame, text="",
+                                    variable=glob.radio_index, value="Hide")
+    glob.radio2_index = Radiobutton(glob.edit_edit_frame, text="",
+                                    variable=glob.radio_index, value="Show")
+    glob.radio1_index.grid(row=5, column=3)
+    glob.radio2_index.grid(row=5, column=4)
+    # --------
+    label_krause_index = Label(glob.edit_edit_frame, text=_("Krause Index:"), anchor="w", width=20)
+    label_krause_index.grid(row=6, column=2)
+    glob.radio_krause_index = StringVar()
+    glob.radio1_krause_index = Radiobutton(glob.edit_edit_frame, text="",
+                                           variable=glob.radio_krause_index, value="Hide")
+    glob.radio2_krause_index = Radiobutton(glob.edit_edit_frame, text="",
+                                           variable=glob.radio_krause_index, value="Show")
+    glob.radio1_krause_index.grid(row=6, column=3)
+    glob.radio2_krause_index.grid(row=6, column=4)
+    # --------
+    label_denomination = Label(glob.edit_edit_frame, text=_("Denomination:"), anchor="w", width=20)
+    label_denomination.grid(row=7, column=2)
+    glob.radio_denomination = StringVar()
+    glob.radio1_denomination = Radiobutton(glob.edit_edit_frame, text="",
+                                           variable=glob.radio_denomination, value="Hide")
+    glob.radio2_denomination = Radiobutton(glob.edit_edit_frame, text="",
+                                           variable=glob.radio_denomination, value="Show")
+    glob.radio1_denomination.grid(row=7, column=3)
+    glob.radio2_denomination.grid(row=7, column=4)
+    # --------
+    label_valuta = Label(glob.edit_edit_frame, text=_("Valuta:"), anchor="w", width=20)
+    label_valuta.grid(row=8, column=2)
+    glob.radio_valuta = StringVar()
+    glob.radio1_valuta = Radiobutton(glob.edit_edit_frame, text="",
+                                     variable=glob.radio_valuta, value="Hide")
+    glob.radio2_valuta = Radiobutton(glob.edit_edit_frame, text="",
+                                     variable=glob.radio_valuta, value="Show")
+    glob.radio1_valuta.grid(row=8, column=3)
+    glob.radio2_valuta.grid(row=8, column=4)
+    # --------
+    label_country = Label(glob.edit_edit_frame, text=_("Country:"), anchor="w", width=20)
+    label_country.grid(row=9, column=2)
+    glob.radio_country = StringVar()
+    glob.radio1_country = Radiobutton(glob.edit_edit_frame, text="",
+                                      variable=glob.radio_country, value="Hide")
+    glob.radio2_country = Radiobutton(glob.edit_edit_frame, text="",
+                                      variable=glob.radio_country, value="Show")
+    glob.radio1_country.grid(row=9, column=3)
+    glob.radio2_country.grid(row=9, column=4)
+    # --------
+    label_year = Label(glob.edit_edit_frame, text=_("Year:"), anchor="w", width=20)
+    label_year.grid(row=10, column=2)
+    glob.radio_year = StringVar()
+    glob.radio1_year = Radiobutton(glob.edit_edit_frame, text="",
+                                   variable=glob.radio_year, value="Hide")
+    glob.radio2_year = Radiobutton(glob.edit_edit_frame, text="",
+                                   variable=glob.radio_year, value="Show")
+    glob.radio1_year.grid(row=10, column=3)
+    glob.radio2_year.grid(row=10, column=4)
+    # --------
+    label_mintmaster = Label(glob.edit_edit_frame, text=_("Mintmaster:"), anchor="w", width=20)
+    label_mintmaster.grid(row=11, column=2)
+    glob.radio_mintmaster = StringVar()
+    glob.radio1_mintmaster = Radiobutton(glob.edit_edit_frame, text="",
+                                         variable=glob.radio_mintmaster, value="Hide")
+    glob.radio2_mintmaster = Radiobutton(glob.edit_edit_frame, text="",
+                                         variable=glob.radio_mintmaster, value="Show")
+    glob.radio1_mintmaster.grid(row=11, column=3)
+    glob.radio2_mintmaster.grid(row=11, column=4)
+    # --------
+    label_quality = Label(glob.edit_edit_frame, text=_("Quality:"), anchor="w", width=20)
+    label_quality.grid(row=12, column=2)
+    glob.radio_quality = StringVar()
+    glob.radio1_quality = Radiobutton(glob.edit_edit_frame, text="",
+                                      variable=glob.radio_quality, value="Hide")
+    glob.radio2_quality = Radiobutton(glob.edit_edit_frame, text="",
+                                      variable=glob.radio_quality, value="Show")
+    glob.radio1_quality.grid(row=12, column=3)
+    glob.radio2_quality.grid(row=12, column=4)
+    # --------
+    label_remark = Label(glob.edit_edit_frame, text=_("Remark:"), anchor="w", width=20)
+    label_remark.grid(row=13, column=2)
+    glob.radio_remark = StringVar()
+    glob.radio1_remark = Radiobutton(glob.edit_edit_frame, text="",
+                                      variable=glob.radio_remark, value="Hide")
+    glob.radio2_remark = Radiobutton(glob.edit_edit_frame, text="",
+                                      variable=glob.radio_remark, value="Show")
+    glob.radio1_remark.grid(row=13, column=3)
+    glob.radio2_remark.grid(row=13, column=4)
+    # --------
+    label_coinage = Label(glob.edit_edit_frame, text=_("Coinage:"), anchor="w", width=20)
+    label_coinage.grid(row=14, column=2)
+    glob.radio_coinage = StringVar()
+    glob.radio1_coinage = Radiobutton(glob.edit_edit_frame, text="",
+                                      variable=glob.radio_coinage, value="Hide")
+    glob.radio2_coinage = Radiobutton(glob.edit_edit_frame, text="",
+                                      variable=glob.radio_coinage, value="Show")
+    glob.radio1_coinage.grid(row=14, column=3)
+    glob.radio2_coinage.grid(row=14, column=4)
+    # --------
+    label_diameter = Label(glob.edit_edit_frame, text=_("Diameter:"), anchor="w", width=20)
+    label_diameter.grid(row=15, column=2)
+    glob.radio_diameter = StringVar()
+    glob.radio1_diameter = Radiobutton(glob.edit_edit_frame, text="",
+                                       variable=glob.radio_diameter, value="Hide")
+    glob.radio2_diameter = Radiobutton(glob.edit_edit_frame, text="",
+                                       variable=glob.radio_diameter, value="Show")
+    glob.radio1_diameter.grid(row=15, column=3)
+    glob.radio2_diameter.grid(row=15, column=4)
+    # --------
+    label_edge = Label(glob.edit_edit_frame, text=_("Edge:"), anchor="w", width=20)
+    label_edge.grid(row=16, column=2)
+    glob.radio_edge = StringVar()
+    glob.radio1_edge = Radiobutton(glob.edit_edit_frame, text="",
+                                   variable=glob.radio_edge, value="Hide")
+    glob.radio2_edge = Radiobutton(glob.edit_edit_frame, text="",
+                                   variable=glob.radio_edge, value="Show")
+    glob.radio1_edge.grid(row=16, column=3)
+    glob.radio2_edge.grid(row=16, column=4)
+    # --------
+    label_edgetext = Label(glob.edit_edit_frame, text=_("Edge text:"), anchor="w", width=20)
+    label_edgetext.grid(row=17, column=2)
+    glob.radio_edgetext = StringVar()
+    glob.radio1_edgetext = Radiobutton(glob.edit_edit_frame, text="",
+                                       variable=glob.radio_edgetext, value="Hide")
+    glob.radio2_edgetext = Radiobutton(glob.edit_edit_frame, text="",
+                                       variable=glob.radio_edgetext, value="Show")
+    glob.radio1_edgetext.grid(row=17, column=3)
+    glob.radio2_edgetext.grid(row=17, column=4)
+    # --------
+    label_stiketype = Label(glob.edit_edit_frame, text=_("Strike type:"), anchor="w", width=20)
+    label_stiketype.grid(row=18, column=2)
+    glob.radio_stiketype = StringVar()
+    glob.radio1_stiketype = Radiobutton(glob.edit_edit_frame, text="",
+                                       variable=glob.radio_stiketype, value="Hide")
+    glob.radio2_stiketype = Radiobutton(glob.edit_edit_frame, text="",
+                                       variable=glob.radio_stiketype, value="Show")
+    glob.radio1_stiketype.grid(row=18, column=3)
+    glob.radio2_stiketype.grid(row=18, column=4)
+    # --------
+    label_weight = Label(glob.edit_edit_frame, text=_("Weight:"), anchor="w", width=20)
+    label_weight.grid(row=19, column=2)
+    glob.radio_weight = StringVar()
+    glob.radio1_weight = Radiobutton(glob.edit_edit_frame, text="",
+                                     variable=glob.radio_weight, value="Hide")
+    glob.radio2_weight = Radiobutton(glob.edit_edit_frame, text="",
+                                     variable=glob.radio_weight, value="Show")
+    glob.radio1_weight.grid(row=19, column=3)
+    glob.radio2_weight.grid(row=19, column=4)
+    # --------
+    label_designer = Label(glob.edit_edit_frame, text=_("Designer:"), anchor="w", width=20)
+    label_designer.grid(row=20, column=2)
+    glob.radio_designer = StringVar()
+    glob.radio1_designer = Radiobutton(glob.edit_edit_frame, text="",
+                                       variable=glob.radio_designer, value="Hide")
+    glob.radio2_designer = Radiobutton(glob.edit_edit_frame, text="",
+                                       variable=glob.radio_designer, value="Show")
+    glob.radio1_designer.grid(row=20, column=3)
+    glob.radio2_designer.grid(row=20, column=4)
+    # --------
+    label_frontside = Label(glob.edit_edit_frame, text=_("Front side description:"), anchor="w", width=20)
+    label_frontside.grid(row=20, column=2)
+    glob.radio_frontside = StringVar()
+    glob.radio1_frontside = Radiobutton(glob.edit_edit_frame, text="",
+                                        variable=glob.radio_frontside, value="Hide")
+    glob.radio2_frontside = Radiobutton(glob.edit_edit_frame, text="",
+                                        variable=glob.radio_frontside, value="Show")
+    glob.radio1_frontside.grid(row=20, column=3)
+    glob.radio2_frontside.grid(row=20, column=4)
+    # --------
+    label_rearside = Label(glob.edit_edit_frame, text=_("Rear side description:"), anchor="w", width=20)
+    label_rearside.grid(row=21, column=2)
+    glob.radio_rearside = StringVar()
+    glob.radio1_rearside = Radiobutton(glob.edit_edit_frame, text="",
+                                        variable=glob.radio_rearside, value="Hide")
+    glob.radio2_rearside = Radiobutton(glob.edit_edit_frame, text="",
+                                        variable=glob.radio_rearside, value="Show")
+    glob.radio1_rearside.grid(row=21, column=3)
+    glob.radio2_rearside.grid(row=21, column=4)
+    # --------
+    label_material = Label(glob.edit_edit_frame, text=_("Material:"), anchor="w", width=20)
+    label_material.grid(row=4, column=8)
+    glob.radio_material = StringVar()
+    glob.radio1_material = Radiobutton(glob.edit_edit_frame, text="",
+                                        variable=glob.radio_material, value="Hide")
+    glob.radio2_material = Radiobutton(glob.edit_edit_frame, text="",
+                                        variable=glob.radio_material, value="Show")
+    glob.radio1_material.grid(row=4, column=9)
+    glob.radio2_material.grid(row=4, column=10)
+
+
 def edit_settings():
     glob.logger_main.info("Configuration window starting.")
     build_edit_settings()
@@ -360,3 +601,11 @@ def edit_settings():
     #                                  initialdir=os.getcwd(),
     #                                  title="Please select a folder:")
     # print(answer)
+
+
+def hide_show_columns():
+    glob.logger_main.info("Hide/Show Columns starting.")
+    build_hide_show()
+
+
+    glob.logger_main.info("Hide/Show Columns window closed.")
