@@ -70,7 +70,7 @@ def build_menu():
     glob.menu.add_cascade(label=_("File"), menu=glob.filemenu)
     glob.filemenu.add_command(label=_("New"), command=lambda: dbn.create_newdb())
     glob.filemenu.add_command(label=_("Open"), command=lambda: dbn.open_db())
-    glob.filemenu.add_command(label=_("Close"), command=newfile)
+    glob.filemenu.add_command(label=_("Close"), command=lambda: dbn.close_db())
     glob.filemenu.add_command(label=_("Save"), command=newfile)
     glob.filemenu.add_separator()
     glob.filemenu.add_command(label=_("Exit"), command=glob.root.quit)
@@ -117,7 +117,7 @@ def build_frames():
     glob.sqlframe = Frame(glob.root, bg="white", width=900)  # center
     glob.photoframe = Frame(glob.root, bg="gray85", height=700, width=181, padx=5, pady=5)  # right
     glob.messageframe = Frame(glob.root, bg="gray85", height=50, width=900)  # message
-    glob.databaseframe = Frame(glob.root, bg="red", height=50, width=65)  # open database name
+    glob.databaseframe = Frame(glob.root, bg="gray85", height=50, width=65)  # open database name
 
     glob.filterframe.grid(row=0, column=0, rowspan=2, columnspan=1, sticky=E + W + N + S)  # left
     glob.buttonframe.grid(row=0, column=1, sticky=E + W + N + S)  # buttons
@@ -132,7 +132,7 @@ def build_frames():
 
     glob.database_frame = Text(glob.databaseframe, width=24, height=1, font=("Segoe", 10))
     glob.database_frame.pack(fill=Y, expand=0, padx=5, pady=5)
-    glob.database_frame.insert('1.0', "Nederland.db")
+    # glob.database_frame.insert('1.0', "Nederland.db")
 
     glob.filter_frame = LabelFrame(glob.filterframe, text=_("Filters"), height=650, width=175,
                                    relief=RIDGE, bd=2, bg="gray85")  # bg="gray85"

@@ -9,13 +9,14 @@ logger_sql = 0
 system_version = "v2.0.2"
 system_build = "23"
 system_sql = "v001"
-current_open_db = ""
 
 # runtime
 scriptpath = ""
 mainpath = ""
 localespath = ""
 language = 0
+open_filename = ""                          # Currently opened file
+current_open_db = ""                        # Currently opened file incl path
 
 # configuration
 slide_horizontal = 0
@@ -72,6 +73,7 @@ button_frame = 0
 sql_frame = 0
 photo_frame = 0
 message_frame = 0
+database_frame = 0
 message_text = ""
 
 # sysconfig edit screen
@@ -117,6 +119,11 @@ treecolumns = ("#0", "#01", "#02", "#03", "#04", "#05", "#06", "#07", "#08")
 treeheaders = [(0, "id"), (1, "SQL RecNo"), (2, "Private index"), (3, "Index"), (4, "Krause"), (5, "denomination"),
                (6, "valuta"), (7, "country"), (8, "year")]
 style = ""
+
+# sql treeview scrollbars
+scrollh = 0
+scrollv = 0
+
 
 # Column radio buttons
 radio_private_index = "Show"

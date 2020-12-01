@@ -84,13 +84,13 @@ def load_coin_tree(cur):
     glob.sql_frame.tag_configure('even', background='#E2FFFF')  # white #E2FFFF
 
     # Inserting horizontal scrollbar
-    scrollh = ttk.Scrollbar(glob.sqlframe, orient="horizontal", command=glob.sql_frame.xview)
-    scrollh.pack(side=BOTTOM, fill='x')
+    glob.scrollh = ttk.Scrollbar(glob.sqlframe, orient="horizontal", command=glob.sql_frame.xview)
+    glob.scrollh.pack(side=BOTTOM, fill='x')
     glob.sql_frame.configure(xscrollcommand=scrollh.set)
 
     # Inserting vertical scrollbar
-    scrollv = ttk.Scrollbar(glob.sqlframe, orient="vertical", command=glob.sql_frame.yview)
-    scrollv.pack(side=RIGHT, fill='y')
+    glob.scrollv = ttk.Scrollbar(glob.sqlframe, orient="vertical", command=glob.sql_frame.yview)
+    glob.scrollv.pack(side=RIGHT, fill='y')
     glob.sql_frame.configure(yscrollcommand=scrollv.set)
 
     # Combine all tuple columns into lines

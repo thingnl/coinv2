@@ -56,6 +56,25 @@ def insert_testdata():
     pass
 
 
+def close_db():
+    glob.database_frame.delete("1.0", "end")
+    lf.send_message(_("Database " + glob.current_open_db + " closed."))
+    glob.logger_main.info("Database " + glob.current_open_db + " closed.")
+
+    # Delete old widgets
+    glob.sql_frame.destroy()
+    glob.scrollh.destroy()
+    glob.scrollv.destroy()
+
+    # commit any changes and close the connection
+    glob.conn.commit()
+    glob.conn.close()
+
+    # reset indicators
+    glob.open_filename = ""
+    glob.current_open_db = ""
+
+
 def open_db():
     """ Ask user to selct a database and load it's contents.
 
@@ -83,9 +102,9 @@ def open_db():
         return
 
     # try to create a connection
-    conn = None
+    glob.conn = None
     try:
-        conn = sqlite3.connect(glob.current_open_db)
+        glob.conn = sqlite3.connect(glob.current_open_db)
     except Exception as e:
         messagebox.showerror(title=_("Database error"), message=_("A connection to the selected database could not be"
                                                                   " made. Please make sure the selected file is a "
@@ -95,7 +114,7 @@ def open_db():
 
     # try getting the db version
     sql_command = """SELECT * FROM schema"""
-    cur = conn.cursor()
+    cur = glob.conn.cursor()
     try:
         cur.execute(sql_command)
         row = cur.fetchone()
@@ -118,15 +137,16 @@ def open_db():
         glob.logger_main.info("Wrong schema version found, exiting")
 
     # And we have a correct version of the database schema. What's next.... ah, load the data....
-
     # Set country filter
     df.load_filter_country(cur)
 
     # Load coins to central treeview
     df.load_coin_tree(cur)
 
-
-
+    # Set filename in frame
+    glob.open_filename = glob.current_open_db.split("/")
+    glob.open_filename = glob.open_filename[-1]
+    glob.database_frame.insert('1.0', "db = " + glob.open_filename)
 
     # Done loading database
     lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) +
@@ -150,9 +170,9 @@ def create_newdb():
         lf.send_message(_("Creating new database: " + new_dbfile + "."))
         glob.logger_sql.info("Creating new database: " + new_dbfile)
 
-        conn = None
+        glob.conn = None
         try:
-            conn = sqlite3.connect(new_dbfile)
+            glob.conn = sqlite3.connect(new_dbfile)
             glob.logger_sql.debug("sqlite version: " + sqlite3.version)
         except Exception as e:
             glob.logger_sql.exception("Error creating " + new_dbfile + " database")
@@ -161,62 +181,62 @@ def create_newdb():
             return
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (5%)"))
-        tables.create_table_schema(conn)
+        tables.create_table_schema()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (11%)"))
-        tables.create_table_country(conn)
+        tables.create_table_country()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (18%)"))
-        tables.create_table_headofstate(conn)
+        tables.create_table_headofstate()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (26%)"))
-        tables.create_table_quality(conn)
+        tables.create_table_quality()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (37%)"))
-        tables.create_table_valuations(conn)
+        tables.create_table_valuations()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (51%)"))
-        tables.create_table_suppliers(conn)
+        tables.create_table_suppliers()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (63%)"))
-        tables.create_table_orders(conn)
+        tables.create_table_orders()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (69%)"))
-        tables.create_table_mintmaster(conn)
+        tables.create_table_mintmaster()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (76%)"))
-        tables.create_table_mint(conn)
+        tables.create_table_mint()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (82%)"))
-        tables.create_table_valuta(conn)
+        tables.create_table_valuta()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (87%)"))
-        tables.create_table_strike(conn)
+        tables.create_table_strike()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (92%)"))
-        tables.create_table_coin(conn)
+        tables.create_table_coin()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (95%)"))
-        tables.create_table_replace(conn)
+        tables.create_table_replace()
         time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (98%)"))
-        tables.create_table_rarity(conn)
+        tables.create_table_rarity()
         time.sleep(1)
 
-        conn.close()
+        glob.conn.close()
         time.sleep(1)
         lf.send_message(_("Database " + new_dbfile + " created."))
     else:

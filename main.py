@@ -54,6 +54,7 @@ __status__ = 'Development'
 # fixed     frame size in reloading with language button, delete frames was not deleting all frames.
 # fixed     Menu exit does not, takes 3 times to actually exit. Switched to logger, solved write delay (4 now)
 # fix       Cleanup opening logfiles and add log entries on opening
+# fix       Creating and opening new database does not create sql frame
 
 # System libs
 import os
