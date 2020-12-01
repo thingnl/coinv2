@@ -126,6 +126,8 @@ def open_db():
     df.load_coin_tree(cur)
 
 
+
+
     # Done loading database
     lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) +
                       " coins loaded."))

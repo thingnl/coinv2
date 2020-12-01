@@ -14,7 +14,7 @@ from win32api import GetSystemMetrics                       # win32api is part o
 # Own modules
 from . import glob
 from . import config_items as ci
-from . import config_window as cwd
+from . import config_window as cw
 from . import language_functions as lf
 from . import database_new as dbn
 from . import journal_functions as jf
@@ -93,8 +93,8 @@ def build_menu():
 
     glob.sysmenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("System"), menu=glob.sysmenu)
-    glob.sysmenu.add_command(label=_("Settings"), command=lambda: cwd.edit_settings())
-    glob.sysmenu.add_command(label=_("Hide/Show Columns"), command=lambda: cwd.hide_show_columns())
+    glob.sysmenu.add_command(label=_("Settings"), command=lambda: cw.edit_settings())
+    glob.sysmenu.add_command(label=_("Hide/Show Columns"), command=lambda: cw.hide_show_columns())
     glob.sysmenu.add_command(label=_("Logfiles"), command=lambda: jf.browse_logfiles())
 
     glob.helpmenu = Menu(glob.menu, tearoff=0)
@@ -115,19 +115,24 @@ def build_frames():
     glob.filterframe = Frame(glob.root, bg="gray85", height=700, width=185, padx=5, pady=5)  # left
     glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
     glob.sqlframe = Frame(glob.root, bg="white", width=900)  # center
-    glob.photoframe = Frame(glob.root, bg="gray85", height=700, width=185, padx=5, pady=5)  # right
-    glob.messageframe = Frame(glob.root, bg="gray85", height=50, width=1100)  # message
+    glob.photoframe = Frame(glob.root, bg="gray85", height=700, width=181, padx=5, pady=5)  # right
+    glob.messageframe = Frame(glob.root, bg="gray85", height=50, width=900)  # message
+    glob.databaseframe = Frame(glob.root, bg="red", height=50, width=65)  # open database name
 
     glob.filterframe.grid(row=0, column=0, rowspan=2, columnspan=1, sticky=E + W + N + S)  # left
     glob.buttonframe.grid(row=0, column=1, sticky=E + W + N + S)  # buttons
     glob.sqlframe.grid(row=1, column=1, sticky=E + W + N + S)  # center
     glob.photoframe.grid(row=0, column=2, rowspan=2, columnspan=1, sticky=E + W + N + S)  # right
-    glob.messageframe.grid(row=2, column=0, rowspan=1, columnspan=3, sticky=E + W + N + S)  # message
+    glob.messageframe.grid(row=2, column=0, rowspan=1, columnspan=2, sticky=E + W + N + S)  # message
+    glob.databaseframe.grid(row=2, column=2, rowspan=1, columnspan=1, sticky=E + W + N + S)  # database
 
-    # glob.message_frame = Label(glob.messageframe, height=1)
     glob.message_frame = Text(glob.messageframe, height=1, font=("Segoe", 10))
     glob.message_frame.pack(fill=X, expand=1, padx=5, pady=5)
     lf.send_message(_("Welcome to Pecuniae Collectio"))
+
+    glob.database_frame = Text(glob.databaseframe, width=24, height=1, font=("Segoe", 10))
+    glob.database_frame.pack(fill=Y, expand=0, padx=5, pady=5)
+    glob.database_frame.insert('1.0', "Nederland.db")
 
     glob.filter_frame = LabelFrame(glob.filterframe, text=_("Filters"), height=650, width=175,
                                    relief=RIDGE, bd=2, bg="gray85")  # bg="gray85"

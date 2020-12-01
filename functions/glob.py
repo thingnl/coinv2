@@ -65,6 +65,7 @@ buttonframe = 0
 sqlframe = 0
 photoframe = 0
 messageframe = 0
+databaseframe = 0
 
 filter_frame = 0
 button_frame = 0

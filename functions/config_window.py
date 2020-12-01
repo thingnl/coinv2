@@ -271,6 +271,21 @@ def build_edit_settings():
     radio2_language.grid(row=7, column=2)
 
 
+def apply_column_hide():
+    if ci.get_config_item("radio_private_index") == "Hide": glob.sql_frame.column("#2", width=0)
+    if ci.get_config_item("radio_index") == "Hide": glob.sql_frame.column("#3", width=0)
+    if ci.get_config_item("radio_krause_index") == "Hide": glob.sql_frame.column("#4", width=0)
+    if ci.get_config_item("radio_denomination") == "Hide": glob.sql_frame.column("#5", width=0)
+    if ci.get_config_item("radio_valuta") == "Hide": glob.sql_frame.column("#6", width=0)
+    if ci.get_config_item("radio_country") == "Hide": glob.sql_frame.column("#7", width=0)
+    if ci.get_config_item("radio_year") == "Hide": glob.sql_frame.column("#8", width=0)
+    if ci.get_config_item("radio_mmt") == "Hide": glob.sql_frame.column("#9", width=0)
+    if ci.get_config_item("radio_quality") == "Hide": glob.sql_frame.column("#10", width=0)
+    if ci.get_config_item("radio_remark") == "Hide": glob.sql_frame.column("#11", width=0)
+    if ci.get_config_item("radio_coinage") == "Hide": glob.sql_frame.column("#12", width=0)
+
+    glob.sql_frame.update()
+
 def save_settings():
     # Rename config file to backup config file
     config_file = glob.mainpath + "\\coinsv2.config"
@@ -336,6 +351,8 @@ def save_settings():
 
     lf.send_message(_("New settings saved to configuration file."))
     glob.logger_main.info("New settings saved to " + config_file + ".")
+
+    apply_column_hide()
 
     # Close edit window
     glob.top.destroy()

@@ -7,7 +7,7 @@
 from tkinter import ttk
 from tkinter import *
 from . import glob
-# from . import config_items as ci
+from . import config_window as cw
 
 
 # Needed for the line coloring stuff
@@ -234,14 +234,8 @@ def load_coin_tree(cur):
 
     glob.sql_frame.pack(fill=BOTH, expand=1)
 
+    # Hide column we don't want to see
+    cw.apply_column_hide()
+
     glob.sql_frame.update()
 
-    # # Inserting horizontal scrollbar
-    # scrollh = ttk.Scrollbar(glob.sqlframe, orient="horizontal", command=mem.coinlist.xview)
-    # scrollh.pack(side=BOTTOM, fill='x')
-    # mem.coinlist.configure(xscrollcommand=scrollh.set)
-    #
-    # # Inserting vertical scrollbar
-    # scrollv = ttk.Scrollbar(glob.sqlframe, orient="vertical", command=mem.coinlist.yview)
-    # scrollv.pack(side=RIGHT, fill='y')
-    # mem.coinlist.configure(yscrollcommand=scrollv.set)
