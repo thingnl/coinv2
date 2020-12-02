@@ -9,7 +9,7 @@
 
 # System libs
 import gettext
-from tkinter import *
+# from tkinter import *
 from . import glob
 
 global _

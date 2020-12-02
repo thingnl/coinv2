@@ -345,15 +345,3 @@ def insert_table_coin(conn):
         conn.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
-
-
-# Strike type missing from coin
-
-# Some language stuf
-# Obverse
-# Reverse
-# Ruler
-# Subject for Serie
-# Date for year
-# Mintage as struck
-# Edge lettering voor randschrift

@@ -17,9 +17,9 @@ def fixed_map(option):
 
 
 def treeview_sort_column(tv, col, reverse):  # Treeview, column name, arrangement
-    l = [(tv.set(k, col), k) for k in tv.get_children('')]
-    l.sort(reverse=reverse)  # Sort by
-    for index, (val, k) in enumerate(l):  # based on sorted index movement
+    listindex = [(tv.set(k, col), k) for k in tv.get_children('')]
+    listindex.sort(reverse=reverse)  # Sort by
+    for index, (val, k) in enumerate(listindex):  # based on sorted index movement
         tv.move(k, '', index)
         tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))
     # Reset the child coloring
@@ -50,11 +50,9 @@ def load_filter_country(cur):
 
 
 def load_coin_tree(cur):
-
     # Need this next to column move, sort and coloring:
     # hide:    https://stackoverflow.com/questions/33290969/hiding-treeview-columns-in-tkinter
     # drag:    https://stackoverflow.com/questions/51378611/python-tkinter-table-order-table-columns-with-drag-and-drop
-    #
 
     sql_command = """SELECT * FROM coin"""
     try:
@@ -86,17 +84,17 @@ def load_coin_tree(cur):
     # Inserting horizontal scrollbar
     glob.scrollh = ttk.Scrollbar(glob.sqlframe, orient="horizontal", command=glob.sql_frame.xview)
     glob.scrollh.pack(side=BOTTOM, fill='x')
-    glob.sql_frame.configure(xscrollcommand=scrollh.set)
+    glob.sql_frame.configure(xscrollcommand=glob.scrollh.set)
 
     # Inserting vertical scrollbar
     glob.scrollv = ttk.Scrollbar(glob.sqlframe, orient="vertical", command=glob.sql_frame.yview)
     glob.scrollv.pack(side=RIGHT, fill='y')
-    glob.sql_frame.configure(yscrollcommand=scrollv.set)
+    glob.sql_frame.configure(yscrollcommand=glob.scrollv.set)
 
     # Combine all tuple columns into lines
     elements = list(zip(*glob.coin_data))
-    # next, get longest value and compare to 20
-    # Take longest value as width
+    # next, get longest value like len(max(elements[1], key=len)
+    # Take longest value from field or header length like max(len(max(elements[2], key=len)) * 9, len("Index") * 8)
 
     # Set width for all columns so data fits and/or header shows, while hiding the first 2 index fields.
     glob.sql_frame.column("#0", width=0, minwidth=0, stretch=NO)
@@ -238,4 +236,3 @@ def load_coin_tree(cur):
     cw.apply_column_hide()
 
     glob.sql_frame.update()
-

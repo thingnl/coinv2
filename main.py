@@ -13,7 +13,11 @@ __credits__ = ['I18n:'
 
                'Treeview sorting:'
                'unknown'
-               'https://www.pianshen.com/article/60037664/'
+               'https://www.pianshen.com/article/60037664/',
+
+               'Treeview hiding columns:'
+               'R4PH43L'
+               'https://stackoverflow.com/questions/33290969/hiding-treeview-columns-in-tkinter'
                ]
 __license__ = 'CC BY-NC-ND 4.0 Attribution-NonCommercial-NoDerivatives 4.0 International'
 __version__ = '0.0.3'
@@ -44,17 +48,32 @@ __status__ = 'Development'
 # todo   2  SQL housekeeping function compact
 # todo   3  Create reports (or some query engine app)
 # todo   1  Before loading testdata, verify db is open and empty: SELECT exists(SELECT 1 FROM MyTable LIMIT 1);
+# todo   2  Strike type missing from coin, need to check
+# todo   2  Obverse in stead of front
+# todo   2  Reverse in stead of rear
+# todo   2  Ruler in stead of Head of state
+# todo   2  Subject for Serie
+# todo   2  Date for year
+# todo   2  Mintage/Minted as struck
+# todo   2  Edge lettering voor randschrift
+# todo   2  Add to config screen: open last database on startup?
+# todo   2  Add to config screen: Include jpg in backup?
+# todo   2  Add to config screen: Include orders in backup?
+# todo   2  Add to config screen: log SQL data?
+# todo   2  Add to config screen: max days to keep logs, 0 = keep all?
 
-# idea      Make sql fieldlist configurable
+# idone     Add Schema Version table to SQL database
+# idone     Make sql fieldlist configurable
 # idea      Replace top button bar with icons
-# idea      Add Schema Version table to SQL database
 # idea      Some library function to PDF catalogs
 # idea      Krause books: https://world-coins.weebly.com/krause-catalogs--other-books.html
 
 # fixed     frame size in reloading with language button, delete frames was not deleting all frames.
 # fixed     Menu exit does not, takes 3 times to actually exit. Switched to logger, solved write delay (4 now)
+# fixed     Creating and opening new database does not create sql frame. Forgot a glob.
+# fix       On loading empty database, treeview crashes with out of range error
 # fix       Cleanup opening logfiles and add log entries on opening
-# fix       Creating and opening new database does not create sql frame
+
 
 # System libs
 import os

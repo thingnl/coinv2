@@ -10,7 +10,7 @@ from tkinter import messagebox
 from . import config_items as ci
 from . import tables_v001 as tables
 from . import language_functions as lf
-from . import testdata_v001 as td
+# from . import testdata_v001 as td
 from . import data_functions as df
 import time
 from . import glob
