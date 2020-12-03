@@ -71,7 +71,7 @@ __status__ = 'Development'
 # fixed     frame size in reloading with language button, delete frames was not deleting all frames.
 # fixed     Menu exit does not, takes 3 times to actually exit. Switched to logger, solved write delay (4 now)
 # fixed     Creating and opening new database does not create sql frame. Forgot a glob.
-# fix       On loading empty database, treeview crashes with out of range error
+# fixed     On loading empty database, treeview crashes with out of range error. Fix by cheking length != 0
 # fix       Cleanup opening logfiles and add log entries on opening
 
 

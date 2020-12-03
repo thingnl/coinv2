@@ -199,8 +199,8 @@ def build_buttons():
     glob.button_del.pack(side=LEFT, pady=10, padx=10)
 
     # text or icon for language
-    if os.path.isfile("icon-nl.png"):
-        imagenl = Image.open("icon-nl.png")
+    if os.path.isfile("icons/icon-nl.png"):
+        imagenl = Image.open("icons/icon-nl.png")
         imagenl = resize(imagenl, 20)
         photonl = ImageTk.PhotoImage(imagenl)
         glob.button_nl = Button(glob.buttonframe, image=photonl, command=lambda: (lf.language_nl(),
@@ -212,8 +212,8 @@ def build_buttons():
                                                                               rebuild_buttons()), padx=20)
         glob.button_nl.pack(side=RIGHT, pady=10, padx=10)
 
-    if os.path.isfile("icon-en.png"):
-        imageen = Image.open("icon-en.png")
+    if os.path.isfile("icons/icon-en.png"):
+        imageen = Image.open("icons/icon-en.png")
         imageen = resize(imageen, 20)
         photoen = ImageTk.PhotoImage(imageen)
         glob.button_en = Button(glob.buttonframe, image=photoen, command=lambda: (lf.language_en(),

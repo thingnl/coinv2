@@ -51,7 +51,6 @@ def load_filter_country(cur):
 
 def load_coin_tree(cur):
     # Need this next to column move, sort and coloring:
-    # hide:    https://stackoverflow.com/questions/33290969/hiding-treeview-columns-in-tkinter
     # drag:    https://stackoverflow.com/questions/51378611/python-tkinter-table-order-table-columns-with-drag-and-drop
 
     sql_command = """SELECT * FROM coin"""
@@ -61,6 +60,13 @@ def load_coin_tree(cur):
     except Exception as e:
         glob.logger_sql.debug(e)
         print(e)
+
+    # On empty database.... do something to make it work....
+    # if len(glob.coin_data) == 0:
+    #     print(glob.coin_data)
+    #     glob.coin_data.append(["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+    #                           "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""])
+    #     print(glob.coin_data)
 
     glob.style = ttk.Style()
     glob.style.map('Treeview', foreground=fixed_map('foreground'), background=fixed_map('background'))
@@ -77,29 +83,21 @@ def load_coin_tree(cur):
                                  "supplier", "orderno", "purchaseprice", "mint", "mintmaster",
                                  "headofstate")
 
+
     # Set colors for odd and even rows
     glob.sql_frame.tag_configure('odd', background='#FFFFFF')  # light blue #FFFFFF
     glob.sql_frame.tag_configure('even', background='#E2FFFF')  # white #E2FFFF
 
-    if len(glob.coin_data) >> 0:
-        # Inserting horizontal scrollbar
-        glob.scrollh = ttk.Scrollbar(glob.sqlframe, orient="horizontal", command=glob.sql_frame.xview)
-        glob.scrollh.pack(side=BOTTOM, fill='x')
-        glob.sql_frame.configure(xscrollcommand=glob.scrollh.set)
+    # Combine all tuple columns into lines
+    elements = list(zip(*glob.coin_data))
+    # next, get longest value like len(max(elements[1], key=len)
+    # Take longest value from field or header length like max(len(max(elements[2], key=len)) * 9, len("Index") * 8)
 
-        # Inserting vertical scrollbar
-        glob.scrollv = ttk.Scrollbar(glob.sqlframe, orient="vertical", command=glob.sql_frame.yview)
-        glob.scrollv.pack(side=RIGHT, fill='y')
-        glob.sql_frame.configure(yscrollcommand=glob.scrollv.set)
+    # Set width for all columns so data fits and/or header shows, while hiding the first 2 index fields.
+    glob.sql_frame.column("#0", width=0, minwidth=0, stretch=NO)
+    glob.sql_frame.column("#1", width=0, minwidth=0, stretch=NO)
 
-        # Combine all tuple columns into lines
-        elements = list(zip(*glob.coin_data))
-        # next, get longest value like len(max(elements[1], key=len)
-        # Take longest value from field or header length like max(len(max(elements[2], key=len)) * 9, len("Index") * 8)
-
-        # Set width for all columns so data fits and/or header shows, while hiding the first 2 index fields.
-        glob.sql_frame.column("#0", width=0, minwidth=0, stretch=NO)
-        glob.sql_frame.column("#1", width=0, minwidth=0, stretch=NO)
+    if len(glob.coin_data) != 0:
         glob.sql_frame.column("#2", width=max(len(max(elements[1], key=len)) * 9, len("Private index") * 6), stretch=NO)
         glob.sql_frame.column("#3", width=max(len(max(elements[2], key=len)) * 9, len("Index") * 8), stretch=NO)
         glob.sql_frame.column("#4", width=max(len(max(elements[3], key=len)) * 9, len("Krause") * 6), stretch=NO)
@@ -221,15 +219,26 @@ def load_coin_tree(cur):
     for teller in range(0, len(glob.coin_data)):
         glob.sql_frame.insert(parent='', index='end', iid=teller, text="text", values=glob.coin_data[teller])
 
-    # Reset the child coloring
-    acounter = 0
-    for child in glob.sql_frame.get_children():
-        if acounter % 2 == 0:
-            glob.sql_frame.item(child, tags="even")
-            acounter += 1
-        else:
-            glob.sql_frame.item(child, tags="odd")
-            acounter += 1
+    if len(glob.coin_data) != 0:
+        # Reset the child coloring
+        acounter = 0
+        for child in glob.sql_frame.get_children():
+            if acounter % 2 == 0:
+                glob.sql_frame.item(child, tags="even")
+                acounter += 1
+            else:
+                glob.sql_frame.item(child, tags="odd")
+                acounter += 1
+
+    # Inserting horizontal scrollbar
+    glob.scrollh = ttk.Scrollbar(glob.sqlframe, orient="horizontal", command=glob.sql_frame.xview)
+    glob.scrollh.pack(side=BOTTOM, fill='x')
+    glob.sql_frame.configure(xscrollcommand=glob.scrollh.set)
+
+    # Inserting vertical scrollbar
+    glob.scrollv = ttk.Scrollbar(glob.sqlframe, orient="vertical", command=glob.sql_frame.yview)
+    glob.scrollv.pack(side=RIGHT, fill='y')
+    glob.sql_frame.configure(yscrollcommand=glob.scrollv.set)
 
     glob.sql_frame.pack(fill=BOTH, expand=1)
 
