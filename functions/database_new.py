@@ -10,7 +10,7 @@ from tkinter import messagebox
 from . import config_items as ci
 from . import tables_v001 as tables
 from . import language_functions as lf
-# from . import testdata_v001 as td
+from . import testdata_v001 as td
 from . import data_functions as df
 import time
 from . import glob
@@ -38,22 +38,46 @@ def insert_testdata():
     """
     # Is a database currently loaded?
     if glob.current_open_db == "":
-        messagebox.showerror(title=_("No database"), message=_("No database is loaded. Please open a database first."))
+        messagebox.showerror(title=_("Database in use"), message=_("No database is loaded. Please open a database first."))
         return
 
-    # td.insert_table_country(conn)
-    # td.insert_table_headofstate(conn)
-    # td.insert_table_quality(conn)
-    # td.insert_table_suppliers(conn)
-    # td.insert_table_orders(conn)
-    # td.insert_table_mintmaster(conn)
-    # td.insert_table_mint(conn)
-    # td.insert_table_valuta(conn)
-    # td.insert_table_strike(conn)
-    # td.insert_table_coin(conn)
-    # td.insert_table_replace(conn)
-    # td.insert_table_rarity(conn)
-    pass
+    # Is there ant data in coin table
+    sql_command = """SELECT * FROM coin"""
+    try:
+        cur.execute(sql_command)
+        glob.coin_data = cur.fetchall()
+    except Exception as e:
+        glob.logger_sql.debug(e)
+        print(e)
+
+    print(glob.conn)
+
+    if len(glob.coin_data) != 0:
+        messagebox.showerror(title=_("Data error"), message=_("There seems to be data in this database. "
+                                                              "Please use a new, empty database."))
+        return
+
+    MsgBox = messagebox.askquestion('Load test data', 'Are you sure you want to load test data?',
+                                           icon='warning')
+    if MsgBox == 'no':
+        return
+    else:
+        td.insert_table_country(glob.conn)
+        td.insert_table_headofstate(glob.conn)
+        td.insert_table_quality(glob.conn)
+        td.insert_table_suppliers(glob.conn)
+        td.insert_table_orders(glob.conn)
+        td.insert_table_mintmaster(glob.conn)
+        td.insert_table_mint(glob.conn)
+        td.insert_table_valuta(glob.conn)
+        td.insert_table_strike(glob.conn)
+        td.insert_table_coin(glob.conn)
+        td.insert_table_replace(glob.conn)
+        td.insert_table_rarity(glob.conn)
+
+    # Now we need a refresh....
+    # glob.sql_frame.update() is not working.... need to rebuild it manually or call the correct function...
+
 
 
 def close_db():
