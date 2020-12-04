@@ -50,9 +50,6 @@ def load_filter_country(cur):
 
 
 def load_coin_tree(cur):
-    # Need this next to column move, sort and coloring:
-    # drag:    https://stackoverflow.com/questions/51378611/python-tkinter-table-order-table-columns-with-drag-and-drop
-
     sql_command = """SELECT * FROM coin"""
     try:
         cur.execute(sql_command)
@@ -60,13 +57,6 @@ def load_coin_tree(cur):
     except Exception as e:
         glob.logger_sql.debug(e)
         print(e)
-
-    # On empty database.... do something to make it work....
-    # if len(glob.coin_data) == 0:
-    #     print(glob.coin_data)
-    #     glob.coin_data.append(["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-    #                           "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""])
-    #     print(glob.coin_data)
 
     glob.style = ttk.Style()
     glob.style.map('Treeview', foreground=fixed_map('foreground'), background=fixed_map('background'))
@@ -82,7 +72,6 @@ def load_coin_tree(cur):
                                  "storage", "ynhave", "ynwant", "ynordered", "ynforsale", "ynother",
                                  "supplier", "orderno", "purchaseprice", "mint", "mintmaster",
                                  "headofstate")
-
 
     # Set colors for odd and even rows
     glob.sql_frame.tag_configure('odd', background='#FFFFFF')  # light blue #FFFFFF
@@ -125,9 +114,9 @@ def load_coin_tree(cur):
         glob.sql_frame.column("#24", width=max(len(max(elements[23], key=len)) * 7, len("Rear jpg") * 7), stretch=NO)
         glob.sql_frame.column("#25", width=max(len(max(elements[24], key=len)) * 9, len("Serie") * 6), stretch=NO)
         glob.sql_frame.column("#26", width=max(len(max(elements[25], key=len)) * 9, len("Storage") * 7), stretch=NO)
-        glob.sql_frame.column("#27", width=max(len(max(elements[26], key=len)) * 9, len("Have") * 7), stretch=NO)
-        glob.sql_frame.column("#28", width=max(len(max(elements[27], key=len)) * 9, len("Want") * 7), stretch=NO)
-        glob.sql_frame.column("#29", width=max(len(max(elements[28], key=len)) * 9, len("Ordered") * 7), stretch=NO)
+        glob.sql_frame.column("#27", width=max(len(max(elements[26], key=len)) * 9, len("Have") * 9), stretch=NO)
+        glob.sql_frame.column("#28", width=max(len(max(elements[27], key=len)) * 9, len("Want") * 9), stretch=NO)
+        glob.sql_frame.column("#29", width=max(len(max(elements[28], key=len)) * 9, len("Ordered") * 8), stretch=NO)
         glob.sql_frame.column("#30", width=max(len(max(elements[29], key=len)) * 9, len("For sale") * 7), stretch=NO)
         glob.sql_frame.column("#31", width=max(len(max(elements[30], key=len)) * 9, len("Other") * 7), stretch=NO)
         glob.sql_frame.column("#32", width=max(len(max(elements[31], key=len)) * 9, len("Supplier") * 7), stretch=NO)

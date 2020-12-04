@@ -294,6 +294,56 @@ def apply_column_hide():
         glob.sql_frame.column("#11", width=0)
     if ci.get_config_item("radio_coinage") == "Hide":
         glob.sql_frame.column("#12", width=0)
+    if ci.get_config_item("radio_diameter") == "Hide":
+        glob.sql_frame.column("#13", width=0)
+    if ci.get_config_item("radio_edge") == "Hide":
+        glob.sql_frame.column("#14", width=0)
+    if ci.get_config_item("radio_edgetext") == "Hide":
+        glob.sql_frame.column("#15", width=0)
+    if ci.get_config_item("radio_stiketype") == "Hide":
+        glob.sql_frame.column("#16", width=0)
+    if ci.get_config_item("radio_weight") == "Hide":
+        glob.sql_frame.column("#17", width=0)
+    if ci.get_config_item("radio_designer") == "Hide":
+        glob.sql_frame.column("#18", width=0)
+    if ci.get_config_item("radio_frontside") == "Hide":
+        glob.sql_frame.column("#19", width=0)
+    if ci.get_config_item("radio_rearside") == "Hide":
+        glob.sql_frame.column("#20", width=0)
+    if ci.get_config_item("radio_material") == "Hide":
+        glob.sql_frame.column("#21", width=0)
+    if ci.get_config_item("radio_rarity") == "Hide":
+        glob.sql_frame.column("#22", width=0)
+    if ci.get_config_item("radio_frontjpg") == "Hide":
+        glob.sql_frame.column("#23", width=0)
+    if ci.get_config_item("radio_rearjpg") == "Hide":
+        glob.sql_frame.column("#24", width=0)
+    if ci.get_config_item("radio_serie") == "Hide":
+        glob.sql_frame.column("#25", width=0)
+    if ci.get_config_item("radio_storage") == "Hide":
+        glob.sql_frame.column("#26", width=0)
+    if ci.get_config_item("radio_have") == "Hide":
+        glob.sql_frame.column("#27", width=0)
+    if ci.get_config_item("radio_want") == "Hide":
+        glob.sql_frame.column("#28", width=0)
+    if ci.get_config_item("radio_ordered") == "Hide":
+        glob.sql_frame.column("#29", width=0)
+    if ci.get_config_item("radio_sale") == "Hide":
+        glob.sql_frame.column("#30", width=0)
+    if ci.get_config_item("radio_other") == "Hide":
+        glob.sql_frame.column("#31", width=0)
+    if ci.get_config_item("radio_supplier") == "Hide":
+        glob.sql_frame.column("#32", width=0)
+    if ci.get_config_item("radio_order ") == "Hide":                # INCLUDE SPACE or it matches radio_ordered
+        glob.sql_frame.column("#33", width=0)
+    if ci.get_config_item("radio_price") == "Hide":
+        glob.sql_frame.column("#34", width=0)
+    if ci.get_config_item("radio_mint") == "Hide":
+        glob.sql_frame.column("#35", width=0)
+    if ci.get_config_item("radio_mintmaster") == "Hide":
+        glob.sql_frame.column("#36", width=0)
+    if ci.get_config_item("radio_ruler") == "Hide":
+        glob.sql_frame.column("#37", width=0)
 
     glob.sql_frame.update()
 
@@ -449,7 +499,7 @@ def get_column_settings():
         glob.radio_sale.set(ci.get_config_item("radio_sale"))
         glob.radio_other.set(ci.get_config_item("radio_other"))
         glob.radio_supplier.set(ci.get_config_item("radio_supplier"))
-        glob.radio_order.set(ci.get_config_item("radio_order"))
+        glob.radio_order.set(ci.get_config_item("radio_order "))            # INCLUDE SPACE or it matches radio_ordered
         glob.radio_price.set(ci.get_config_item("radio_price"))
         glob.radio_mint.set(ci.get_config_item("radio_mint"))
         glob.radio_mintmaster.set(ci.get_config_item("radio_mintmaster"))
@@ -562,7 +612,7 @@ def save_columns():
         elif line.startswith('radio_supplier'):
             file2.write("radio_supplier = " + str(glob.radio_supplier.get()) + '\n')
             glob.logger_main.debug("Wrote radio_supplier = " + str(glob.radio_supplier.get()))
-        elif line.startswith('radio_order'):
+        elif line.startswith('radio_order '):           # INCLUDE SPACE
             file2.write("radio_order = " + str(glob.radio_order.get()) + '\n')
             glob.logger_main.debug("Wrote radio_order = " + str(glob.radio_order.get()))
         elif line.startswith('radio_price'):

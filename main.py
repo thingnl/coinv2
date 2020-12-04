@@ -25,16 +25,17 @@ __maintainer__ = 'M. Lebbink'
 __email__ = 'mlebbink@yahoo.com'
 __status__ = 'Development'
 
-# Done   1  Investigate decent multi language solution like https://docs.python.org/3/library/gettext.html
-# Done      Check glob valiable for all frames, menu's and buttons
-# Done   0  studie: https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
-# Done   0  Create configuration import/management functions
-# Done   1  Create logging functionality
-# Done   1  Add main loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
-# Done   1  Add sql loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
-# Done   1  Add show main log option to system menu
-# Done   1  Add show sql log option to main menu
-# Done   1  Create create database function
+# todone 1  Investigate decent multi language solution like https://docs.python.org/3/library/gettext.html
+# todone 1  Check glob valiable for all frames, menu's and buttons
+# todone 0  studie: https://docs.python.org/3/faq/programming.html#how-do-i-share-global-variables-across-modules
+# todone 0  Create configuration import/management functions
+# todone 1  Create logging functionality
+# todone 1  Add main loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
+# todone 1  Add sql loglevel setting to config file (INFO-20/DEBUG-10/NOTSET-0)
+# todone 1  Add show main log option to system menu
+# todone 1  Add show sql log option to main menu
+# todone 1  Create create database function
+# todone 1  Before loading testdata, verify db is open and empty: SELECT exists(SELECT 1 FROM MyTable LIMIT 1);
 
 # todo   1  Create housekeeping function to clear out old logs and config files
 # todo   1  Import/create test data function
@@ -47,7 +48,6 @@ __status__ = 'Development'
 # todo   2  SQL housekeeping function optimize
 # todo   2  SQL housekeeping function compact
 # todo   3  Create reports (or some query engine app)
-# todo   1  Before loading testdata, verify db is open and empty: SELECT exists(SELECT 1 FROM MyTable LIMIT 1);
 # todo   2  Strike type missing from coin, need to check
 # todo   2  Obverse in stead of front
 # todo   2  Reverse in stead of rear
@@ -61,6 +61,9 @@ __status__ = 'Development'
 # todo   2  Add to config screen: Include orders in backup?
 # todo   2  Add to config screen: log SQL data?
 # todo   2  Add to config screen: max days to keep logs, 0 = keep all?
+# todo   2  Movable columns: https://stackoverflow.com/questions/51378611
+#                                                     /python-tkinter-table-order-table-columns-with-drag-and-drop
+# todo   2  Make row editable: https://stackoverflow.com/questions/18562123/how-to-make-ttk-treeviews-rows-editable
 
 # idone     Add Schema Version table to SQL database
 # idone     Make sql fieldlist configurable
@@ -71,8 +74,8 @@ __status__ = 'Development'
 # fixed     frame size in reloading with language button, delete frames was not deleting all frames.
 # fixed     Menu exit does not, takes 3 times to actually exit. Switched to logger, solved write delay (4 now)
 # fixed     Creating and opening new database does not create sql frame. Forgot a glob.
-# fixed     On loading empty database, treeview crashes with out of range error. Fix by cheking length != 0
-# fix       Cleanup opening logfiles and add log entries on opening
+# fixed     On loading empty database, treeview crashes with out of range error. Fixed by checking length != 0
+# fix       Cleanup opening logfiles and add log entries on opening, depending on settings in config
 
 
 # System libs

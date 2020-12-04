@@ -77,7 +77,13 @@ def insert_testdata():
 
     # Now we need a refresh....
     # glob.sql_frame.update() is not working.... need to rebuild it manually or call the correct function...
-
+        df.load_filter_country(glob.cur)
+        df.load_coin_tree(glob.cur)
+        glob.open_filename = glob.current_open_db.split("/")
+        glob.open_filename = glob.open_filename[-1]
+        glob.database_frame.insert('1.0', "db = " + glob.open_filename)
+        lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) +
+                          " coins loaded."))
 
 
 def close_db():
@@ -206,62 +212,62 @@ def create_newdb():
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (5%)"))
         tables.create_table_schema()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (11%)"))
         tables.create_table_country()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (18%)"))
         tables.create_table_headofstate()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (26%)"))
         tables.create_table_quality()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (37%)"))
         tables.create_table_valuations()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (51%)"))
         tables.create_table_suppliers()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (63%)"))
         tables.create_table_orders()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (69%)"))
         tables.create_table_mintmaster()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (76%)"))
         tables.create_table_mint()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (82%)"))
         tables.create_table_valuta()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (87%)"))
         tables.create_table_strike()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (92%)"))
         tables.create_table_coin()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (95%)"))
         tables.create_table_replace()
-        time.sleep(1)
+        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (98%)"))
         tables.create_table_rarity()
-        time.sleep(1)
+        # time.sleep(1)
 
         glob.conn.close()
-        time.sleep(1)
+        # time.sleep(1)
         lf.send_message(_("Database " + new_dbfile + " created."))
     else:
         glob.logger_main.info("New database function closed.")
