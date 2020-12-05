@@ -4,7 +4,6 @@
 # System libs
 import os
 import os.path
-# import gettext
 from tkinter import *
 from tkinter import ttk
 from tkinter import Tk
@@ -46,15 +45,7 @@ def resize(img, max_px_size):
     return img
 
 
-def newfile():
-    pass
-
-
 def about():
-    pass
-
-
-def opendb():
     pass
 
 
@@ -106,12 +97,6 @@ def build_menu():
 
 def build_frames():
     # Frames
-    # glob.filterframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # left
-    # glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
-    # glob.sqlframe = Frame(glob.root, bg="green", width=900)  # center
-    # glob.photoframe = Frame(glob.root, bg="red", height=700, width=185, padx=5, pady=5)  # right
-    # glob.messageframe = Frame(glob.root, bg="blue", height=50, width=1100)  # message
-
     glob.filterframe = Frame(glob.root, bg="gray85", height=700, width=185, padx=5, pady=5)  # left
     glob.buttonframe = Frame(glob.root, bg="gray85", width=900)  # buttons
     glob.sqlframe = Frame(glob.root, bg="white", width=900)  # center
@@ -132,7 +117,6 @@ def build_frames():
 
     glob.database_frame = Text(glob.databaseframe, width=24, height=1, font=("Segoe", 10))
     glob.database_frame.pack(fill=Y, expand=0, padx=5, pady=5)
-    # glob.database_frame.insert('1.0', "Nederland.db")
 
     glob.filter_frame = LabelFrame(glob.filterframe, text=_("Filters"), height=650, width=175,
                                    relief=RIDGE, bd=2, bg="gray85")  # bg="gray85"

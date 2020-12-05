@@ -38,7 +38,8 @@ def insert_testdata():
     """
     # Is a database currently loaded?
     if glob.current_open_db == "":
-        messagebox.showerror(title=_("Database in use"), message=_("No database is loaded. Please open a database first."))
+        messagebox.showerror(title=_("Database in use"), message=_("No database is loaded. "
+                                                                   "Please open a database first."))
         return
 
     # Is there ant data in coin table
@@ -57,9 +58,9 @@ def insert_testdata():
                                                               "Please use a new, empty database."))
         return
 
-    MsgBox = messagebox.askquestion('Load test data', 'Are you sure you want to load test data?',
-                                           icon='warning')
-    if MsgBox == 'no':
+    msgbox = messagebox.askquestion('Load test data', 'Are you sure you want to load test data?',
+                                    icon='warning')
+    if msgbox == 'no':
         return
     else:
         td.insert_table_country(glob.conn)

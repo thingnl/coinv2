@@ -13,7 +13,7 @@ from tkinter import *
 from . import glob
 from . import language_functions as lf
 from . import config_items as ci
-# from . import journal_functions as jf
+
 
 global _
 

@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 # System libs
-# import os
-# import logging
 from tkinter import ttk
 from tkinter import *
 from . import glob

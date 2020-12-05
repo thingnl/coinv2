@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 # System libs
 import os
 import os.path
 
 from . import glob
-# from . import journal_functions as jf
+
 
 global _
 
