@@ -7,7 +7,6 @@ import os.path
 
 from . import glob
 
-
 global _
 
 

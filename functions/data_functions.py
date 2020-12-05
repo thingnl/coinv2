@@ -5,7 +5,8 @@
 from tkinter import ttk
 from tkinter import *
 from . import glob
-from . import config_window as cw
+from . import column_functions as cl
+# from . import config_window as cw
 
 
 # Needed for the line coloring stuff
@@ -230,6 +231,6 @@ def load_coin_tree(cur):
     glob.sql_frame.pack(fill=BOTH, expand=1)
 
     # Hide column we don't want to see
-    cw.apply_column_hide()
+    cl.apply_column_hide()
 
     glob.sql_frame.update()

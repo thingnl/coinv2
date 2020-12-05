@@ -64,6 +64,7 @@ __status__ = 'Development'
 # todo   2  Movable columns: https://stackoverflow.com/questions/51378611
 #                                                     /python-tkinter-table-order-table-columns-with-drag-and-drop
 # todo   2  Make row editable: https://stackoverflow.com/questions/18562123/how-to-make-ttk-treeviews-rows-editable
+# todo   2  Check this: https://github.com/ragardner/tksheet iso sql window
 
 # idone     Add Schema Version table to SQL database
 # idone     Make sql fieldlist configurable

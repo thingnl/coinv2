@@ -14,6 +14,7 @@ from win32api import GetSystemMetrics                       # win32api is part o
 from . import glob
 from . import config_items as ci
 from . import config_window as cw
+from . import column_functions as cl
 from . import language_functions as lf
 from . import database_new as dbn
 from . import journal_functions as jf
@@ -46,6 +47,11 @@ def resize(img, max_px_size):
 
 
 def about():
+    # temp placeholder
+    pass
+
+def newfile():
+    # temp placeholder
     pass
 
 
@@ -85,7 +91,7 @@ def build_menu():
     glob.sysmenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("System"), menu=glob.sysmenu)
     glob.sysmenu.add_command(label=_("Settings"), command=lambda: cw.edit_settings())
-    glob.sysmenu.add_command(label=_("Hide/Show Columns"), command=lambda: cw.hide_show_columns())
+    glob.sysmenu.add_command(label=_("Hide/Show Columns"), command=lambda: cl.hide_show_columns())
     glob.sysmenu.add_command(label=_("Logfiles"), command=lambda: jf.browse_logfiles())
 
     glob.helpmenu = Menu(glob.menu, tearoff=0)
