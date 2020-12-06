@@ -172,8 +172,9 @@ def build_edit_settings():
     glob.slide_vertical = Scale(glob.edit_edit_frame, from_=0, to=100, length=150, tickinterval=25, orient=HORIZONTAL)
     glob.slide_vertical.grid(row=2, column=5, columnspan=2)
 
-    label_emptyline = Label(glob.edit_edit_frame, text="")
-    label_emptyline.grid(row=4, column=1)
+    label_emptyline = Label(glob.edit_edit_frame, text="_" * 200, anchor="w")
+    label_emptyline.grid(row=4, column=0, columnspan=8)
+
     label_emptyline = Label(glob.edit_edit_frame, text="", width=20)
     label_emptyline.grid(row=1, column=4)
 

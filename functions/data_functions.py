@@ -21,6 +21,7 @@ def treeview_sort_column(tv, col, reverse):  # Treeview, column name, arrangemen
     for index, (val, k) in enumerate(listindex):  # based on sorted index movement
         tv.move(k, '', index)
         tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))
+
     # Reset the child coloring
     acounter = 0
     for child in glob.sql_frame.get_children():
@@ -51,11 +52,19 @@ def load_filter_country(cur):
 def load_coin_tree(cur):
     sql_command = """SELECT * FROM coin"""
     try:
-        cur.execute(sql_command)
-        glob.coin_data = cur.fetchall()
+        glob.cur.execute(sql_command)
+        glob.coin_data = glob.cur.fetchall()
     except Exception as e:
         glob.logger_sql.debug(e)
         print(e)
+
+    # format price data with 2 decimals by replaceing tuple value
+    if len(glob.coin_data) != 0:
+        for i in range(0, len(glob.coin_data)):
+            if glob.coin_data[i][33] != "":                 # We do need a price there.... not an empty field
+                templist = list(glob.coin_data[i])
+                templist[33] = f'{glob.coin_data[i][33]:.2f}'
+                glob.coin_data[i] = templist
 
     glob.style = ttk.Style()
     glob.style.map('Treeview', foreground=fixed_map('foreground'), background=fixed_map('background'))
@@ -158,9 +167,11 @@ def load_coin_tree(cur):
     glob.sql_frame.heading("#37", text="Ruler", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
                                                                                                "#37", False))
 
+    # Inster data into tree
     for teller in range(0, len(glob.coin_data)):
         glob.sql_frame.insert(parent='', index='end', iid=teller, text="text", values=glob.coin_data[teller])
 
+    # Set color indicators for all lines when we have data
     if len(glob.coin_data) != 0:
         # Reset the child coloring
         acounter = 0

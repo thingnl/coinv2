@@ -76,6 +76,7 @@ __status__ = 'Development'
 # fixed     Menu exit does not, takes 3 times to actually exit. Switched to logger, solved write delay (4 now)
 # fixed     Creating and opening new database does not create sql frame. Forgot a glob.
 # fixed     On loading empty database, treeview crashes with out of range error. Fixed by checking length != 0
+# fixed     On loading defective database, reset loaded file indicators. Fixed with glob.current_open_db = ""
 # fix       Cleanup opening logfiles and add log entries on opening, depending on settings in config
 
 

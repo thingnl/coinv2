@@ -41,6 +41,7 @@ screen_left = 0
 
 # SQL connection
 conn = 0
+cur = 0
 
 # root TK
 root = 0

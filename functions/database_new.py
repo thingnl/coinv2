@@ -45,13 +45,11 @@ def insert_testdata():
     # Is there ant data in coin table
     sql_command = """SELECT * FROM coin"""
     try:
-        cur.execute(sql_command)
+        glob.cur.execute(sql_command)
         glob.coin_data = cur.fetchall()
     except Exception as e:
         glob.logger_sql.debug(e)
         print(e)
-
-    print(glob.conn)
 
     if len(glob.coin_data) != 0:
         messagebox.showerror(title=_("Data error"), message=_("There seems to be data in this database. "
@@ -141,20 +139,24 @@ def open_db():
                                                                   " made. Please make sure the selected file is a "
                                                                   "valid database."))
         glob.logger_main.info("Database could not be connected, exiting.")
+        glob.current_open_db = ""
+        glob.conn = ""
         print(e)
 
     # try getting the db version
     sql_command = """SELECT * FROM schema"""
-    cur = glob.conn.cursor()
+    glob.cur = glob.conn.cursor()
     try:
-        cur.execute(sql_command)
-        row = cur.fetchone()
+        glob.cur.execute(sql_command)
+        row = glob.cur.fetchone()
     except Exception as e:
         messagebox.showerror(title=_("Database error"), message=_("An error happened while trying to read the "
                                                                   "database. Please make sure the selected file "
                                                                   "is a database and is undamaged."))
         glob.logger_main.info("Database could not be read, exiting.")
         glob.logger_sql.info("Database could not be read, exiting.")
+        glob.current_open_db = ""               # Reset indicator
+        glob.conn = ""                          # Reset indicator
         glob.logger_sql.debug(e)
         print(e)
         return
@@ -169,10 +171,10 @@ def open_db():
 
     # And we have a correct version of the database schema. What's next.... ah, load the data....
     # Set country filter
-    df.load_filter_country(cur)
+    df.load_filter_country(glob.cur)
 
     # Load coins to central treeview
-    df.load_coin_tree(cur)
+    df.load_coin_tree(glob.cur)
 
     # Set filename in frame
     glob.open_filename = glob.current_open_db.split("/")
