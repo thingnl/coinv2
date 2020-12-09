@@ -33,12 +33,12 @@ def treeview_sort_column(tv, col, reverse):  # Treeview, column name, arrangemen
             acounter += 1
 
 
-def load_filter_country(cur):
+def load_filter_country():
     sql_command = """SELECT description FROM country ORDER by description"""
     try:
-        cur.execute(sql_command)
+        glob.cur.execute(sql_command)
         glob.country_data = ['*']
-        for row in cur.fetchall():
+        for row in glob.cur.fetchall():
             glob.country_data.append(row[0])
     except Exception as e:
         glob.logger_sql.debug(e)
@@ -49,7 +49,7 @@ def load_filter_country(cur):
     glob.combo_country.current(0)
 
 
-def load_coin_tree(cur):
+def load_coin_tree():
     sql_command = """SELECT * FROM coin"""
     try:
         glob.cur.execute(sql_command)

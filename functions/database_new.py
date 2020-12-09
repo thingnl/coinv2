@@ -12,7 +12,6 @@ from . import tables_v001 as tables
 from . import language_functions as lf
 from . import testdata_v001 as td
 from . import data_functions as df
-import time
 from . import glob
 
 global _
@@ -26,6 +25,7 @@ def check_database_empty(conn):
         Returns:
         """
     print(conn)
+    print("check_database_empty from database_new called. Should not be called!")
     pass
 
 
@@ -38,7 +38,7 @@ def insert_testdata():
     """
     # Is a database currently loaded?
     if glob.current_open_db == "":
-        messagebox.showerror(title=_("Database in use"), message=_("No database is loaded. "
+        messagebox.showerror(title=_("Database to use"), message=_("No database is loaded. "
                                                                    "Please open a database first."))
         return
 
@@ -46,7 +46,7 @@ def insert_testdata():
     sql_command = """SELECT * FROM coin"""
     try:
         glob.cur.execute(sql_command)
-        glob.coin_data = cur.fetchall()
+        glob.coin_data = glob.cur.fetchall()
     except Exception as e:
         glob.logger_sql.debug(e)
         print(e)
@@ -74,15 +74,43 @@ def insert_testdata():
         td.insert_table_replace(glob.conn)
         td.insert_table_rarity(glob.conn)
 
-    # Now we need a refresh....
-    # glob.sql_frame.update() is not working.... need to rebuild it manually or call the correct function...
-        df.load_filter_country(glob.cur)
-        df.load_coin_tree(glob.cur)
-        glob.open_filename = glob.current_open_db.split("/")
-        glob.open_filename = glob.open_filename[-1]
-        glob.database_frame.insert('1.0', "db = " + glob.open_filename)
-        lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) +
-                          " coins loaded."))
+    # close database, saving name/location in glob.current_open_db
+    # auto reopen database.
+    save_open_db = glob.current_open_db
+    close_db()
+    glob.current_open_db = save_open_db
+
+    # need a connection!
+    glob.conn = None
+    try:
+        glob.conn = sqlite3.connect(glob.current_open_db)
+    except Exception as e:
+        messagebox.showerror(title=_("Database error"), message=_("A connection to the selected database could not be"
+                                                                  " made. Please make sure the selected file is a "
+                                                                  "valid database."))
+        glob.logger_main.info("Database could not be connected, exiting.")
+        glob.current_open_db = ""
+        glob.conn = ""
+        print(e)
+
+    # and we need a new cursor
+    glob.cur = glob.conn.cursor()
+
+    # df.load_filter_country(glob.cur)
+    df.load_filter_country()
+
+    # Load coins to central treeview
+    # df.load_coin_tree(glob.cur)
+    df.load_coin_tree()
+
+    # Set filename in frame
+    glob.open_filename = glob.current_open_db.split("/")
+    glob.open_filename = glob.open_filename[-1]
+    glob.database_frame.insert('1.0', "db = " + glob.open_filename)
+
+    # Done loading database
+    lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) +
+                      " coins loaded."))
 
 
 def close_db():
@@ -171,10 +199,12 @@ def open_db():
 
     # And we have a correct version of the database schema. What's next.... ah, load the data....
     # Set country filter
-    df.load_filter_country(glob.cur)
+    # df.load_filter_country(glob.cur)
+    df.load_filter_country()
 
     # Load coins to central treeview
-    df.load_coin_tree(glob.cur)
+    # df.load_coin_tree(glob.cur)
+    df.load_coin_tree()
 
     # Set filename in frame
     glob.open_filename = glob.current_open_db.split("/")

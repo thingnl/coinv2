@@ -50,6 +50,7 @@ def about():
     # temp placeholder
     pass
 
+
 def newfile():
     # temp placeholder
     pass

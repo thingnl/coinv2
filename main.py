@@ -77,6 +77,7 @@ __status__ = 'Development'
 # fixed     Creating and opening new database does not create sql frame. Forgot a glob.
 # fixed     On loading empty database, treeview crashes with out of range error. Fixed by checking length != 0
 # fixed     On loading defective database, reset loaded file indicators. Fixed with glob.current_open_db = ""
+# fixed     Auto reload after adding testdata working. Needed new glob.conn & glob.cur after closing
 # fix       Cleanup opening logfiles and add log entries on opening, depending on settings in config
 
 

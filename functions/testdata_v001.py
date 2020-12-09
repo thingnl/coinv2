@@ -337,7 +337,7 @@ def insert_table_coin(conn):
                    '21 mm', 'Kabelrand', '', 'Medailleslag', '3.494 g', '',
                    'Staande ridder naar rechts met zwaard en pijlenbundel',
                    'Versierd vierkant met daarin: MO.AUR.REG.BELGII AD LEGEM IMPERII.', 'goud 983/1000', 'N', '', '',
-                   '', 'map 4', 'Y', 'N', 'N', 'N', 'N', 'KNM', '', '24,95', 'KNM', '', 'Koningin Beatrix')]
+                   '', 'map 4', 'Y', 'N', 'N', 'N', 'N', 'KNM', '', '24.95', 'KNM', '', 'Koningin Beatrix')]
     c = conn.cursor()
     try:
         glob.logger_sql.debug("Inserting 5 records into table coin")
