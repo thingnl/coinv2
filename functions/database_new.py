@@ -42,7 +42,7 @@ def insert_testdata():
                                                                    "Please open a database first."))
         return
 
-    # Is there ant data in coin table
+    # Is there any data in coin table
     sql_command = """SELECT * FROM coin"""
     try:
         glob.cur.execute(sql_command)

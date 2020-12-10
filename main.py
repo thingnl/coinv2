@@ -36,9 +36,8 @@ __status__ = 'Development'
 # todone 1  Add show sql log option to main menu
 # todone 1  Create create database function
 # todone 1  Before loading testdata, verify db is open and empty: SELECT exists(SELECT 1 FROM MyTable LIMIT 1);
-
+# todone 1  Import/create test data function
 # todo   1  Create housekeeping function to clear out old logs and config files
-# todo   1  Import/create test data function
 # todo   1  Add a check database option to system menu
 # todo   1  validate config (directories) on startup and set alarm if it fails
 # todo   2  Update language select on config screen to use stringvar() iso intvar(), like logging
@@ -69,7 +68,7 @@ __status__ = 'Development'
 # idone     Add Schema Version table to SQL database
 # idone     Make sql fieldlist configurable
 # idea      Replace top button bar with icons
-# idea      Some library function to PDF catalogs
+# idea      Some library function to link PDF catalogs like a library
 # idea      Krause books: https://world-coins.weebly.com/krause-catalogs--other-books.html
 
 # fixed     frame size in reloading with language button, delete frames was not deleting all frames.

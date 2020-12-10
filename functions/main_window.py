@@ -18,6 +18,7 @@ from . import column_functions as cl
 from . import language_functions as lf
 from . import database_new as dbn
 from . import journal_functions as jf
+from . import table_country as tc
 
 global _
 
@@ -75,7 +76,7 @@ def build_menu():
 
     glob.tablemenu = Menu(glob.menu, tearoff=0)
     glob.menu.add_cascade(label=_("Tables"), menu=glob.tablemenu)
-    glob.tablemenu.add_command(label=_("Countries"), command=about)
+    glob.tablemenu.add_command(label=_("Countries"), command=lambda: tc.edit_country())
     glob.tablemenu.add_command(label=_("Suppliers"), command=about)
     glob.tablemenu.add_command(label=_("Orders"), command=about)
     glob.tablemenu.add_command(label=_("Rarity"), command=about)
