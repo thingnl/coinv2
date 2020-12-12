@@ -67,26 +67,21 @@ def load_coin_tree():
                 glob.coin_data[i] = templist
 
     glob.style = ttk.Style()
-    glob.style.map('Treeview', foreground=fixed_map('foreground'), background=fixed_map('background'))
-    glob.style.configure("mystyle.Treeview", highlightthickness=0, bd=0,
-                         font=('Courier New', 8))  # Modify the font of the body
+    glob.style.map("Custom.Treeview", foreground=fixed_map('foreground'), background=fixed_map('background'))
+    glob.style.element_create("Custom.Treeheading.border", "from", "default")
+    glob.style.layout("Custom.Treeview.Heading", [
+        ("Custom.Treeheading.cell", {'sticky': 'nswe'}),
+        ("Custom.Treeheading.border", {'sticky': 'nswe', 'children': [
+            ("Custom.Treeheading.padding", {'sticky': 'nswe', 'children': [
+                ("Custom.Treeheading.image", {'side': 'right', 'sticky': ''}),
+                ("Custom.Treeheading.text", {'sticky': 'we'})
+            ]})
+        ]}),
+    ])
+    glob.style.configure("Custom.Treeview.Heading", background="blue", foreground="white", relief="flat")
+    glob.style.map("Custom.Treeview.Heading", relief=[('active', 'groove'), ('pressed', 'sunken')])
 
-    # style = ttk.Style()
-    # style.element_create("Custom.Treeheading.border", "from", "default")
-    # style.layout("Custom.Treeview.Heading", [
-    #     ("Custom.Treeheading.cell", {'sticky': 'nswe'}),
-    #     ("Custom.Treeheading.border", {'sticky': 'nswe', 'children': [
-    #         ("Custom.Treeheading.padding", {'sticky': 'nswe', 'children': [
-    #             ("Custom.Treeheading.image", {'side': 'right', 'sticky': ''}),
-    #             ("Custom.Treeheading.text", {'sticky': 'we'})
-    #         ]})
-    #     ]}),
-    # ])
-
-    # glob.sqlframe
-    # glob.sql_frame = ttk.Treeview(glob.sqlframe, style="mystyle.Treeview")
     glob.sql_frame = ttk.Treeview(glob.sqlframe, style="Custom.Treeview")
-
     glob.sql_frame['columns'] = ("SQL RecNo", "Private index", "Index", "Krause", "denomination", "valuta",
                                  "country", "year", "mmt", "quality", "remark", "coinage", "diameter",
                                  "edge", "edgetext", "striketype", "weight", "designer", "frontside",

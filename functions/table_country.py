@@ -19,10 +19,15 @@ from . import glob
 global _
 
 
-# Needed for the line coloring stuff
+# Needed for the line coloring stuff, duplicate for data_functions:fixed_map. May need to move to include file
 def fixed_map(option):
-    return [elm for elm in glob.style.map('Treeview', query_opt=option) if
+    return [elm for elm in glob.style.map('Custom.Treeview', query_opt=option) if
             elm[:2] != ('!disabled', '!selected')]
+
+
+def save_country_table():
+
+    pass
 
 
 def treeview_sort_column(tv, col, reverse):  # Treeview, column name, arrangement
@@ -54,24 +59,8 @@ def load_country_sql():
         glob.logger_sql.debug(e)
         print(e)
 
-    # check if sql window exists (no name yet....)
-    #   if so, delete
-    # create new sql window
-    style = ttk.Style()
-    style.element_create("Custom.Treeheading.border", "from", "default")
-    style.layout("Custom.Treeview.Heading", [
-        ("Custom.Treeheading.cell", {'sticky': 'nswe'}),
-        ("Custom.Treeheading.border", {'sticky': 'nswe', 'children': [
-            ("Custom.Treeheading.padding", {'sticky': 'nswe', 'children': [
-                ("Custom.Treeheading.image", {'side': 'right', 'sticky': ''}),
-                ("Custom.Treeheading.text", {'sticky': 'we'})
-            ]})
-        ]}),
-    ])
-
-    # glob.sqlframe
-    glob.sql_frame = ttk.Treeview(glob.edit_edit_frame, style = "Custom.Treeview")
-    glob.sql_frame['columns'] = ("country")
+    glob.sql_frame = ttk.Treeview(glob.edit_edit_frame, style="Custom.Treeview")
+    glob.sql_frame['columns'] = "country"
 
     # Set colors for odd and even rows
     glob.sql_frame.tag_configure('odd', background='#FFFFFF')  # light blue #FFFFFF
@@ -133,7 +122,8 @@ def build_edit_country():
                                      command=lambda: glob.top.destroy(), padx=20)
     glob.button_edit_cancel.pack(side=LEFT, pady=10, padx=10)
 
-    glob.button_edit_save = Button(glob.edit_button_frame, text=_("Save"), command=lambda: save_settings(), padx=20)
+    glob.button_edit_save = Button(glob.edit_button_frame, text=_("Save"),
+                                   command=lambda: save_country_table(), padx=20)
     glob.button_edit_save.pack(side=RIGHT, pady=10, padx=10)
 
     pass

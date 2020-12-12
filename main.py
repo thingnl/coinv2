@@ -17,7 +17,11 @@ __credits__ = ['I18n:'
 
                'Treeview hiding columns:'
                'R4PH43L'
-               'https://stackoverflow.com/questions/33290969/hiding-treeview-columns-in-tkinter'
+               'https://stackoverflow.com/questions/33290969/hiding-treeview-columns-in-tkinter',
+
+               'Treeview header styling:'
+               'patthoyts'
+               'https://stackoverflow.com/questions/42708050/tkinter-treeview-heading-styling'
                ]
 __license__ = 'CC BY-NC-ND 4.0 Attribution-NonCommercial-NoDerivatives 4.0 International'
 __version__ = '0.0.3'
