@@ -6,31 +6,8 @@ from tkinter import ttk
 from tkinter import *
 from . import glob
 from . import column_functions as cl
+from . import table_shared as ts
 # from . import config_window as cw
-
-
-# Needed for the line coloring stuff
-def fixed_map(option):
-    return [elm for elm in glob.style.map('Treeview', query_opt=option) if
-            elm[:2] != ('!disabled', '!selected')]
-
-
-def treeview_sort_column(tv, col, reverse):  # Treeview, column name, arrangement
-    listindex = [(tv.set(k, col), k) for k in tv.get_children('')]
-    listindex.sort(reverse=reverse)  # Sort by
-    for index, (val, k) in enumerate(listindex):  # based on sorted index movement
-        tv.move(k, '', index)
-        tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))
-
-    # Reset the child coloring
-    acounter = 0
-    for child in glob.sql_frame.get_children():
-        if acounter % 2 == 0:
-            glob.sql_frame.item(child, tags="even")
-            acounter += 1
-        else:
-            glob.sql_frame.item(child, tags="odd")
-            acounter += 1
 
 
 def load_filter_country():
@@ -67,7 +44,7 @@ def load_coin_tree():
                 glob.coin_data[i] = templist
 
     glob.style = ttk.Style()
-    glob.style.map("Custom.Treeview", foreground=fixed_map('foreground'), background=fixed_map('background'))
+    glob.style.map("Custom.Treeview", foreground=ts.fixed_map('foreground'), background=ts.fixed_map('background'))
     glob.style.element_create("Custom.Treeheading.border", "from", "default")
     glob.style.layout("Custom.Treeview.Heading", [
         ("Custom.Treeheading.cell", {'sticky': 'nswe'}),
@@ -99,82 +76,82 @@ def load_coin_tree():
     glob.sql_frame.column("#1", width=0, minwidth=0, stretch=NO)
 
     # Set headings and register sort command
-    glob.sql_frame.heading("#0", text="Id", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                           "#0", False))
-    glob.sql_frame.heading("#1", text="SQL RecNo", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                  "#1", False))
-    glob.sql_frame.heading("#2", text="Private index", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                      "#2", False))
-    glob.sql_frame.heading("#3", text="Index", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                              "#3", False))
-    glob.sql_frame.heading("#4", text="Krause", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                               "#4", False))
-    glob.sql_frame.heading("#5", text="Denomination", anchor=E, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                     "#5", False))
-    glob.sql_frame.heading("#6", text="Valuta", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                               "#6", False))
-    glob.sql_frame.heading("#7", text="Country", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                "#7", False))
-    glob.sql_frame.heading("#8", text="Year", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                             "#8", False))
-    glob.sql_frame.heading("#9", text="Mmt", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                            "#9", False))
-    glob.sql_frame.heading("#10", text="Quality", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                 "#10", False))
-    glob.sql_frame.heading("#11", text="Remark", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                "#11", False))
-    glob.sql_frame.heading("#12", text="Coinage", anchor=E, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                 "#12", False))
-    glob.sql_frame.heading("#13", text="Diameter", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                  "#13", False))
-    glob.sql_frame.heading("#14", text="Edge", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                              "#14", False))
-    glob.sql_frame.heading("#15", text="Edge text", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                   "#15", False))
-    glob.sql_frame.heading("#16", text="Strike type", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                     "#16", False))
-    glob.sql_frame.heading("#17", text="Weight", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                "#17", False))
-    glob.sql_frame.heading("#18", text="Designer", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                  "#18", False))
-    glob.sql_frame.heading("#19", text="Front side", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                    "#19", False))
-    glob.sql_frame.heading("#20", text="Rear side", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                   "#20", False))
-    glob.sql_frame.heading("#21", text="Material", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                  "#21", False))
-    glob.sql_frame.heading("#22", text="Rarity", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                "#22", False))
-    glob.sql_frame.heading("#23", text="Front jpg link", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                        "#23", False))
-    glob.sql_frame.heading("#24", text="Rear jpg link", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                       "#24", False))
-    glob.sql_frame.heading("#25", text="Serie", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                               "#25", False))
-    glob.sql_frame.heading("#26", text="Storage", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                 "#26", False))
-    glob.sql_frame.heading("#27", text="Have", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                              "#27", False))
-    glob.sql_frame.heading("#28", text="Want", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                              "#28", False))
-    glob.sql_frame.heading("#29", text="Ordered", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                 "#29", False))
-    glob.sql_frame.heading("#30", text="For sale", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                  "#30", False))
-    glob.sql_frame.heading("#31", text="Other", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                               "#31", False))
-    glob.sql_frame.heading("#32", text="Supplier", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                  "#32", False))
-    glob.sql_frame.heading("#33", text="Order no", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                  "#33", False))
-    glob.sql_frame.heading("#34", text="Price", anchor=E, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                               "#34", False))
-    glob.sql_frame.heading("#35", text="Mint", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                              "#35", False))
-    glob.sql_frame.heading("#36", text="Mintmaster", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                    "#36", False))
-    glob.sql_frame.heading("#37", text="Ruler", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                               "#37", False))
+    glob.sql_frame.heading("#0", text="Id", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#0", False))
+    glob.sql_frame.heading("#1", text="SQL RecNo", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#1", False))
+    glob.sql_frame.heading("#2", text="Private index", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#2", False))
+    glob.sql_frame.heading("#3", text="Index", anchor=W,
+                           ccommand=lambda: ts.treeview_sort_column(glob.sql_frame, "#3", False))
+    glob.sql_frame.heading("#4", text="Krause", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#4", False))
+    glob.sql_frame.heading("#5", text="Denomination", anchor=E,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#5", False))
+    glob.sql_frame.heading("#6", text="Valuta", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#6", False))
+    glob.sql_frame.heading("#7", text="Country", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#7", False))
+    glob.sql_frame.heading("#8", text="Year", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#8", False))
+    glob.sql_frame.heading("#9", text="Mmt", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#9", False))
+    glob.sql_frame.heading("#10", text="Quality", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#10", False))
+    glob.sql_frame.heading("#11", text="Remark", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#11", False))
+    glob.sql_frame.heading("#12", text="Coinage", anchor=E,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#12", False))
+    glob.sql_frame.heading("#13", text="Diameter", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#13", False))
+    glob.sql_frame.heading("#14", text="Edge", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#14", False))
+    glob.sql_frame.heading("#15", text="Edge text", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#15", False))
+    glob.sql_frame.heading("#16", text="Strike type", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#16", False))
+    glob.sql_frame.heading("#17", text="Weight", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#17", False))
+    glob.sql_frame.heading("#18", text="Designer", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#18", False))
+    glob.sql_frame.heading("#19", text="Front side", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#19", False))
+    glob.sql_frame.heading("#20", text="Rear side", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#20", False))
+    glob.sql_frame.heading("#21", text="Material", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#21", False))
+    glob.sql_frame.heading("#22", text="Rarity", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#22", False))
+    glob.sql_frame.heading("#23", text="Front jpg link", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#23", False))
+    glob.sql_frame.heading("#24", text="Rear jpg link", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#24", False))
+    glob.sql_frame.heading("#25", text="Serie", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#25", False))
+    glob.sql_frame.heading("#26", text="Storage", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#26", False))
+    glob.sql_frame.heading("#27", text="Have", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#27", False))
+    glob.sql_frame.heading("#28", text="Want", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#28", False))
+    glob.sql_frame.heading("#29", text="Ordered", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#29", False))
+    glob.sql_frame.heading("#30", text="For sale", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#30", False))
+    glob.sql_frame.heading("#31", text="Other", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#31", False))
+    glob.sql_frame.heading("#32", text="Supplier", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#32", False))
+    glob.sql_frame.heading("#33", text="Order no", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#33", False))
+    glob.sql_frame.heading("#34", text="Price", anchor=E,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#34", False))
+    glob.sql_frame.heading("#35", text="Mint", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#35", False))
+    glob.sql_frame.heading("#36", text="Mintmaster", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#36", False))
+    glob.sql_frame.heading("#37", text="Ruler", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#37", False))
 
     # Inster data into tree
     for teller in range(0, len(glob.coin_data)):

@@ -13,39 +13,16 @@ from tkinter import ttk
 from tkinter import *
 
 from . import glob
+from . import table_shared as ts
 # from . import language_functions as lf
 # from . import config_items as ci
 
 global _
 
 
-# Needed for the line coloring stuff, duplicate for data_functions:fixed_map. May need to move to include file
-def fixed_map(option):
-    return [elm for elm in glob.style.map('Custom.Treeview', query_opt=option) if
-            elm[:2] != ('!disabled', '!selected')]
-
-
 def save_country_table():
 
     pass
-
-
-def treeview_sort_column(tv, col, reverse):  # Treeview, column name, arrangement
-    listindex = [(tv.set(k, col), k) for k in tv.get_children('')]
-    listindex.sort(reverse=reverse)  # Sort by
-    for index, (val, k) in enumerate(listindex):  # based on sorted index movement
-        tv.move(k, '', index)
-        tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))
-
-    # Reset the child coloring
-    acounter = 0
-    for child in glob.sql_frame.get_children():
-        if acounter % 2 == 0:
-            glob.sql_frame.item(child, tags="even")
-            acounter += 1
-        else:
-            glob.sql_frame.item(child, tags="odd")
-            acounter += 1
 
 
 def load_country_sql():
@@ -70,8 +47,8 @@ def load_country_sql():
     glob.sql_frame.column("#0", width=0, minwidth=0, stretch=NO)
     glob.sql_frame.column("#1", width=300, minwidth=50)
     # Set headings and register sort command
-    glob.sql_frame.heading("#1", text="Country", anchor=W, command=lambda: treeview_sort_column(glob.sql_frame,
-                                                                                                "#1", False))
+    glob.sql_frame.heading("#1", text="Country", anchor=W,
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#1", False))
 
     # fill with countries
     for teller in range(0, len(glob.coin_data)):
