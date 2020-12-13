@@ -99,6 +99,14 @@ def build_edit_country():
                                      command=lambda: glob.top.destroy(), padx=20)
     glob.button_edit_cancel.pack(side=LEFT, pady=10, padx=10)
 
+    glob.button_edit_add = Button(glob.edit_button_frame, text=_("Add"),
+                                     command=lambda: glob.top.destroy(), padx=20)
+    glob.button_edit_add.pack(side=LEFT, pady=10, padx=10)
+
+    glob.button_edit_delete = Button(glob.edit_button_frame, text=_("Delete"),
+                                     command=lambda: glob.top.destroy(), padx=20)
+    glob.button_edit_delete.pack(side=LEFT, pady=10, padx=10)
+
     glob.button_edit_save = Button(glob.edit_button_frame, text=_("Save"),
                                    command=lambda: save_country_table(), padx=20)
     glob.button_edit_save.pack(side=RIGHT, pady=10, padx=10)

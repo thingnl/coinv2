@@ -82,6 +82,8 @@ top = 0
 edit_edit_frame = 0
 edit_button_frame = 0
 button_edit_cancel = 0
+button_edit_add = 0
+button_edit_delete = 0
 button_edit_save = 0
 
 button_filter_apply = 0

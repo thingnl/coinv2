@@ -3,24 +3,19 @@
 
 __author__ = 'M. Lebbink'
 __copyright__ = 'Copyright 2020, Pecuniae Collectio'
-__credits__ = ['I18n:'
-               'Theo Despoudis'
+__credits__ = ['I18n:' 'Theo Despoudis'
                'https://phrase.com/blog/posts/translate-python-gnu-gettext/',
 
-               'Logging:'
-               'Gank'
+               'Logging:' 'Gank'
                'https://stackoverflow.com/questions/11232230/logging-to-two-files-with-different-settings',
 
-               'Treeview sorting:'
-               'unknown'
+               'Treeview sorting:' 'unknown'
                'https://www.pianshen.com/article/60037664/',
 
-               'Treeview hiding columns:'
-               'R4PH43L'
+               'Treeview hiding columns:' 'R4PH43L'
                'https://stackoverflow.com/questions/33290969/hiding-treeview-columns-in-tkinter',
 
-               'Treeview header styling:'
-               'patthoyts'
+               'Treeview header styling:' 'patthoyts'
                'https://stackoverflow.com/questions/42708050/tkinter-treeview-heading-styling'
                ]
 __license__ = 'CC BY-NC-ND 4.0 Attribution-NonCommercial-NoDerivatives 4.0 International'
@@ -84,6 +79,8 @@ __status__ = 'Development'
 # fixed     Auto reload after adding testdata working. Needed new glob.conn & glob.cur after closing
 # fix       Cleanup opening logfiles and add log entries on opening, depending on settings in config
 
+# watch     treeview add/delete: https://www.youtube.com/watch?v=rtR5wHXPKZ4
+# watch     matplotlib: https://www.youtube.com/watch?v=8exB6Ly3nx0
 
 # System libs
 import os

@@ -83,7 +83,7 @@ def load_coin_tree():
     glob.sql_frame.heading("#2", text="Private index", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#2", False))
     glob.sql_frame.heading("#3", text="Index", anchor=W,
-                           ccommand=lambda: ts.treeview_sort_column(glob.sql_frame, "#3", False))
+                           command=lambda: ts.treeview_sort_column(glob.sql_frame, "#3", False))
     glob.sql_frame.heading("#4", text="Krause", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#4", False))
     glob.sql_frame.heading("#5", text="Denomination", anchor=E,

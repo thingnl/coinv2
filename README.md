@@ -53,3 +53,8 @@ Pecuniae Collectio is build with and for the following reasons:
 * Loop 1 to something: for i in range(0, len(glob.country_data)):
 * Insert into tupple: glob.country_data.insert(0,"'*'")
 
+
+---
+##### Pycharm settings
+* Custom tags
+  * In the Settings/Preferences dialog Ctrl+Alt+S, select Editor | TODO.
