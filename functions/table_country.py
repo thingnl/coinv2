@@ -21,8 +21,24 @@ global _
 
 
 def save_country_table():
+    # Save to the sql table (delete all and write all or check all and delete is nog in table.
+    # Also update country filter after update.
 
     pass
+
+
+def recolor_country():
+    # Set color indicators for all lines when we have data
+    if len(glob.country_data) != 0:
+        # Reset the child coloring
+        acounter = 0
+        for child in glob.sql_frame.get_children():
+            if acounter % 2 == 0:
+                glob.sql_frame.item(child, tags="even")
+                acounter += 1
+            else:
+                glob.sql_frame.item(child, tags="odd")
+                acounter += 1
 
 
 def load_country_sql():
@@ -55,16 +71,7 @@ def load_country_sql():
         glob.sql_frame.insert(parent='', index='end', iid=teller, text=str(teller), values=glob.country_data[teller])
 
     # Set color indicators for all lines when we have data
-    if len(glob.country_data) != 0:
-        # Reset the child coloring
-        acounter = 0
-        for child in glob.sql_frame.get_children():
-            if acounter % 2 == 0:
-                glob.sql_frame.item(child, tags="even")
-                acounter += 1
-            else:
-                glob.sql_frame.item(child, tags="odd")
-                acounter += 1
+    recolor_country()
 
     # Inserting horizontal scrollbar
     glob.scrollh = ttk.Scrollbar(glob.sql_frame, orient="horizontal", command=glob.sql_frame.xview)
@@ -78,6 +85,14 @@ def load_country_sql():
 
     # Show the actual data
     glob.sql_frame.pack(fill=BOTH, expand=1)
+
+
+def delete_country():
+    for record in glob.sql_frame.selection():
+        glob.sql_frame.delete(record)
+
+    # reset coloring
+    recolor_country()
 
 
 def build_edit_country():
@@ -104,14 +119,12 @@ def build_edit_country():
     glob.button_edit_add.pack(side=LEFT, pady=10, padx=10)
 
     glob.button_edit_delete = Button(glob.edit_button_frame, text=_("Delete"),
-                                     command=lambda: glob.top.destroy(), padx=20)
+                                     command=lambda: delete_country(), padx=20)
     glob.button_edit_delete.pack(side=LEFT, pady=10, padx=10)
 
     glob.button_edit_save = Button(glob.edit_button_frame, text=_("Save"),
                                    command=lambda: save_country_table(), padx=20)
     glob.button_edit_save.pack(side=RIGHT, pady=10, padx=10)
-
-    pass
 
 
 def edit_country():
