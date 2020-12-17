@@ -87,6 +87,21 @@ def load_country_sql():
     glob.sql_frame.pack(fill=BOTH, expand=1)
 
 
+def add_country():
+    global country_input
+    if country_input.get() != "":
+        # Check if value in country_input
+        # Check if value allready exists
+        # glob.sql_frame.insert(parent='', index='end', iid=len(glob.sql_frame.get_children()), text="",
+        #                       values=(country_input.get()))
+        glob.sql_frame.insert(parent='', index='end', text="", values=(country_input.get(),))
+        country_input.delete(0, END)        # Clear input box
+        # resort
+        recolor_country()                   # Set correct Odd & Even
+
+    pass
+
+
 def delete_country():
     for record in glob.sql_frame.selection():
         glob.sql_frame.delete(record)
@@ -96,6 +111,7 @@ def delete_country():
 
 
 def build_edit_country():
+    global country_input
     glob.top = Toplevel()
     glob.top.title(_("Country table"))
     glob.top.geometry('%sx%s' % (400, 350))
@@ -112,19 +128,25 @@ def build_edit_country():
     # Create buttons
     glob.button_edit_cancel = Button(glob.edit_button_frame, text=_("Cancel"),
                                      command=lambda: glob.top.destroy(), padx=20)
-    glob.button_edit_cancel.pack(side=LEFT, pady=10, padx=10)
+    glob.button_edit_cancel.grid(row=1, column=0, pady=10, padx=25)
+
+    country_label = Label(glob.edit_button_frame, text=_("Country:"), pady=4, padx=20)
+    country_label.grid(row=0, column=0, pady=10, padx=25)
+
+    country_input = Entry(glob.edit_button_frame)
+    country_input.grid(row=0, column=1)
 
     glob.button_edit_add = Button(glob.edit_button_frame, text=_("Add"),
-                                     command=lambda: glob.top.destroy(), padx=20)
-    glob.button_edit_add.pack(side=LEFT, pady=10, padx=10)
+                                  command=lambda: add_country(), padx=20)
+    glob.button_edit_add.grid(row=0, column=2, pady=10, padx=25)
 
     glob.button_edit_delete = Button(glob.edit_button_frame, text=_("Delete"),
                                      command=lambda: delete_country(), padx=20)
-    glob.button_edit_delete.pack(side=LEFT, pady=10, padx=10)
+    glob.button_edit_delete.grid(row=1, column=1, pady=10, padx=25)
 
     glob.button_edit_save = Button(glob.edit_button_frame, text=_("Save"),
                                    command=lambda: save_country_table(), padx=20)
-    glob.button_edit_save.pack(side=RIGHT, pady=10, padx=10)
+    glob.button_edit_save.grid(row=1, column=2, pady=10, padx=25)
 
 
 def edit_country():

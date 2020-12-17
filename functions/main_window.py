@@ -260,4 +260,7 @@ def main_window():
     build_frames()
     build_buttons()
 
+    # auto load Netherland database
+    dbn.auto_load()
+
     glob.root.mainloop()

@@ -100,7 +100,6 @@ def insert_testdata():
     df.load_filter_country()
 
     # Load coins to central treeview
-    # df.load_coin_tree(glob.cur)
     df.load_coin_tree()
 
     # Set filename in frame
@@ -158,6 +157,7 @@ def open_db():
         glob.logger_main.info("Nothing selected, exiting.")
         return
 
+    print(glob.current_open_db)
     # try to create a connection
     glob.conn = None
     try:
@@ -199,11 +199,9 @@ def open_db():
 
     # And we have a correct version of the database schema. What's next.... ah, load the data....
     # Set country filter
-    # df.load_filter_country(glob.cur)
     df.load_filter_country()
 
     # Load coins to central treeview
-    # df.load_coin_tree(glob.cur)
     df.load_coin_tree()
 
     # Set filename in frame
@@ -215,6 +213,64 @@ def open_db():
     lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) +
                       " coins loaded."))
 
+
+def auto_load():
+    glob.current_open_db = "F:/py-dev/coinv2/database/nederland.db"
+
+    # try to create a connection
+    glob.conn = None
+    try:
+        glob.conn = sqlite3.connect(glob.current_open_db)
+    except Exception as e:
+        messagebox.showerror(title=_("Database error"), message=_("A connection to the selected database could not be"
+                                                                  " made. Please make sure the selected file is a "
+                                                                  "valid database."))
+        glob.logger_main.info("Database could not be connected, exiting.")
+        glob.current_open_db = ""
+        glob.conn = ""
+        print(e)
+
+    # try getting the db version
+    sql_command = """SELECT * FROM schema"""
+    glob.cur = glob.conn.cursor()
+    try:
+        glob.cur.execute(sql_command)
+        row = glob.cur.fetchone()
+    except Exception as e:
+        messagebox.showerror(title=_("Database error"), message=_("An error happened while trying to read the "
+                                                                  "database. Please make sure the selected file "
+                                                                  "is a database and is undamaged."))
+        glob.logger_main.info("Database could not be read, exiting.")
+        glob.logger_sql.info("Database could not be read, exiting.")
+        glob.current_open_db = ""               # Reset indicator
+        glob.conn = ""                          # Reset indicator
+        glob.logger_sql.debug(e)
+        print(e)
+        return
+
+    # So by now we have a working database and got the version of the schema. Let's check it...
+    glob.logger_sql.debug("Schema version found: " + row[1] + ", system is on " + glob.system_sql)
+    if row[1] != glob.system_sql:
+        messagebox.showerror(title=_("Database error"), message=_("This database version (" + row[1] + ") is for a "
+                                                                  "different version of Pecuniae Collectio and can "
+                                                                  "not be used."))
+        glob.logger_main.info("Wrong schema version found, exiting")
+
+    # And we have a correct version of the database schema. What's next.... ah, load the data....
+    # Set country filter
+    df.load_filter_country()
+
+    # Load coins to central treeview
+    df.load_coin_tree()
+
+    # Set filename in frame
+    glob.open_filename = glob.current_open_db.split("/")
+    glob.open_filename = glob.open_filename[-1]
+    glob.database_frame.insert('1.0', "db = " + glob.open_filename)
+
+    # Done loading database
+    lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) +
+                      " coins loaded."))
 
 def create_newdb():
     """ Ask user for name and location for a new database.
@@ -245,62 +301,47 @@ def create_newdb():
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (5%)"))
         tables.create_table_schema()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (11%)"))
         tables.create_table_country()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (18%)"))
         tables.create_table_headofstate()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (26%)"))
         tables.create_table_quality()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (37%)"))
         tables.create_table_valuations()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (51%)"))
         tables.create_table_suppliers()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (63%)"))
         tables.create_table_orders()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (69%)"))
         tables.create_table_mintmaster()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (76%)"))
         tables.create_table_mint()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (82%)"))
         tables.create_table_valuta()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (87%)"))
         tables.create_table_strike()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (92%)"))
         tables.create_table_coin()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (95%)"))
         tables.create_table_replace()
-        # time.sleep(1)
 
         lf.send_message(_("Creating new database: " + new_dbfile + " (98%)"))
         tables.create_table_rarity()
-        # time.sleep(1)
 
         glob.conn.close()
-        # time.sleep(1)
         lf.send_message(_("Database " + new_dbfile + " created."))
     else:
         glob.logger_main.info("New database function closed.")
