@@ -14,6 +14,7 @@ from tkinter import *
 
 from . import glob
 from . import table_shared as ts
+from . import data_functions as df
 # from . import language_functions as lf
 # from . import config_items as ci
 
@@ -25,28 +26,26 @@ def save_country_table():
     # or delete on delete and add on add....
     # Also update country filter after update.
 
-    # First try, delete all from sql, then save the tree
-    # print(glob.sql_frame)
-    # print(glob.sql_frame.get_children())
-    for x in glob.sql_frame.get_children():
-        print(glob.sql_frame.item(x))
-        print(glob.sql_frame.item(x)["values"])
-        cntasstr = glob.sql_frame.item(x)["values"][0]
-        print(cntasstr)
-
-    return
     sql_command = """DELETE FROM country;"""
     try:
-        glob.cur.execute(sql_command)
-        sql_command = """INSERT INTO country (id, description) VALUES(?,?);"""
+        glob.cur.execute(sql_command)                                           # Delete old records
+        glob.conn.commit()                                                      # Commit delete
+        sql_command = """INSERT INTO country (description) VALUES(?);"""
         try:
-            c = glob.conn.cursor()
-            c.executemany(sql_command, glob.sql_frame.get_children())
-            glob.conn.commit()
+            for x in glob.sql_frame.get_children():
+                recordtuple = tuple([glob.sql_frame.item(x)["values"][0]])
+                glob.cur.execute(sql_command, recordtuple)                      # Write current tree
+            glob.conn.commit()                                                  # Commit writes
         except Exception as e:
             glob.logger_sql.debug(e)
     except Exception as e:
         glob.logger_sql.debug(e)
+
+    # refresh filter
+    df.load_filter_country()                                                    # Reload country filter
+
+    # Close country window
+    glob.top.destroy()
 
 
 def recolor_country():
@@ -89,7 +88,7 @@ def load_country_sql():
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#1", False))
 
     # fill with countries
-    for teller in range(0, len(glob.coin_data)):
+    for teller in range(0, len(glob.country_data)):
         glob.sql_frame.insert(parent='', index='end', iid=teller, text=str(teller), values=glob.country_data[teller])
 
     recolor_country()                                                  # Set correct Odd & Even
