@@ -21,10 +21,32 @@ global _
 
 
 def save_country_table():
-    # Save to the sql table (delete all and write all or check all and delete is nog in table.
+    # Save to the sql table (delete all and write all or check all and delete if still in table
+    # or delete on delete and add on add....
     # Also update country filter after update.
 
-    pass
+    # First try, delete all from sql, then save the tree
+    # print(glob.sql_frame)
+    # print(glob.sql_frame.get_children())
+    for x in glob.sql_frame.get_children():
+        print(glob.sql_frame.item(x))
+        print(glob.sql_frame.item(x)["values"])
+        cntasstr = glob.sql_frame.item(x)["values"][0]
+        print(cntasstr)
+
+    return
+    sql_command = """DELETE FROM country;"""
+    try:
+        glob.cur.execute(sql_command)
+        sql_command = """INSERT INTO country (id, description) VALUES(?,?);"""
+        try:
+            c = glob.conn.cursor()
+            c.executemany(sql_command, glob.sql_frame.get_children())
+            glob.conn.commit()
+        except Exception as e:
+            glob.logger_sql.debug(e)
+    except Exception as e:
+        glob.logger_sql.debug(e)
 
 
 def recolor_country():
@@ -70,8 +92,7 @@ def load_country_sql():
     for teller in range(0, len(glob.coin_data)):
         glob.sql_frame.insert(parent='', index='end', iid=teller, text=str(teller), values=glob.country_data[teller])
 
-    # Set color indicators for all lines when we have data
-    recolor_country()
+    recolor_country()                                                  # Set correct Odd & Even
 
     # Inserting horizontal scrollbar
     glob.scrollh = ttk.Scrollbar(glob.sql_frame, orient="horizontal", command=glob.sql_frame.xview)
@@ -90,24 +111,16 @@ def load_country_sql():
 def add_country():
     global country_input
     if country_input.get() != "":
-        # Check if value in country_input
-        # Check if value allready exists
-        # glob.sql_frame.insert(parent='', index='end', iid=len(glob.sql_frame.get_children()), text="",
-        #                       values=(country_input.get()))
-        glob.sql_frame.insert(parent='', index='end', text="", values=(country_input.get(),))
-        country_input.delete(0, END)        # Clear input box
-        # resort
-        recolor_country()                   # Set correct Odd & Even
-
-    pass
+        glob.sql_frame.insert(parent='', index='end', text="", values=(country_input.get(),))   # Add value
+        country_input.delete(0, END)                            # Clear input box
+        ts.treeview_sort_column(glob.sql_frame, "#1", False)    # Sort new value into table
+        recolor_country()                                       # Set correct Odd & Even
 
 
 def delete_country():
     for record in glob.sql_frame.selection():
         glob.sql_frame.delete(record)
-
-    # reset coloring
-    recolor_country()
+    recolor_country()                                           # Set correct Odd & Even
 
 
 def build_edit_country():
