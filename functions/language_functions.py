@@ -3,8 +3,11 @@
 
 # System libs
 import gettext
+
+# Own modules
 from . import glob
 
+# i18n
 global _
 
 

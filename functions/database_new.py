@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 
 # System libs
-# import os
 import tkinter
 import tkinter.filedialog
 import sqlite3
 from tkinter import messagebox
+
+# Own modules
 from . import config_items as ci
 from . import tables_v001 as tables
 from . import language_functions as lf
@@ -14,6 +15,7 @@ from . import testdata_v001 as td
 from . import data_functions as df
 from . import glob
 
+# i18n
 global _
 
 
@@ -271,6 +273,7 @@ def auto_load():
     # Done loading database
     lf.send_message(_("Loading of database " + glob.current_open_db + " finished. " + str(len(glob.coin_data)) +
                       " coins loaded."))
+
 
 def create_newdb():
     """ Ask user for name and location for a new database.

@@ -20,6 +20,7 @@ from . import database_new as dbn
 from . import journal_functions as jf
 from . import table_country as tc
 
+# i18n
 global _
 
 

@@ -2,7 +2,12 @@
 # -*- coding: utf-8 -*-
 
 # System libs
+
+# Own modules
 from . import glob
+
+# i18n
+global _
 
 
 def insert_table_country(conn):

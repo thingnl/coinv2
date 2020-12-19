@@ -4,10 +4,14 @@
 # System libs
 from tkinter import ttk
 from tkinter import *
+
+# Own modules
 from . import glob
 from . import column_functions as cl
 from . import table_shared as ts
-# from . import config_window as cw
+
+# i18n
+global _
 
 
 def load_filter_country():

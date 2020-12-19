@@ -4,17 +4,16 @@
 # System libs
 import os
 import time
-
 from os import path
-
 from tkinter import filedialog
 from tkinter import *
 
+# Own modules
 from . import glob
 from . import language_functions as lf
 from . import config_items as ci
 
-
+# i18n
 global _
 
 

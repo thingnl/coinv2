@@ -5,8 +5,13 @@
 import os
 import logging
 from tkinter import filedialog
+
+# Own modules
 from . import glob
 from . import config_items as ci
+
+# i18n
+global _
 
 
 def setup_logger(logger_name, log_file, logging_level):

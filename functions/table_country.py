@@ -2,39 +2,32 @@
 # -*- coding: utf-8 -*-
 
 # System libs
-# import os
-# import time
-
-# from os import path
-
-# from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import *
 
+# Own modules
 from . import glob
 from . import table_shared as ts
 from . import data_functions as df
-# from . import language_functions as lf
-# from . import config_items as ci
+from . import language_functions as lf
 
+# i18n
 global _
 
 
 def save_country_table():
-    # Save to the sql table (delete all and write all or check all and delete if still in table
-    # or delete on delete and add on add....
-    # Also update country filter after update.
-
     sql_command = """DELETE FROM country;"""
     try:
         glob.cur.execute(sql_command)                                           # Delete old records
         glob.conn.commit()                                                      # Commit delete
+        glob.logger_sql.debug("Table Country cleared.")
         sql_command = """INSERT INTO country (description) VALUES(?);"""
         try:
             for x in glob.sql_frame.get_children():
                 recordtuple = tuple([glob.sql_frame.item(x)["values"][0]])
                 glob.cur.execute(sql_command, recordtuple)                      # Write current tree
+                glob.logger_sql.debug(glob.sql_frame.item(x)["values"][0] + " written to table Country.")
             glob.conn.commit()                                                  # Commit writes
         except Exception as e:
             glob.logger_sql.debug(e)
@@ -46,6 +39,7 @@ def save_country_table():
 
     # Close country window
     glob.top.destroy()
+    lf.send_message(_("Country table saved."))
 
 
 def recolor_country():
@@ -108,22 +102,22 @@ def load_country_sql():
 
 
 def add_country():
-    global country_input
-    if country_input.get() != "":
-        glob.sql_frame.insert(parent='', index='end', text="", values=(country_input.get(),))   # Add value
-        country_input.delete(0, END)                            # Clear input box
+    if glob.country_input.get() != "":
+        glob.sql_frame.insert(parent='', index='end', text="", values=(glob.country_input.get(),))   # Add value
+        glob.logger_main.debug(glob.country_input.get() + " added to country treeview.")
+        glob.country_input.delete(0, END)                            # Clear input box
         ts.treeview_sort_column(glob.sql_frame, "#1", False)    # Sort new value into table
         recolor_country()                                       # Set correct Odd & Even
 
 
 def delete_country():
     for record in glob.sql_frame.selection():
+        glob.logger_main.debug(glob.sql_frame.item(record)["values"][0] + " deleted from country treeview.")
         glob.sql_frame.delete(record)
     recolor_country()                                           # Set correct Odd & Even
 
 
 def build_edit_country():
-    global country_input
     glob.top = Toplevel()
     glob.top.title(_("Country table"))
     glob.top.geometry('%sx%s' % (400, 350))
@@ -145,8 +139,8 @@ def build_edit_country():
     country_label = Label(glob.edit_button_frame, text=_("Country:"), pady=4, padx=20)
     country_label.grid(row=0, column=0, pady=10, padx=25)
 
-    country_input = Entry(glob.edit_button_frame)
-    country_input.grid(row=0, column=1)
+    glob.country_input = Entry(glob.edit_button_frame)
+    glob.country_input.grid(row=0, column=1)
 
     glob.button_edit_add = Button(glob.edit_button_frame, text=_("Add"),
                                   command=lambda: add_country(), padx=20)
@@ -162,17 +156,6 @@ def build_edit_country():
 
 
 def edit_country():
-
-    # log function starting
-    # make shure a database is loaded
-    # if not, inform and stop
-    # if it is:
-    #  build screen
-    #  get data
-    #  save data
-    # log closing
-    # close screen while leaving database as is.
-
     glob.logger_main.info("Country table maintenance starting.")
 
     # Is a database currently loaded?
@@ -182,11 +165,6 @@ def edit_country():
         return
 
     build_edit_country()
-    # build_edit_settings()
-
     load_country_sql()
-    # get_current_settings()
 
     glob.logger_main.info("Country table maintenance closed.")
-
-    pass

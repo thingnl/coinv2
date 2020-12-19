@@ -127,7 +127,6 @@ style = ""
 scrollh = 0
 scrollv = 0
 
-
 # Column radio buttons
 radio_private_index = "Show"
 radio_index = "Show"
@@ -165,3 +164,6 @@ radio_price = "Show"
 radio_mint = "Show"
 radio_mintmaster = "Show"
 radio_ruler = "Show"
+
+# Country table edit
+country_input = ""

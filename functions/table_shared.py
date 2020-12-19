@@ -1,10 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# System libs
+
+# Own modules
 from . import glob
 
+# i18n
+global _
 
-# Needed for the line coloring stuff
+
 def fixed_map(option):
     return [elm for elm in glob.style.map('Treeview', query_opt=option) if
             elm[:2] != ('!disabled', '!selected')]
