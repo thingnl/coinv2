@@ -36,6 +36,14 @@ __status__ = 'Development'
 # todone 1  Create create database function
 # todone 1  Before loading testdata, verify db is open and empty: SELECT exists(SELECT 1 FROM MyTable LIMIT 1);
 # todone 1  Import/create test data function
+# todono 2  Strike type missing from coin, need to check. Added to table
+# todone 2  Obverse in stead of front
+# todone 2  Reverse in stead of rear
+# todone 2  Ruler in stead of Head of state
+# todone 2  Subject for Serie
+# todone 2  Date for year
+# todone 2  Mintage/Minted as struck
+# todone 2  Edge lettering voor randschrift
 # todo   1  Create housekeeping function to clear out old logs and config files
 # todo   1  Add a check database option to system menu
 # todo   1  validate config (directories) on startup and set alarm if it fails
@@ -46,14 +54,6 @@ __status__ = 'Development'
 # todo   2  SQL housekeeping function optimize
 # todo   2  SQL housekeeping function compact
 # todo   3  Create reports (or some query engine app)
-# todo   2  Strike type missing from coin, need to check
-# todo   2  Obverse in stead of front
-# todo   2  Reverse in stead of rear
-# todo   2  Ruler in stead of Head of state
-# todo   2  Subject for Serie
-# todo   2  Date for year
-# todo   2  Mintage/Minted as struck
-# todo   2  Edge lettering voor randschrift
 # todo   2  Add to config screen: open last database on startup?
 # todo   2  Add to config screen: Include jpg in backup?
 # todo   2  Add to config screen: Include orders in backup?

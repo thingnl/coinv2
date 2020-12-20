@@ -63,13 +63,12 @@ def load_coin_tree():
     glob.style.map("Custom.Treeview.Heading", relief=[('active', 'groove'), ('pressed', 'sunken')])
 
     glob.sql_frame = ttk.Treeview(glob.sqlframe, style="Custom.Treeview")
-    glob.sql_frame['columns'] = ("SQL RecNo", "Private index", "Index", "Krause", "denomination", "valuta",
-                                 "country", "year", "mmt", "quality", "remark", "coinage", "diameter",
-                                 "edge", "edgetext", "striketype", "weight", "designer", "frontside",
-                                 "rearside", "material", "rarity", "frontjpglink", "rearjpglink", "serie",
-                                 "storage", "ynhave", "ynwant", "ynordered", "ynforsale", "ynother",
-                                 "supplier", "orderno", "purchaseprice", "mint", "mintmaster",
-                                 "headofstate")
+    glob.sql_frame['columns'] = ("SQL RecNo", "Private index", "Index", "Krause", "Denomination", "Valuta",
+                                 "Country", "Date", "Mintmaster sign", "Quality", "Remark", "Minted", "Diameter",
+                                 "Edge", "Edge lettering", "Striketype", "Weight", "Designer", "Obverse",
+                                 "Reverse", "Material", "Rarity", "Obverse jpg", "Reverse jpg", "Subject",
+                                 "Storage", "Have", "Want", "Ordered", "For sale", "Other",
+                                 "Supplier", "Order", "Price", "Mint", "Mintmaster", "Ruler")
 
     # Set colors for odd and even rows
     glob.sql_frame.tag_configure('odd', background='#FFFFFF')  # light blue #FFFFFF
@@ -96,21 +95,21 @@ def load_coin_tree():
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#6", False))
     glob.sql_frame.heading("#7", text="Country", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#7", False))
-    glob.sql_frame.heading("#8", text="Year", anchor=W,
+    glob.sql_frame.heading("#8", text="Date", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#8", False))
-    glob.sql_frame.heading("#9", text="Mmt", anchor=W,
+    glob.sql_frame.heading("#9", text="Mintmaster sign", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#9", False))
     glob.sql_frame.heading("#10", text="Quality", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#10", False))
     glob.sql_frame.heading("#11", text="Remark", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#11", False))
-    glob.sql_frame.heading("#12", text="Coinage", anchor=E,
+    glob.sql_frame.heading("#12", text="Minted", anchor=E,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#12", False))
     glob.sql_frame.heading("#13", text="Diameter", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#13", False))
     glob.sql_frame.heading("#14", text="Edge", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#14", False))
-    glob.sql_frame.heading("#15", text="Edge text", anchor=W,
+    glob.sql_frame.heading("#15", text="Edge lettering", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#15", False))
     glob.sql_frame.heading("#16", text="Strike type", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#16", False))
@@ -118,19 +117,19 @@ def load_coin_tree():
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#17", False))
     glob.sql_frame.heading("#18", text="Designer", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#18", False))
-    glob.sql_frame.heading("#19", text="Front side", anchor=W,
+    glob.sql_frame.heading("#19", text="Obverse", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#19", False))
-    glob.sql_frame.heading("#20", text="Rear side", anchor=W,
+    glob.sql_frame.heading("#20", text="Reverse", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#20", False))
     glob.sql_frame.heading("#21", text="Material", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#21", False))
     glob.sql_frame.heading("#22", text="Rarity", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#22", False))
-    glob.sql_frame.heading("#23", text="Front jpg link", anchor=W,
+    glob.sql_frame.heading("#23", text="Obverse jpg", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#23", False))
-    glob.sql_frame.heading("#24", text="Rear jpg link", anchor=W,
+    glob.sql_frame.heading("#24", text="Reverse jpg", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#24", False))
-    glob.sql_frame.heading("#25", text="Serie", anchor=W,
+    glob.sql_frame.heading("#25", text="Subject", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#25", False))
     glob.sql_frame.heading("#26", text="Storage", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#26", False))
@@ -146,7 +145,7 @@ def load_coin_tree():
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#31", False))
     glob.sql_frame.heading("#32", text="Supplier", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#32", False))
-    glob.sql_frame.heading("#33", text="Order no", anchor=W,
+    glob.sql_frame.heading("#33", text="Order", anchor=W,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#33", False))
     glob.sql_frame.heading("#34", text="Price", anchor=E,
                            command=lambda: ts.treeview_sort_column(glob.sql_frame, "#34", False))

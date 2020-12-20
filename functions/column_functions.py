@@ -298,13 +298,13 @@ def apply_column_hide():
         if ci.get_config_item("radio_year") == "Hide":
             glob.sql_frame.column("#8", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#8", width=max(len(max(elements[7], key=len)) * 9, len("Year") * 6), minwidth=0,
+            glob.sql_frame.column("#8", width=max(len(max(elements[7], key=len)) * 9, len("Date") * 6), minwidth=0,
                                   stretch=NO)
 
         if ci.get_config_item("radio_mmt") == "Hide":
             glob.sql_frame.column("#9", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#9", width=max(len(max(elements[8], key=len)) * 9, len("Mmt") * 6), minwidth=0,
+            glob.sql_frame.column("#9", width=max(len(max(elements[8], key=len)) * 9, len("Mintmaster sign") * 6), minwidth=0,
                                   stretch=NO)
 
         if ci.get_config_item("radio_quality") == "Hide":
@@ -322,7 +322,7 @@ def apply_column_hide():
         if ci.get_config_item("radio_coinage") == "Hide":
             glob.sql_frame.column("#12", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#12", width=max(len(max(elements[11], key=len)) * 9, len("Coinage") * 6),
+            glob.sql_frame.column("#12", width=max(len(max(elements[11], key=len)) * 9, len("Minted") * 6),
                                   minwidth=0, stretch=NO, anchor=E)
 
         if ci.get_config_item("radio_diameter") == "Hide":
@@ -340,7 +340,7 @@ def apply_column_hide():
         if ci.get_config_item("radio_edgetext") == "Hide":
             glob.sql_frame.column("#15", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#15", width=max(len(max(elements[14], key=len)) * 8, len("Edge text") * 7),
+            glob.sql_frame.column("#15", width=max(len(max(elements[14], key=len)) * 8, len("Edge lettering") * 7),
                                   minwidth=0, stretch=NO)
 
         if ci.get_config_item("radio_stiketype") == "Hide":
@@ -364,13 +364,13 @@ def apply_column_hide():
         if ci.get_config_item("radio_frontside") == "Hide":
             glob.sql_frame.column("#19", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#19", width=max(len(max(elements[18], key=len)) * 7, len("Front side") * 6),
+            glob.sql_frame.column("#19", width=max(len(max(elements[18], key=len)) * 7, len("Obverse") * 6),
                                   minwidth=0, stretch=NO)
 
         if ci.get_config_item("radio_rearside") == "Hide":
             glob.sql_frame.column("#20", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#20", width=max(len(max(elements[19], key=len)) * 7, len("Rear side") * 6),
+            glob.sql_frame.column("#20", width=max(len(max(elements[19], key=len)) * 7, len("Reverse") * 6),
                                   minwidth=0, stretch=NO)
 
         if ci.get_config_item("radio_material") == "Hide":
@@ -388,19 +388,19 @@ def apply_column_hide():
         if ci.get_config_item("radio_frontjpg") == "Hide":
             glob.sql_frame.column("#23", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#23", width=max(len(max(elements[22], key=len)) * 7, len("Front jpg") * 7),
+            glob.sql_frame.column("#23", width=max(len(max(elements[22], key=len)) * 7, len("Obverse jpg") * 7),
                                   minwidth=0, stretch=NO)
 
         if ci.get_config_item("radio_rearjpg") == "Hide":
             glob.sql_frame.column("#24", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#24", width=max(len(max(elements[23], key=len)) * 7, len("Rear jpg") * 7),
+            glob.sql_frame.column("#24", width=max(len(max(elements[23], key=len)) * 7, len("Reverse jpg") * 7),
                                   minwidth=0, stretch=NO)
 
         if ci.get_config_item("radio_serie") == "Hide":
             glob.sql_frame.column("#25", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#25", width=max(len(max(elements[24], key=len)) * 9, len("Serie") * 6),
+            glob.sql_frame.column("#25", width=max(len(max(elements[24], key=len)) * 9, len("Subject") * 6),
                                   minwidth=0, stretch=NO)
 
         if ci.get_config_item("radio_storage") == "Hide":
@@ -448,7 +448,7 @@ def apply_column_hide():
         if ci.get_config_item("radio_order ") == "Hide":                # INCLUDE SPACE or it matches radio_ordered
             glob.sql_frame.column("#33", width=0, minwidth=0)
         else:
-            glob.sql_frame.column("#33", width=max(len(max(elements[32], key=len)) * 9, len("Order no") * 7),
+            glob.sql_frame.column("#33", width=max(len(max(elements[32], key=len)) * 9, len("Order") * 7),
                                   minwidth=0, stretch=NO)
 
         if ci.get_config_item("radio_price") == "Hide":
@@ -474,8 +474,6 @@ def apply_column_hide():
         else:
             glob.sql_frame.column("#37", width=max(len(max(elements[36], key=len)) * 9, len("Ruler") * 7),
                                   minwidth=0, stretch=NO)
-
-    # glob.sql_frame.update()   seems to do fuck-all
 
 
 def build_hide_show():

@@ -13,11 +13,9 @@ global _
 
 
 def dump_vars():
-
     print("Script info:")
     print(f'    {str(type(glob.mainpath        )):28}  glob.mainpath       = {glob.mainpath}')
     print(f'    {str(type(glob.localespath     )):28}  glob.localespath    = {glob.localespath}')
-    print(f'                                  glob.scriptpath     = CURRENTLY HASHED')
 
     print("Version info:")
     print(f'    {str(type(glob.language        )):28}  glob.language        = {str(glob.language)}')
@@ -35,8 +33,6 @@ def dump_vars():
     print(f'    {str(type(glob.conn            )):28}  glob.conn            = {str(glob.conn)}')
     print(f'    {str(type(glob.cur             )):28}  glob.cur             = {str(glob.cur)}')
     print(f'    {str(type(glob.conn_new        )):28}  glob.conn_new        = {str(glob.conn_new)}')
-
-
 
     print("Config Tk variables:")
     print(f'    {str(type(glob.loc_database    )):28}  glob.loc_database    = {glob.loc_database}')
