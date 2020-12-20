@@ -159,7 +159,6 @@ def open_db():
         glob.logger_main.info("Nothing selected, exiting.")
         return
 
-    print(glob.current_open_db)
     # try to create a connection
     glob.conn = None
     try:
@@ -292,9 +291,9 @@ def create_newdb():
         lf.send_message(_("Creating new database: " + new_dbfile + "."))
         glob.logger_sql.info("Creating new database: " + new_dbfile)
 
-        glob.conn = None
+        glob.conn_new = None
         try:
-            glob.conn = sqlite3.connect(new_dbfile)
+            glob.conn_new = sqlite3.connect(new_dbfile)
             glob.logger_sql.debug("sqlite version: " + sqlite3.version)
         except Exception as e:
             glob.logger_sql.exception("Error creating " + new_dbfile + " database")
@@ -344,7 +343,7 @@ def create_newdb():
         lf.send_message(_("Creating new database: " + new_dbfile + " (98%)"))
         tables.create_table_rarity()
 
-        glob.conn.close()
+        glob.conn_new.close()
         lf.send_message(_("Database " + new_dbfile + " created."))
     else:
         glob.logger_main.info("New database function closed.")

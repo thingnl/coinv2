@@ -19,7 +19,7 @@ def create_table_schema():
     Returns: Nothing
     """
     sql_command = """CREATE TABLE IF NOT EXISTS schema (id integer PRIMARY KEY,	version text NOT NULL);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table schema")
@@ -28,11 +28,11 @@ def create_table_schema():
 
     sql_command = """INSERT INTO schema (id, version) VALUES(?,?);"""
     sql_data = [1, 'v001']
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         glob.logger_sql.debug("Inserting [1, 'v001'] into table schema")
         c.execute(sql_command, sql_data,)
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -47,11 +47,11 @@ def create_table_country():
     """
     sql_command = """CREATE TABLE IF NOT EXISTS country (id	         INTEGER PRIMARY KEY AUTOINCREMENT,
                                                          description TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table country")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -70,11 +70,11 @@ def create_table_headofstate():
                                                              started         TEXT,
                                                              finished        TEXT,
                                                              country         TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table headofstate")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -90,11 +90,11 @@ def create_table_quality():
     sql_command = """CREATE TABLE IF NOT EXISTS quality (id              INTEGER PRIMARY KEY AUTOINCREMENT,
                                                          quality         TEXT,
                                                          description     TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table quality")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -111,11 +111,11 @@ def create_table_valuations():
                                                             coin_id         INTEGER,
                                                             year            INTEGER NOT NULL,
                                                             value           REAL NOT NULL);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table valuations")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -142,11 +142,11 @@ def create_table_suppliers():
                                                            web             TEXT,
                                                            customerid      TEXT,
                                                            country         TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table suppliers")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -165,11 +165,11 @@ def create_table_orders():
                                                         pdflink         TEXT,
                                                         status          TEXT,
                                                         suppliers_id    REFERENCES suppliers(id));"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table orders")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -190,11 +190,11 @@ def create_table_mintmaster():
                                                             finished        TEXT,
                                                             remark          TEXT,
                                                             country         TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table mintmaster")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -216,11 +216,11 @@ def create_table_mint():
                                                       started         TEXT,
                                                       finished        TEXT,
                                                       country         TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table mint")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -236,11 +236,11 @@ def create_table_valuta():
     sql_command = """CREATE TABLE IF NOT EXISTS valuta (id              INTEGER PRIMARY KEY AUTOINCREMENT,
                                                         valuta          TEXT NOT NULL,
                                                         country         TEXT NOT NULL);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table valuta")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -263,11 +263,11 @@ def create_table_strike():
     """
     sql_command = """CREATE TABLE IF NOT EXISTS strike (id              INTEGER PRIMARY KEY AUTOINCREMENT,
                                                         striketype      TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table strike")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -317,11 +317,11 @@ def create_table_coin():
                                                       mint            TEXT,
                                                       mintmaster      TEXT,
                                                       headofstate     TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table coin")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
 
@@ -337,11 +337,11 @@ def create_table_replace():
     sql_command = """CREATE TABLE IF NOT EXISTS replace (id              INTEGER PRIMARY KEY AUTOINCREMENT,
                                                          searchfor       TEXT,
                                                          replacewith     TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table replace")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
     pass
@@ -358,11 +358,11 @@ def create_table_rarity():
     sql_command = """CREATE TABLE IF NOT EXISTS rarity (id              INTEGER PRIMARY KEY AUTOINCREMENT,
                                                         rarity	        TEXT, 
                                                         description 	TEXT);"""
-    c = glob.conn.cursor()
+    c = glob.conn_new.cursor()
     try:
         c.execute(sql_command)
         glob.logger_sql.debug("Created table rarity")
-        glob.conn.commit()
+        glob.conn_new.commit()
     except Exception as e:
         glob.logger_sql.debug(e)
     pass

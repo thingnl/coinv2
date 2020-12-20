@@ -11,14 +11,19 @@ system_build = "23"
 system_sql = "v001"
 
 # runtime
-scriptpath = ""
+# scriptpath = ""
 mainpath = ""
 localespath = ""
 language = 0
+
+# SQL connection
+conn = 0                                    # Current of database
+cur = 0                                     # Cursor for current open database
+conn_new = 0                                # Used during new database creation
 open_filename = ""                          # Currently opened file
 current_open_db = ""                        # Currently opened file incl path
 
-# configuration
+# configuration tkinter window
 slide_horizontal = 0
 slide_vertical = 0
 loc_database = ""
@@ -39,10 +44,6 @@ screen_height_setup = 0
 screen_top = 0
 screen_left = 0
 
-# SQL connection
-conn = 0
-cur = 0
-
 # root TK
 root = 0
 
@@ -53,6 +54,7 @@ tablemenu = 0
 datamenu = 0
 sysmenu = 0
 helpmenu = 0
+dumpmenu = 0
 
 # buttons
 button_add = 0

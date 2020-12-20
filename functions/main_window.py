@@ -103,6 +103,10 @@ def build_menu():
     glob.helpmenu.add_command(label=_("Manual"), command=about)
     glob.helpmenu.add_command(label=_("Support"), command=about)
 
+    glob.dumpmenu = Menu(glob.menu, tearoff=0)
+    glob.menu.add_cascade(label=_("Debug"), menu=glob.dumpmenu)
+    glob.dumpmenu.add_command(label=_("Dump vars"), command=lambda: ci.dump_vars())
+
 
 def build_frames():
     # Frames
@@ -262,6 +266,6 @@ def main_window():
     build_buttons()
 
     # auto load Netherland database
-    dbn.auto_load()
+    # dbn.auto_load()
 
     glob.root.mainloop()
