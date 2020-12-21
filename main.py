@@ -64,6 +64,7 @@ __status__ = 'Development'
 # todo   2  Make row editable: https://stackoverflow.com/questions/18562123/how-to-make-ttk-treeviews-rows-editable
 # todo   2  Check this: https://github.com/ragardner/tksheet iso sql window
 # todo   1  Add "show insert testdata" to configscreen to hide the option from the menu
+# todo   2  Check out: https://ttkwidgets.readthedocs.io/en/latest/
 
 # idone     Add Schema Version table to SQL database
 # idone     Make sql fieldlist configurable

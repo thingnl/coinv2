@@ -70,6 +70,11 @@ def load_coin_tree():
                                  "Storage", "Have", "Want", "Ordered", "For sale", "Other",
                                  "Supplier", "Order", "Price", "Mint", "Mintmaster", "Ruler")
 
+    # set-up column drag treeview
+    visual_drag = ttk.Treeview(glob.sqlframe, columns=glob.sql_frame['columns'], show='headings')
+    for col in glob.sql_frame['columns']:
+        visual_drag.heading(col, text=col)
+
     # Set colors for odd and even rows
     glob.sql_frame.tag_configure('odd', background='#FFFFFF')  # light blue #FFFFFF
     glob.sql_frame.tag_configure('even', background='#E2FFFF')  # white #E2FFFF
